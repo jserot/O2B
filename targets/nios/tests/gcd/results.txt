@@ -1,0 +1,18 @@
+2162832 14151 647 
+2162857 14155 647 
+2162857 14154 648 
+2162858 14155 651 
+2162859 14155 650 
+2162859 14155 650 
+...
+
+Results are in us.
+The number of iterations in the [gcd] function is 25008.
+The Nios2 clock frequency is 50 Mhz (20 ns cycle).
+This gives :
+- 86 us / iter for the Caml version  (approx 4300 clock cycles / iter)
+- 566 ns / iter for the C version (approx 27 clock cycles / iter)
+- 25 ns / iter for the RTL (hardware) version (approx 1 clock cycle / iter)
+The slowdown ratio wrt. to the RTL implementation are
+- 22 for the C version
+- 3440 for the Caml version
