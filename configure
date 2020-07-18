@@ -25,7 +25,7 @@ function usage () {
  -prefix <dir>       Set bindir, libdir, libexecdir includedir and mandir to <dir>/bin, <dir>/lib/omicrob,
                      <dir>/libexec/omicrob, <dir>/include/omicrob and <dir>/man respectively
  -target <opt>       Select for which target OMicroB will be installed
-                     (e.g. -target pic32|avr|esp)"
+                     (e.g. -target pic32|avr|esp|nios-<platform>)"
 }
 
 function check_command () {
@@ -103,6 +103,7 @@ LIBEXECDIR=/usr/local/libexec/omicrob
 INCLUDEDIR=/usr/local/include/omicrob
 MANDIR=/usr/local/man
 TARGET=""
+NIOS_PLATFORM=""
 
 while [ $# -ne 0 ]; do
     case "$1" in
@@ -130,7 +131,13 @@ while [ $# -ne 0 ]; do
             INCLUDEDIR="$PREFIX/include/omicrob"
             MANDIR="$PREFIX/man" ;;
         -target)
-            TARGET="$2";;
+            spec=(${2//-/ })
+            TARGET=${spec[0]}
+            case $TARGET in
+                nios)
+                    NIOS_PLATFORM=${spec[1]};;
+                *)
+            esac;;
         *)
         usage "Don't know what to do with \"$1\""
     esac
@@ -177,6 +184,7 @@ endef
 TARGETS      := \\
 " > etc/Makefile.conf
 
+
 ################################################################################
 
 echo -n "\
@@ -189,13 +197,13 @@ let ocaml       = \"$OCAML\"
 let ocamlc      = \"$OCAMLC\"
 let ocamlclean  = \"$OCAMLCLEAN\"
 let cxx         = \"$GXX\"
+let version     = \"$VERSION\"
 let avr_cxx     = \"$AVR_GXX\"
 let avr_objcopy = \"$AVR_OBJCOPY\"
 let avrdude     = \"$AVRDUDE\"
 let xc32_cxx    = \"$XC32_GXX\"
 let xc32_bin2hex= \"$XC32_BIN2HEX\"
 let pic32prog   = \"$PIC32PROG\"
-let version     = \"$VERSION\"
 " > etc/config.ml
 
 ################################################################################
@@ -210,6 +218,7 @@ function reset_targets() {
     cat "src/byterun/simul/indep-sf-regs.c" > "src/byterun/simul/sf-regs.c"
     rm -rf "src/byterun/avr/"
     rm -rf "src/byterun/pic32"
+    rm -rf "src/byterun/nios"
 }
 
 reset_targets
@@ -267,13 +276,46 @@ function target_pic32 () {
     echo "pic32 \\" >> etc/Makefile.conf
 }
 
+function target_nios () {
+    check_directory "targets/nios"
+    check_directory "targets/nios/platforms/$NIOS_PLATFORM"
+
+    cat "targets/nios/device_config.ml" >> "src/omicrob/device_config.ml"
+
+    mkdir -p "src/byterun/nios"
+    cp -f "targets/nios/arch-specific.c" "src/byterun/nios/"
+    cp -f "targets/nios/arch-specific.h" "src/byterun/nios/"
+
+    cat "targets/nios/platforms/$NIOS_PLATFORM/prims/prims.h" >> "src/byterun/prims/prims.h"
+    cat "targets/nios/platforms/$NIOS_PLATFORM/prims/bindings.c" >> "src/byterun/prims/bindings.c"
+    cat "targets/nios/platforms/$NIOS_PLATFORM/prims/prims.h" >> "src/byterun/simul/sf-regs.h"
+    cat "targets/nios/platforms/$NIOS_PLATFORM/simul/sf-regs.c" >> "src/byterun/simul/sf-regs.c"
+
+    cp -f "targets/nios/platforms/$NIOS_PLATFORM/lib/nioslib.c" "src/byterun/nios"
+
+    mkdir -p "lib/targets/nios"
+
+    echo "nios" >> etc/Makefile.conf
+    echo "NIOS_PLATFORM := $NIOS_PLATFORM" >> etc/Makefile.conf
+}
+
+
+err=""
+case $TARGET in
+    avr)
+        target_avr;;
+    pic32)
+        target_pic32;;
+    nios)
+        target_nios;;
+    *)
+        err="1";;
+esac
 
 ################################################################################
-## Choose your targets
 
-target_avr
-target_pic32
-
-################################################################################
-
-echo "** OMicroB configuration completed successfully **"
+if [ -z $err ]; then
+    echo "** OMicroB configuration completed successfully **"
+else
+    echo "** Unknown target"
+fi

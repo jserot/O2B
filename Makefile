@@ -20,6 +20,9 @@ avr: internals
 pic32: internals
 	$(call compile, targets/pic32)
 
+nios: internals
+	$(call compile, targets/nios)
+
 config:
 	@if [ $(ETC)/Makefile.conf -ot VERSION -o                     \
              $(ETC)/Makefile.conf -ot configure ]; then               \
@@ -53,9 +56,8 @@ install: all
 	cp -a src/byterun/vm "$(INCLUDEDIR)/"
 	cp -a src/byterun/prims "$(INCLUDEDIR)/"
 	cp -a src/byterun/simul "$(INCLUDEDIR)/"
-	cp -a src/byterun/avr "$(INCLUDEDIR)" 2> /dev/null
-	cp -a src/byterun/pic32 "$(INCLUDEDIR)/" 2> /dev/null
 	cp -a src/byterun/stdlib "$(INCLUDEDIR)/"
+	for i in $(TARGETS); do cp -a src/byterun/$$i "$(INCLUDEDIR)/" 2> /dev/null; done
 
 uninstall:
 	-rm -f "$(BINDIR)/bc2c"
@@ -114,5 +116,6 @@ clean:
 	$(call clean, lib/extra)
 	$(call clean, targets/avr)
 	$(call clean, targets/pic32)
+	$(call clean, targets/nios)
 
 .PHONY: all config install uninstall tests clean
