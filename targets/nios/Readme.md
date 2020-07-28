@@ -24,6 +24,7 @@ To build / run an application
 5. Go to the application directory, build and upload the software
 
    - `cd targets/nios/tests/<app>` 
+   - `make nios-makefile` 
    - `make build` 
    - `make run`
 

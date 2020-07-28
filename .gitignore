@@ -11,8 +11,14 @@
 **/*.avr
 **/*.hex
 **/*.elf.dSYM
+**/*.map
+**/*.objdump
+**/Makefile.nios
 **/*~
+**/obj/
+targets/nios/tests/*/main.c
 .build/
 .vscode/
 node_modules/
 config.ml
+src/byterun/nios/
