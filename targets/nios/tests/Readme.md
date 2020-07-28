@@ -8,6 +8,7 @@ All these applications have been tested on a DE10-Lite board.
 - "sieve" computes and displays the first 50 prime numbers 
 - "sieve2" is a variant of "sieve" using tail recursive functions (and hence reducing the stack and
    heap memory requirements)
+- "ledshade" makes the 10 LEDs pulsating using a PWM
    
 All these applications use the "basic" Nios platform.
 
