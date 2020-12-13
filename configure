@@ -12,20 +12,8 @@ function error () {
 function usage () {
     echo "$@" 1>&2
     error "Usage: $0 [ OPTIONS... ]
- -bindir <dir>       Directory where the binaries will be installed
-                     (default: /usr/local/bin)
- -libdir <dir>       Directory where the OCaml library will be installed
-                     (default: /usr/local/lib/omicrob)
- -libexecdir <dir>   Directory where the OCaml library executable files will be installed
-                     (default: /usr/local/libexec/omicrob)
- -includedir <dir>   Directory where the OCaml virtual machine will be installed
-                     (default: /usr/local/include/omicrob)
- -mandir <dir>       Directory where the manual pages will be installed
-                     (default: /usr/local/man)
- -prefix <dir>       Set bindir, libdir, libexecdir includedir and mandir to <dir>/bin, <dir>/lib/omicrob,
-                     <dir>/libexec/omicrob, <dir>/include/omicrob and <dir>/man respectively
- -target <opt>       Select for which target OMicroB will be installed
-                     (e.g. -target pic32|avr|esp|nios-<platform>)"
+ -prefix <dir>       Directory where the OMicroB binaries, libraries, headers and man pages will be installed (default: <O2B_root_dir>/omicrob)
+ -target <opt>       Select NIOS target for which OMicroB will be installed (e.g. -target nios-basic)"
 }
 
 function check_command () {
@@ -58,10 +46,10 @@ check_command "gcc"
 check_command "ocaml"
 check_command "ocamlc"
 check_command "ocamlopt"
+check_command "ocamlclean"
 check_command "ocamlbuild"
 check_command "ocamldep"
 check_command "ocamldoc"
-check_command "ocamlclean"
 check_command "mkdir"
 check_command "rmdir"
 check_command "chmod"
@@ -79,57 +67,27 @@ check_directory "$(ocamlc -where)/../obytelib" "the OByteLib library (ex: opam i
 ################################################################################
 
 GXX="$(which g++)"
-AVR_GXX="$(which avr-g++ 2> /dev/null)"
-AVR_OBJCOPY="$(which avr-objcopy 2> /dev/null)"
-AVRDUDE="$(which avrdude 2> /dev/null)"
-XC32_GXX="$(which xc32-g++)"
-XC32_BIN2HEX="$(which xc32-bin2hex)"
-PIC32PROG="$(which pic32prog)"
 OCAML="$(which ocaml.opt 2> /dev/null || which ocaml)"
 OCAMLOPT="$(which ocamlopt.opt 2> /dev/null || which ocamlopt)"
 OCAMLC="$(which ocamlc.opt 2> /dev/null || which ocamlc)"
 OCAMLDOC="$(which ocamldoc.opt 2> /dev/null || which ocamldoc)"
 OCAMLBUILD="$(which ocamlbuild)"
-OCAMLCLEAN="$(which ocamlclean)"
 OCAMLWHERE="$(ocamlc -where)"
+OCAMLCLEAN="$(which ocamlclean)"
 VERSION="$(cat VERSION)"
 ROOT="$(pwd)"
 
 ################################################################################
 
-BINDIR=/usr/local/bin
-LIBDIR=/usr/local/lib/omicrob
-LIBEXECDIR=/usr/local/libexec/omicrob
-INCLUDEDIR=/usr/local/include/omicrob
-MANDIR=/usr/local/man
+OMICROB="$(pwd)"/omicrob
 TARGET=""
 NIOS_PLATFORM=""
 
 while [ $# -ne 0 ]; do
     case "$1" in
-        -bindir)
-            check_absolute_path "$2"
-            BINDIR="$(remove_trailing_slash "$2")" ;;
-        -libdir)
-            check_absolute_path "$2"
-            LIBDIR="$(remove_trailing_slash "$2")" ;;
-        -libexecdir)
-            check_absolute_path "$2"
-            LIBEXECDIR="$(remove_trailing_slash "$2")" ;;
-        -includedir)
-            check_absolute_path "$2"
-            INCLUDEDIR="$(remove_trailing_slash "$2")" ;;
-        -mandir)
-            check_absolute_path "$2"
-            MANDIR="$(remove_trailing_slash "$2")" ;;
         -prefix)
             check_absolute_path "$2"
-            PREFIX="$(remove_trailing_slash "$2")"
-            BINDIR="$PREFIX/bin"
-            LIBDIR="$PREFIX/lib/omicrob"
-            LIBEXECDIR="$PREFIX/libexec/omicrob"
-            INCLUDEDIR="$PREFIX/include/omicrob"
-            MANDIR="$PREFIX/man" ;;
+            OMICROB="$(remove_trailing_slash "$2")";;
         -target)
             spec=(${2//-/ })
             TARGET=${spec[0]}
@@ -150,28 +108,19 @@ done
 echo -n "\
 VERSION     := $VERSION
 OCAMLCLEAN  := $OCAMLCLEAN
-BINDIR      := $BINDIR
-LIBDIR      := $LIBDIR
-LIBEXECDIR  := $LIBEXECDIR
-INCLUDEDIR  := $INCLUDEDIR
-MAN1DIR     := $MANDIR/man1
-MAN3DIR     := $MANDIR/man3
+OMICROB      := $OMICROB
 GXX         := $GXX
-AVR_GXX     := $AVR_GXX
-AVR_OBJCOPY := $AVR_OBJCOPY
-AVRDUDE     := $AVRDUDE
-XC32_GXX    := $XC32_GXX
-XC32_BIN2HEX:= $XC32_BIN2HEX
-PIC32PROG   := $PIC32PROG
 OCAMLC      := $OCAMLC -w A-58-e -warn-error A -safe-string -strict-formats -strict-sequence
 OCAMLOPT    := $OCAMLOPT -w A-58-e -warn-error A -safe-string -strict-formats -strict-sequence
 OCAMLDOC    := $OCAMLDOC
 OCAMLBUILD  := $OCAMLBUILD -cflags -w,A-58-e,-warn-error,A,-safe-string,-strict-formats,-strict-sequence -lflags -w,A-58-e,-warn-error,A,-safe-string,-strict-formats,-strict-sequence -no-links -classic-display -build-dir .build
 OCAMLWHERE  := $OCAMLWHERE
 SRC         := $ROOT/src
-BIN         := $ROOT/bin
-LIB         := $ROOT/lib
+BIN         := $OMICROB/bin
+LIB         := $OMICROB/lib
 ETC         := $ROOT/etc
+LIBDIR      := $OMICROB/lib
+INCLUDEDIR  := $OMICROB/include
 
 define compile
         @\$(MAKE) --no-print-directory -q -C \$1 && \$(MAKE) --no-print-directory -C \$1 || \$(MAKE) -C \$1
@@ -189,21 +138,15 @@ TARGETS      := \\
 
 echo -n "\
 let builddir    = \"$ROOT\"
-let libdir      = \"$LIBDIR\"
-let libexecdir  = \"$LIBEXECDIR\"
-let includedir  = \"$INCLUDEDIR\"
-let bindir      = \"$BINDIR\"
+let libdir      = \"$OMICROB/lib\"
+let libexecdir  = \"$OMICROB/libexec\"
+let includedir  = \"$OMICROB/include\"
+let bindir      = \"$OMICROB/bin\"
 let ocaml       = \"$OCAML\"
 let ocamlc      = \"$OCAMLC\"
 let ocamlclean  = \"$OCAMLCLEAN\"
 let cxx         = \"$GXX\"
 let version     = \"$VERSION\"
-let avr_cxx     = \"$AVR_GXX\"
-let avr_objcopy = \"$AVR_OBJCOPY\"
-let avrdude     = \"$AVRDUDE\"
-let xc32_cxx    = \"$XC32_GXX\"
-let xc32_bin2hex= \"$XC32_BIN2HEX\"
-let pic32prog   = \"$PIC32PROG\"
 " > etc/config.ml
 
 ################################################################################
@@ -216,65 +159,10 @@ function reset_targets() {
     cat "src/byterun/prims/indep-bindings.c" > "src/byterun/prims/bindings.c"
     cat "src/byterun/simul/indep-sf-regs.h" > "src/byterun/simul/sf-regs.h"
     cat "src/byterun/simul/indep-sf-regs.c" > "src/byterun/simul/sf-regs.c"
-    rm -rf "src/byterun/avr/"
-    rm -rf "src/byterun/pic32"
     rm -rf "src/byterun/nios"
 }
 
 reset_targets
-
-function target_avr () {
-    check_command "avr-g++"
-    check_command "avr-objcopy"
-    check_command "avrdude"
-    check_directory "targets/avr"
-
-    cat "targets/avr/device_config.ml" >> "src/omicrob/device_config.ml"
-
-    mkdir -p "src/byterun/avr"
-    cp -f "targets/avr/arch-specific.c" "src/byterun/avr/"
-    cp -f "targets/avr/arch-specific.h" "src/byterun/avr/"
-
-    cat "targets/avr/prims/prims.h" >> "src/byterun/prims/prims.h"
-    cat "targets/avr/prims/bindings.c" >> "src/byterun/prims/bindings.c"
-    cat "targets/avr/prims/prims.h" >> "src/byterun/simul/sf-regs.h"
-    cat "targets/avr/simul/sf-regs.c" >> "src/byterun/simul/sf-regs.c"
-
-    for f in "arduboy" "arduino_uno" "arduino_mega_2560"
-    do
-        mkdir -p "src/byterun/avr/$f/"
-        cp -f "targets/avr/$f/avrlib.c" "src/byterun/avr/$f/"
-    done
-
-    echo "avr \\" >> etc/Makefile.conf
-}
-
-function target_pic32 () {
-    check_command "xc32-g++"
-    check_command "xc32-bin2hex"
-    check_command "pic32prog"
-    check_directory "targets/pic32"
-
-    cat "targets/pic32/device_config.ml" >> "src/omicrob/device_config.ml"
-
-    mkdir -p "src/byterun/pic32"
-    cp -f "targets/pic32/arch-specific.c" "src/byterun/pic32/"
-    cp -f "targets/pic32/arch-specific.h" "src/byterun/pic32/"
-    cp -fr "targets/pic32/ld" "src/byterun/pic32/"
-
-    cat "targets/pic32/prims/prims.h" >> "src/byterun/prims/prims.h"
-    cat "targets/pic32/prims/bindings.c" >> "src/byterun/prims/bindings.c"
-    cat "targets/pic32/prims/prims.h" >> "src/byterun/simul/sf-regs.h"
-    cat "targets/pic32/simul/sf-regs.c" >> "src/byterun/simul/sf-regs.c"
-
-    for f in "fubarino_mini" "lchip" "pro_mx7"
-    do
-        mkdir -p "src/byterun/pic32/$f/"
-        cp -f "targets/pic32/$f/pic32lib.c" "src/byterun/pic32/$f/"
-    done
-
-    echo "pic32 \\" >> etc/Makefile.conf
-}
 
 function target_nios () {
     check_directory "targets/nios"
@@ -302,10 +190,6 @@ function target_nios () {
 
 err=""
 case $TARGET in
-    avr)
-        target_avr;;
-    pic32)
-        target_pic32;;
     nios)
         target_nios;;
     *)

@@ -15,9 +15,12 @@ MLIS := $(MODULES:=.mli)
 CMOS := $(STDLIB_MODULES:=.cmo)
 CMIS := $(STDLIB_MODULES:=.cmi)
 
+LIB := $(OMICROB)/lib
+
 LIB_MLS  := $(foreach ml,$(MLS),$(LIB)/$(ml))
 LIB_MLIS := $(foreach mli,$(MLIS),$(LIB)/$(mli))
 LIB_CMIS := $(foreach cmi,$(CMIS),$(LIB)/$(cmi))
+
 
 TARGETS := $(LIB)/stdlib.cma $(LIB)/stdlib.cmo $(LIB)/std_exit.cmo $(LIB_MLS) $(LIB_MLIS) $(LIB_CMIS)
 

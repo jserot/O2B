@@ -363,12 +363,12 @@ let caml_hash =
 
 let rec caml_compare v0 v1 =
   match v0, v1 with
-  | Int i0, Int i1 -> Pervasives.compare i0 i1
+  | Int i0, Int i1 -> Stdlib.compare i0 i1
   | Int32 i0, Int32 i1 -> Int32.compare i0 i1
   | Int64 i0, Int64 i1 -> Int64.compare i0 i1
   | Nativeint i0, Nativeint i1 -> Nativeint.compare i0 i1
-  | Float f0, Float f1 -> Pervasives.compare f0 f1 (* May be incorrect with runtime representation of floats *)
-  | Float_array (_mut0, tbl0), Float_array(_mut1, tbl1) -> Pervasives.compare tbl0 tbl1
+  | Float f0, Float f1 -> Stdlib.compare f0 f1 (* May be incorrect with runtime representation of floats *)
+  | Float_array (_mut0, tbl0), Float_array(_mut1, tbl1) -> Stdlib.compare tbl0 tbl1
   | Bytes (_mut0, b0), Bytes (_mut1, b1) -> Bytes.compare b0 b1
   | Object (_mut0, tbl0), Object (_mut1, tbl1) -> caml_compare_arrays tbl0 tbl1
   | Block (_mut0, tag0, tbl0), Block (_mut1, tag1, tbl1) ->
@@ -510,7 +510,7 @@ let ccall arch ooid prim args =
   | "caml_compare", [ v0; v1 ] -> Int (caml_compare v0 v1)
   | "caml_string_compare", [ Bytes (_mut1, b1); Bytes (_mut2, b2) ] -> Int (Bytes.compare b1 b2)
   | "caml_string_notequal", [ Bytes (_mut1, b1); Bytes (_mut2, b2) ] -> if Bytes.equal b1 b2 then Int 0 else Int 1
-  | "caml_int_compare", [ Int n1; Int n2 ] -> Int (Pervasives.compare n1 n2)
+  | "caml_int_compare", [ Int n1; Int n2 ] -> Int (Stdlib.compare n1 n2)
   | "caml_alloc_dummy", [ Int sz ] -> Block (Mutable, ref 0, Array.make sz (Int 0))
   | "caml_alloc_dummy_function", [ Int sz; Int _ ] -> Closure { ofs = 0; ptrs = [||]; env = Array.make sz (Int 0) }
   | "caml_update_dummy", [ Block (_mut1, tag1, tbl1); Block (_mut2, tag2, tbl2) ] -> assert (Array.length tbl1 = Array.length tbl2); tag1 := !tag2; Array.blit tbl2 0 tbl1 0 (Array.length tbl1); Int 0

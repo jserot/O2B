@@ -3,8 +3,7 @@ include ../../../../../etc/Makefile.conf
 #PLATFORM = $$(basename $$(dirname `pwd`))
 PLATFORM=basic
 
-#LIB_FOLDER = $(LIB)/targets/nios/$(PLATFORM)
-LIB_FOLDER = $(LIB)/targets/nios
+LIB_FOLDER = $(OMICROB)/lib/targets/nios
 
 MLS = nios.ml
 MLIS = nios.mli

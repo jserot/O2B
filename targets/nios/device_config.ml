@@ -48,11 +48,6 @@ module NiosConfig (P : NIOSCONFIG) : DEVICECONFIG = struct
     
     let cmd = cmd @ inputs @ [ "-o"; output ] in
     run ~vars ~verbose cmd
-
-  let compile_c_to_hex ~local:_ ~trace:_ ~verbose:_ _ _ = ()
-
-  let flash ~sudo:_ ~verbose:_ _ = ()
-
 end
 
 let get_config name = match name with

@@ -11,13 +11,6 @@ module type DEVICECONFIG = sig
   val compile_ml_to_byte : ppx_options:string list -> mlopts:string list ->
     cxxopts:string list -> local:bool -> trace:int -> verbose:bool ->
     string list -> string -> unit
-
-  (** Compile a .c to a .hex *)
-  val compile_c_to_hex : local: bool -> trace:int -> verbose:bool ->
-    string -> string -> unit
-
-  (** Flash an executable file *)
-  val flash : sudo:bool -> verbose:bool -> string -> unit
 end
 
 let default_ocamlc_options = [ "-g"; "-w"; "A"; "-safe-string"; "-strict-sequence"; "-strict-formats"; "-ccopt"; "-D__OCAML__" ]
@@ -32,12 +25,6 @@ module DefaultConfig : DEVICECONFIG = struct
     let cmd = cmd @ List.flatten (List.map (fun cxxopt -> [ "-ccopt"; cxxopt ]) cxxopts) in
     let cmd = cmd @ inputs @ [ "-o"; output ] in
     run ~vars ~verbose cmd
-
-  let compile_c_to_hex ~local:_ ~trace:_ ~verbose:_ _ _ =
-    failwith "The default config doesn't support flashing"
-
-  let flash ~sudo:_ ~verbose:_ _ =
-    failwith "The default config doesn't support flashing"
 end
 
 (******************************************************************************)

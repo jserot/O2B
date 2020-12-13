@@ -26,9 +26,6 @@ Makefile.nios: check
 main.c: main.ml
 	$(OMICROBC) $(OMICROB_OPTS) -device de10lite -v -mlopt -verbose -o main.c main.ml
 
-simul: main.ml
-	$(OMICROBC) $(OMICROB_OPTS) -simul -device de10lite -v -mlopt -verbose main.ml
-
 code: main.c
 
 build: check code

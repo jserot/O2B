@@ -1,27 +1,6 @@
 include etc/Makefile.conf
 
-all: internals $(TARGETS)
-
-internals: config
-	$(call compile, lib/extra)
-	$(call compile, src/bc2c)
-	$(call compile, src/h15ppx)
-	$(call compile, src/simulators/lcd)
-	$(call compile, src/simulators/lcd_16x2)
-	$(call compile, src/simulators/dip)
-	$(call compile, src/simulators/circuit)
-	$(call compile, src/byterun)
-	$(call compile, src/omicrob)
-	$(call compile, src/stdlib)
-
-avr: internals
-	$(call compile, targets/avr)
-
-pic32: internals
-	$(call compile, targets/pic32)
-
-nios: internals
-	$(call compile, targets/nios)
+all: omicrob $(TARGETS)
 
 config:
 	@if [ $(ETC)/Makefile.conf -ot VERSION -o                     \
@@ -31,91 +10,41 @@ config:
           exit 1;                                                     \
 	fi
 
-install: all
-	mkdir -p "$(LIBDIR)"
-	mkdir -p "$(LIBEXECDIR)"
-	mkdir -p "$(INCLUDEDIR)"
-	mkdir -p "$(BINDIR)"
-	mkdir -p "$(MAN1DIR)"
-	mkdir -p "$(MAN3DIR)"
-	cp bin/bc2c "$(BINDIR)/bc2c"
-	cp bin/h15ppx "$(BINDIR)/h15ppx"
-	cp bin/omicrob "$(BINDIR)/omicrob"
-	cp bin/*_simulator "$(LIBEXECDIR)/"
-	cp doc/bc2c.1 "$(MAN1DIR)/bc2c.1"
-	cp doc/omicrob.1 "$(MAN1DIR)/omicrob.1"
-	cp lib/stdlib.cma "$(LIBDIR)/stdlib.cma"
-	cp lib/libcamlrun.a "$(LIBDIR)/libcamlrun.a"
-	cp lib/*.ml "$(LIBDIR)/"
-	cp lib/*.mli "$(LIBDIR)/"
-	cp lib/*.cmo "$(LIBDIR)/"
-	cp lib/*.cmi "$(LIBDIR)/"
-	cp lib/lcd_cgrom.txt "$(LIBDIR)/"
-	cp -a lib/extra "$(LIBDIR)/"
-	cp -a lib/targets "$(LIBDIR)/"
-	cp -a src/byterun/vm "$(INCLUDEDIR)/"
-	cp -a src/byterun/prims "$(INCLUDEDIR)/"
-	cp -a src/byterun/simul "$(INCLUDEDIR)/"
-	cp -a src/byterun/stdlib "$(INCLUDEDIR)/"
-	for i in $(TARGETS); do cp -a src/byterun/$$i "$(INCLUDEDIR)/" 2> /dev/null; done
-
-uninstall:
-	-rm -f "$(BINDIR)/bc2c"
-	-rm -f "$(BINDIR)/h15ppx"
-	-rm -f "$(BINDIR)/omicrob"
-	-rm -f "$(MAN1DIR)/omicrob.1"
-	-rm -f "$(MAN1DIR)/bc2c.1"
-	-rm -f "$(LIBDIR)/stdlib.cma"
-	-rm -f "$(LIBDIR)/libcamlrun.a"
-	-rm -f "$(LIBDIR)/"*.ml
-	-rm -f "$(LIBDIR)/"*.mli
-	-rm -f "$(LIBDIR)/"*.cmi
-	-rm -f "$(LIBDIR)/"*.cmo
-	-rm -f "$(LIBDIR)/lcd_cgrom.txt"
-	-rm -rf "$(LIBDIR)/extra"
-	-rm -f "$(LIBEXECDIR)/"*_simulator
-	-rm -f "$(INCLUDEDIR)/vm/"*
-	-rm -f "$(INCLUDEDIR)/prims/"*
-	-rm -f "$(INCLUDEDIR)/simul/"*
-	-rm -rf "$(INCLUDEDIR)/$(TARGET)/"*
-	-rm -f "$(INCLUDEDIR)/stdlib/"*
-	@for mod in $(MAN_3P_BASES); do \
-	  rm -f "$(MAN3DIR)/"$$mod.3p;	\
-	done
-	@for mod in $(MAN_3O_BASES); do \
-	  rm -f "$(MAN3DIR)/"$$mod.3o;	\
-	done
-	@if [ -d "$(LIBDIR)" ]; then rmdir "$(LIBDIR)"; fi
-	@if [ -d "$(LIBEXECDIR)" ]; then rmdir "$(LIBEXECDIR)"; fi
-	@if [ -d "$(INCLUDEDIR)/vm" ]; then rmdir "$(INCLUDEDIR)/vm"; fi
-	@if [ -d "$(INCLUDEDIR)/prims" ]; then rmdir "$(INCLUDEDIR)/prims"; fi
-	@if [ -d "$(INCLUDEDIR)/simul" ]; then rmdir "$(INCLUDEDIR)/simul"; fi
-	@if [ -d "$(INCLUDEDIR)/$(TARGET)" ]; then rmdir "$(INCLUDEDIR)/$(TARGET)"; fi
-	@if [ -d "$(INCLUDEDIR)/stdlib" ]; then rmdir "$(INCLUDEDIR)/stdlib"; fi
-	@if [ -d "$(INCLUDEDIR)" ]; then rmdir "$(INCLUDEDIR)"; fi
-
 etc/Makefile.conf:
 	@echo "You must run ./configure before" 1>&2
 	@exit 1
 
-tests: all
-	@make --no-print-directory -C tests
+omicrob: config
+	mkdir -p "$(OMICROB)/lib"
+#	mkdir -p "$(OMICROB)/libexec"
+	mkdir -p "$(OMICROB)/include"
+	mkdir -p "$(OMICROB)/bin"
+#	mkdir -p "$(OMICROB)/man/man1"
+#	mkdir -p "$(OMICROB)/man/man3"
+	$(call compile, src/bc2c)
+	$(call compile, src/byterun)
+	$(call compile, src/omicrob)
+	$(call compile, src/stdlib)
+#	cp lib/libcamlrun.a "$(LIBDIR)/libcamlrun.a"
+#	cp -a lib/targets "$(LIBDIR)/"
+	cp -a src/byterun/vm "$(OMICROB)/include/"
+	cp -a src/byterun/prims "$(OMICROB)/include/"
+	cp -a src/byterun/stdlib "$(OMICROB)/include/"
+	for i in $(TARGETS); do cp -a src/byterun/$$i "$(OMICROB)/include/" 2> /dev/null; done
+
+# PLATFORM-SPECIFIC TARGETS
+
+nios: omicrob
+	$(call compile, targets/nios)
 
 clean:
-	@rm -f *~ */*~ */*/*~ */*/*/*~
-	@rm -f bin/*
-	$(call clean, src/bc2c)
-	$(call clean, src/h15ppx)
-	$(call clean, src/byterun)
-	$(call clean, src/simulators/dip)
-	$(call clean, src/simulators/lcd_16x2)
-	$(call clean, src/simulators/lcd)
-	$(call clean, src/simulators/circuit)
-	$(call clean, src/omicrob)
-	$(call clean, src/stdlib)
-	$(call clean, lib/extra)
-	$(call clean, targets/avr)
-	$(call clean, targets/pic32)
+	-rm -rf "$(OMICROB)/bin"
+	-rm -rf "$(OMICROB)/lib"
+	-rm -rf "$(OMICROB)/include"
+#	-rm -rf "$(OMICROB)/libexec"
+#	-rm -rf "$(OMICROB)/man"
+	@rm -rf lib/targets/nios
 	$(call clean, targets/nios)
+	@rm -f *~ */*~ */*/*~ */*/*/*~
 
-.PHONY: all config install uninstall tests clean
+.PHONY: all config omicrob nios clean

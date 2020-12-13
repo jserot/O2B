@@ -22,3 +22,6 @@ targets/nios/tests/*/main.c
 node_modules/
 config.ml
 src/byterun/nios/
+targets/nios/docs/
+extra-docs/
+omicrob/

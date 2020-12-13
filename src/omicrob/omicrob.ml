@@ -30,7 +30,6 @@ let compile_only     = ref false
 let infer_interf     = ref false
 let just_print       = ref false
 let trace            = ref 0
-let sudo             = ref false
 let simul            = ref false
 let flash            = ref false
 let verbose          = ref false
@@ -84,20 +83,14 @@ let spec =
   ) @ [
     ("-trace", Arg.Set_int trace,
      " Set verbosity of traces: print informations about execution at runtime (default: 0)");
-    ("-sudo", Arg.Set sudo,
-     " Use sudo when flashing the micro-controller");
-    ("-simul", Arg.Set simul,
-     " Execute the program in simulation mode on the computer");
-    ("-flash", Arg.Set flash,
-     " Transfer the program to the micro-controller\n");
-
+    (* ("-simul", Arg.Set simul,
+     *  " Execute the program in simulation mode on the computer"); *)
     ("-device", Arg.String set_config,
      "<device-name> Set the device to compile for; see -list-devices");
     ("-list-devices",
      Arg.Unit (fun _ -> List.iter (fun n -> Printf.printf "%s\n" n)
                   (Device_config.all_config_names ()); exit 0),
      " List available devices\n");
-
     ("-stack-size", Arg.Int (fun sz -> stack_size := Some sz),
      Printf.sprintf "<word-nb> Set stack size (default: %d)" default_stack_size);
     ("-heap-size", Arg.Int (fun sz -> heap_size := Some sz),
@@ -110,11 +103,6 @@ let spec =
      " Do not remove unused VM instructions, compile and link all of them");
     ("-no-shortcut-initialization", Arg.Set no_shortcut_init,
      " Do not improve starting time by evaluating the program initialization at compile time");
-    ("-no-flash-heap", Arg.Set no_flash_heap,
-     " Do not use flash to store immutable data from the heap known at compile time");
-    ("-no-flash-globals", Arg.Set no_flash_globals,
-     " Do not use flash to store immutable entries of the global data table");
-
     ("-mlopt", Arg.String (fun opt -> mlopts := opt :: !mlopts),
      "<option> Pass the given option to the OCaml compiler");
     ("-mlopts", Arg.String (fun opts -> mlopts := List.rev (split opts ',') @ !mlopts),
@@ -160,11 +148,8 @@ Usages:\n\
 \  %s [ OPTIONS ] <src.cmo> -o <out.byte>      (compile .cmo  -> .byte using ocamlc)\n\
 \  %s [ OPTIONS ] <in.byte> -o <out.c>         (compile .byte -> .c    using bc2c)\n\
 \  %s [ OPTIONS ] <in.c> -o <out.elf>          (compile .c    -> .elf  using c++)\n\
-\  %s [ OPTIONS ] <in.c> -o <out.hex>        (compile .c -> .hex  using architecture-specific chain)\n\
-\  %s [ OPTIONS ] -simul <in.elf> [ sim_prog ] (execute the program in simulation mode)\n\
-\  %s [ OPTIONS ] -flash <in.hex>              (flash the micro-controller using the architecture-specific programmer)\n\
 \n\
-Options:" me me me me me me me me
+Options:" me me me me me
 
 (******************************************************************************)
 (* Error and help tools *)
@@ -192,14 +177,12 @@ let input_cmos   = ref []
 let input_cs     = ref []
 let input_byte   = ref None
 let input_elf    = ref None
-let input_hex    = ref None
 
 let input_prgms  = ref []
 
 let output_byte  = ref None
 let output_c     = ref None
 let output_elf   = ref None
-let output_hex   = ref None
 
 (***)
 
@@ -220,7 +203,6 @@ let push_input_file path =
   | ".c"           -> input_cs := path :: !input_cs
   | ".byte"        -> set_file "input" ".byte" input_byte path
   | ".elf"         -> set_file "input" ".elf"  input_elf  path
-  | ".hex"         -> set_file "input" ".hex"  input_hex  path
   | _              -> error "don't know what to do with input file %S" path
 
 let push_output_file path =
@@ -228,7 +210,6 @@ let push_output_file path =
   | ".byte" -> set_file "output" ".byte" output_byte path
   | ".c"    -> set_file "output" ".c"    output_c    path
   | ".elf"  -> set_file "output" ".elf"  output_elf  path
-  | ".hex"  -> set_file "output" ".hex"  output_hex  path
   | _       -> error "don't know what to do to generate output file %S" path
 
 (******************************************************************************)
@@ -251,9 +232,6 @@ let compile_only     = !compile_only
 let infer_interf     = !infer_interf
 let just_print       = !just_print
 let trace            = !trace
-let sudo             = !sudo
-let simul            = !simul
-let flash            = !flash
 let local            = !local
 let verbose          = !verbose
 
@@ -263,8 +241,6 @@ let gc               = !gc
 let arch             = !arch
 let no_clean_interp  = !no_clean_interp
 let no_shortcut_init = !no_shortcut_init
-let no_flash_heap    = !no_flash_heap
-let no_flash_globals = !no_flash_globals
 
 let mlopts           = List.rev !mlopts
 let bc2copts         = List.rev !bc2copts
@@ -276,14 +252,12 @@ let input_cmos       = List.rev !input_cmos
 let input_cs         = List.rev !input_cs
 let input_byte       = !input_byte
 let input_elf        = !input_elf
-let input_hex        = !input_hex
 
 let input_prgms      = List.rev !input_prgms
 
 let output_byte      = !output_byte
 let output_c         = !output_c
 let output_elf       = !output_elf
-let output_hex       = !output_hex
 
 let libdir =
   if local then Filename.concat Config.builddir "lib"
@@ -305,9 +279,6 @@ let ppx_options =
   if arch <> Some 16 then []
   else if local then [ "-ppx"; Filename.concat (Filename.concat Config.builddir "bin") "h15ppx" ]
   else [ "-ppx"; Filename.concat Config.bindir "h15ppx" ]
-
-let () =
-  if sudo && not flash then error "the option -sudo is meaningless without -flash"
 
 (******************************************************************************)
 (* Unexpected argument tools *)
@@ -361,7 +332,7 @@ let input_c =
     | [] | _ :: _ :: _ -> None
 
 let no_output_requested =
-  output_byte = None && output_c = None && output_elf = None && output_hex = None
+  output_byte = None && output_c = None && output_elf = None
 
 let rec get_first_defined path_opts ext =
   match path_opts with
@@ -376,26 +347,20 @@ let () =
   if compile_only then (
     should_be_false "-c" "-i" infer_interf;
     should_be_false "-c" "-trace" (trace <> 0);
-    should_be_false "-c" "-simul" simul;
-    should_be_false "-c" "-flash" flash;
     should_be_none_incomp "-c" "-stack-size" stack_size;
     should_be_none_incomp "-c" "-heap-size" heap_size;
     should_be_none_incomp "-c" "-gc" gc;
     should_be_none_incomp "-c" "-arch" arch;
     should_be_false "-c" "-no-clean-interpreter" no_clean_interp;
     should_be_false "-c" "-no-shortcut-initialization" no_shortcut_init;
-    should_be_false "-c" "-no-flash-heap" no_flash_heap;
-    should_be_false "-c" "-no-flash-globals" no_flash_globals;
     should_be_empty_options "-cxxopt" cxxopts;
     should_be_empty_files input_cmos;
     should_be_empty_files input_cs;
     should_be_none_file input_byte;
     should_be_none_file input_elf;
-    should_be_none_file input_hex;
     should_be_none_file output_byte;
     should_be_none_file output_c;
     should_be_none_file output_elf;
-    should_be_none_file output_hex;
 
     match input_mls with
     | [] -> error "no input file"
@@ -413,26 +378,20 @@ let () =
   if infer_interf then (
     should_be_false "-i" "-c" compile_only;
     should_be_false "-i" "-trace" (trace <> 0);
-    should_be_false "-i" "-simul" simul;
-    should_be_false "-i" "-flash" flash;
     should_be_none_incomp "-i" "-stack-size" stack_size;
     should_be_none_incomp "-i" "-heap-size" heap_size;
     should_be_none_incomp "-i" "-gc" gc;
     should_be_none_incomp "-i" "-arch" arch;
     should_be_false "-i" "-no-clean-interpreter" no_clean_interp;
     should_be_false "-i" "-no-shortcut-initialization" no_shortcut_init;
-    should_be_false "-i" "-no-flash-heap" no_flash_heap;
-    should_be_false "-i" "-no-flash-globals" no_flash_globals;
     should_be_empty_options "-cxxopt" cxxopts;
     should_be_empty_files input_cmos;
     should_be_empty_files input_cs;
     should_be_none_file input_byte;
     should_be_none_file input_elf;
-    should_be_none_file input_hex;
     should_be_none_file output_byte;
     should_be_none_file output_c;
     should_be_none_file output_elf;
-    should_be_none_file output_hex;
 
     match input_mls with
     | [] -> error "no input file"
@@ -453,7 +412,6 @@ let () =
   if input_mls <> [] || input_cmos <> [] then (
     should_be_none_file input_byte;
     should_be_none_file input_elf;
-    should_be_none_file input_hex;
 
     if input_cmos = [] && not (List.exists (fun path -> Filename.extension path = ".ml") input_mls) then (
       error "cannot generate a .byte only with OCaml interfaces";
@@ -496,10 +454,9 @@ let () =
   if (
     available_byte <> None
   ) && (
-      simul || flash || no_output_requested || output_c <> None || output_elf <> None || output_hex <> None
+      no_output_requested || output_c <> None || output_elf <> None 
     ) then (
     should_be_none_file input_elf;
-    should_be_none_file input_hex;
 
     let stack_size = match stack_size with Some sz -> sz | None -> default_stack_size in
     let heap_size = match heap_size with Some sz -> sz | None -> default_heap_size in
@@ -530,8 +487,6 @@ let () =
       ] in
     let cmd = if no_clean_interp then cmd @ [ "-no-clean-interpreter" ] else cmd in
     let cmd = if no_shortcut_init then cmd @ [ "-no-shortcut-initialization" ] else cmd in
-    let cmd = if no_flash_heap then cmd @ [ "-no-flash-heap" ] else cmd in
-    let cmd = if no_flash_globals then cmd @ [ "-no-flash-globals" ] else cmd in
     let cmd = cmd @ List.flatten (List.map (fun path -> [ "-i"; path ]) input_cs) in
     let cmd = cmd @ [ input_path; "-o"; output_path ] in
     run ~verbose cmd
@@ -551,9 +506,8 @@ let available_c = !available_c
 let available_elf = ref input_elf
 
 let () =
-  if available_c <> None && (simul || output_elf <> None || no_output_requested) then (
+  if available_c <> None && (output_elf <> None || no_output_requested) then (
     should_be_none_file input_elf;
-    should_be_none_file input_hex;
 
     let input_path =
       match available_c with
@@ -570,71 +524,8 @@ let () =
 
     let cmd = [ Config.cxx ; "-D"; "__PC__" ] @ default_cxx_options @ cxxopts in
     let cmd = if trace > 0 then cmd @ [ "-DDEBUG=" ^ string_of_int trace ] else cmd in
-    let cmd = cmd @ [ "-I"; Filename.concat includedir "simul" ] in
     let cmd = cmd @ [ input_path; "-o"; output_path ] in
     run ~verbose cmd
   )
 
 let available_elf = !available_elf
-
-(******************************************************************************)
-(* Compile a .c into a .hex *)
-
-let available_hex = ref input_hex
-
-let () =
-  if available_c <> None &&
-     (flash || output_hex <> None || no_output_requested) then (
-    should_be_none_file input_elf;
-    should_be_none_file input_hex;
-
-    let input_path =
-      match available_c with
-      | None -> error "no input file to generate a .hex"
-      | Some path -> path in
-
-    let output_path =
-      get_first_defined [
-        output_hex;
-        output_elf;
-        Some input_path;
-      ] ".hex" in
-
-    DeviceConfig.compile_c_to_hex ~local ~trace ~verbose input_path output_path;
-
-    available_hex := Some output_path)
-
-let available_hex = !available_hex
-
-(******************************************************************************)
-(* Simul *)
-
-let () =
-  if simul then (
-    let env_path = try Sys.getenv "PATH" ^ ":" ^ libexecdir with _ -> libexecdir in
-    let vars = [ ("PATH", env_path) ] in
-    let elf_path =
-      match available_elf with
-      | None -> error "no input file run simulation"
-      | Some elf_path -> elf_path in
-    let cmd = [ if Filename.is_relative elf_path then Filename.concat Filename.current_dir_name elf_path else elf_path ] @ input_prgms in
-    run ~verbose ~vars cmd
-  ) else (
-    should_be_empty_files input_prgms;
-  )
-
-(******************************************************************************)
-(* Flash *)
-
-let () =
-  if flash then
-    let path =
-      match available_hex with
-      | None -> error "no input file to flash the micro-controller"
-      | Some path -> path in
-
-    DeviceConfig.flash ~sudo ~verbose path
-
-(******************************************************************************)
-(******************************************************************************)
-(******************************************************************************)
