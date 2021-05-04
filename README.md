@@ -54,6 +54,7 @@ instanciated on the FPGA. The latter steps are carried out using the vendor-spec
 3. Go to the selected platform directory and upload the hardware configuration :
 
    - `cd targets/nios/platforms/<platform>` 
+   - `make bsp`
    - `make hw` 
 
 4. Go to the application directory, build and upload the software
