@@ -46,74 +46,74 @@ static int char_to_ssd(char c)
        for the 7-segment is shown in the DE0_C5 User Manual. */
   switch ( c ) {
 	case '0':
-		return 0b1000000;
+		return 0b11000000;
 	case '1':
-		return 0b1111001;
+		return 0b11111001;
 	case '2':
-		return 0b0100100;
+		return 0b10100100;
 	case '3':
-		return 0b0110000;
+		return 0b10110000;
 	case '4':
-		return 0b0011001;
+		return 0b10011001;
 	case '5':
 	case '6':
-		return 0b0000010;
+		return 0b10000010;
 	case '7':
-		return 0b1111000;
+		return 0b11111000;
 	case '8':
-		return 0b0000000;
+		return 0b10000000;
 	case '9':
-		return 0b0010000;
+		return 0b10010000;
 	case 'A':
-		return 0b0001000;
+		return 0b10001000;
 	case 'B'://Lowercase
-		return 0b0000011;
+		return 0b10000011;
 	case 'C':
-		return 0b1000110;
+		return 0b11000110;
 	case 'D'://Lowercase
-		return 0b0100001;
+		return 0b10100001;
 	case 'E':
-		return 0b0000110;
+		return 0b10000110;
 	case 'F':
-		return 0b0001110;
+		return 0b10001110;
 	case 'G':
-		return 0b0010000;
+		return 0b10010000;
 	case 'H':
-		return 0b0001001;
+		return 0b10001001;
 	case 'I':
-		return 0b1111001;
+		return 0b11111001;
 	case 'J':
-		return 0b1110001;
+		return 0b11110001;
 	case 'K':
-		return 0b0001010;
+		return 0b10001010;
 	case 'L':
-		return 0b1000111;
+		return 0b11000111;
 	case 'N':
-		return 0b0101011;
+		return 0b10101011;
 	case 'O':
-		return 0b1000000;
+		return 0b11000000;
 	case 'P':
-		return 0b0001100;
+		return 0b10001100;
 	case 'Q':
-		return 0b0011000;
+		return 0b10011000;
 	case 'R'://Lowercase
-		return 0b0101111;
+		return 0b10101111;
 	case 'S':
-		return 0b0010010;
+		return 0b10010010;
 	case 'T':
-		return 0b0000111;
+		return 0b10000111;
 	case 'U':
-		return 0b1000001;
+		return 0b11000001;
 	case 'V':
-		return 0b1100011;
+		return 0b11100011;
 	case 'X':
-		return 0b0011011;
+		return 0b10011011;
 	case 'Y':
-		return 0b0010001;
+		return 0b10010001;
 	case 'Z':
-		return 0b0100100;
+		return 0b10100100;
 	default:
-		return 0b1111111;
+		return 0b11111111;
 	}
 }
 
