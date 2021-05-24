@@ -4,15 +4,22 @@ This directory contains several predefined _platforms_ for the NIOS target.
 
 A _platform_ is a combination of 
 - a board (device type + peripherals)
-- a Nios2 CPU configuration (memory, interfaces, custom instructions, ...)
+- a system configuration (Nios CPU type and configuration, memory, interfaces, custom components/instructions, ...)
 - a _board support package_ (BSP)
 
 The board description ("hardware") is in subdirectory `hw`. 
-The Nios2 configuration ("SoPC") is in subdirectory `qsys`. 
+The system configuration ("SoPC") is in subdirectory `qsys`. 
 The BSP description is in subdirectory `bsp`.
-The source code of custom instructions, when present, is is subdirectory `rtl`.
+The source code of custom components or instructions, when present, is is subdirectory `rtl`.
 
 The interface to the OMicroB framework is located in subdirectories `ml`, `prims` and `simul`.
+
+The system configuration of a platform includes a unique "system ID" which can be edited using the
+`qsys` tools. This system ID can be retrieved and checked by an application uploaded on the hosted
+Nios CPU to ensure that it is running on a compatible system (this will prevent, for example,
+applications needing to read a given peripheral to be run on a system configuration not including
+this peripheral).  Pre-defined platforms have a system ID ranging from 0x100 to 0x1FF. This system
+ID is specified in the `platform-desc.txt` file given with each provided platform.
 
 ## USING PLATFORMS
 
@@ -21,8 +28,7 @@ To use the provided platforms, edit them or build new ones, the Intel *Quartus* 
 - support for the target FPGA device
 
 The platforms provided here 
-- have been developed with [Quartus Prime v 15.1 Lite
-  Edition](https://fpgasoftware.intel.com/15.1/?edition=lite&platform=linux) under LinuxMint 4.15.0.
+- have been developed with [Quartus Prime v 15.1 Lite Edition](https://fpgasoftware.intel.com/15.1/?edition=lite&platform=linux) under LinuxMint 4.15.0.
 - target a [DE10-Lite](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021)
   board, equiped with a Max10 M50DAF484 FPGA. 
 

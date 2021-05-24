@@ -16,6 +16,11 @@
          value = "4";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element button.s1
    {
@@ -32,6 +37,11 @@
          value = "0";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element cpu
    {
@@ -42,7 +52,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "1";
+         value = "0";
          type = "boolean";
       }
    }
@@ -61,6 +71,11 @@
          value = "7";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element hex0.s1
    {
@@ -76,6 +91,11 @@
       {
          value = "8";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
       }
    }
    element hex1.s1
@@ -93,6 +113,11 @@
          value = "9";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element hex2.s1
    {
@@ -108,6 +133,11 @@
       {
          value = "10";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
       }
    }
    element hex3.s1
@@ -125,6 +155,11 @@
          value = "11";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element hex4.s1
    {
@@ -140,6 +175,11 @@
       {
          value = "12";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
       }
    }
    element hex5.s1
@@ -157,6 +197,11 @@
          value = "3";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element jtag_uart.avalon_jtag_slave
    {
@@ -172,6 +217,11 @@
       {
          value = "6";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
       }
    }
    element led.s1
@@ -189,6 +239,11 @@
          value = "2";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element onchip_memory.s1
    {
@@ -205,6 +260,11 @@
          value = "5";
          type = "int";
       }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
    }
    element switch.s1
    {
@@ -214,12 +274,30 @@
          type = "String";
       }
    }
+   element sys_id
+   {
+      datum _sortIndex
+      {
+         value = "14";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
+   }
    element sys_timer
    {
       datum _sortIndex
       {
          value = "13";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
       }
    }
 }
@@ -302,7 +380,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="4" />
+  <parameter name="width" value="2" />
  </module>
  <module name="clk" kind="clock_source" version="15.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
@@ -330,7 +408,7 @@
   <parameter name="dataAddrWidth" value="18" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x0' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='sys_timer.s1' start='0x20000' end='0x20020' type='altera_avalon_timer.s1' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='hex5.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='hex4.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='hex3.s1' start='0x21020' end='0x21030' type='altera_avalon_pio.s1' /><slave name='hex2.s1' start='0x21030' end='0x21040' type='altera_avalon_pio.s1' /><slave name='hex1.s1' start='0x21040' end='0x21050' type='altera_avalon_pio.s1' /><slave name='hex0.s1' start='0x21050' end='0x21060' type='altera_avalon_pio.s1' /><slave name='led.s1' start='0x21060' end='0x21070' type='altera_avalon_pio.s1' /><slave name='switch.s1' start='0x21070' end='0x21080' type='altera_avalon_pio.s1' /><slave name='button.s1' start='0x21080' end='0x21090' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21090' end='0x21098' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x0' end='0x20000' type='altera_avalon_onchip_memory2.s1' /><slave name='sys_timer.s1' start='0x20000' end='0x20020' type='altera_avalon_timer.s1' /><slave name='sys_id.control_slave' start='0x20020' end='0x20028' type='altera_avalon_sysid_qsys.control_slave' /><slave name='cpu.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='hex5.s1' start='0x21000' end='0x21010' type='altera_avalon_pio.s1' /><slave name='hex4.s1' start='0x21010' end='0x21020' type='altera_avalon_pio.s1' /><slave name='hex3.s1' start='0x21020' end='0x21030' type='altera_avalon_pio.s1' /><slave name='hex2.s1' start='0x21030' end='0x21040' type='altera_avalon_pio.s1' /><slave name='hex1.s1' start='0x21040' end='0x21050' type='altera_avalon_pio.s1' /><slave name='hex0.s1' start='0x21050' end='0x21060' type='altera_avalon_pio.s1' /><slave name='led.s1' start='0x21060' end='0x21070' type='altera_avalon_pio.s1' /><slave name='switch.s1' start='0x21070' end='0x21080' type='altera_avalon_pio.s1' /><slave name='button.s1' start='0x21080' end='0x21090' type='altera_avalon_pio.s1' /><slave name='jtag_uart.avalon_jtag_slave' start='0x21090' end='0x21098' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -498,7 +576,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="7" />
+  <parameter name="width" value="8" />
  </module>
  <module name="hex1" kind="altera_avalon_pio" version="15.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -512,7 +590,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="7" />
+  <parameter name="width" value="8" />
  </module>
  <module name="hex2" kind="altera_avalon_pio" version="15.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -526,7 +604,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="7" />
+  <parameter name="width" value="8" />
  </module>
  <module name="hex3" kind="altera_avalon_pio" version="15.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -540,7 +618,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="7" />
+  <parameter name="width" value="8" />
  </module>
  <module name="hex4" kind="altera_avalon_pio" version="15.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -554,7 +632,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="7" />
+  <parameter name="width" value="8" />
  </module>
  <module name="hex5" kind="altera_avalon_pio" version="15.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -568,7 +646,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="7" />
+  <parameter name="width" value="8" />
  </module>
  <module
    name="jtag_uart"
@@ -647,6 +725,14 @@
   <parameter name="width" value="10" />
  </module>
  <module
+   name="sys_id"
+   kind="altera_avalon_sysid_qsys"
+   version="15.1"
+   enabled="1">
+  <parameter name="AUTO_DEVICE_FAMILY" value="MAX 10" />
+  <parameter name="id" value="256" />
+ </module>
+ <module
    name="sys_timer"
    kind="altera_avalon_timer"
    version="15.1"
@@ -669,6 +755,15 @@
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00021090" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="15.1"
+   start="cpu.data_master"
+   end="sys_id.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00020020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -773,6 +868,7 @@
  <connection kind="clock" version="15.1" start="clk.clk" end="hex4.clk" />
  <connection kind="clock" version="15.1" start="clk.clk" end="hex5.clk" />
  <connection kind="clock" version="15.1" start="clk.clk" end="sys_timer.clk" />
+ <connection kind="clock" version="15.1" start="clk.clk" end="sys_id.clk" />
  <connection kind="clock" version="15.1" start="clk.clk" end="onchip_memory.clk1" />
  <connection kind="interrupt" version="15.1" start="cpu.irq" end="jtag_uart.irq">
   <parameter name="irqNumber" value="0" />
@@ -800,6 +896,7 @@
    version="15.1"
    start="clk.clk_reset"
    end="sys_timer.reset" />
+ <connection kind="reset" version="15.1" start="clk.clk_reset" end="sys_id.reset" />
  <connection
    kind="reset"
    version="15.1"

@@ -1,6 +1,6 @@
 Flow report for top
-Fri Jul 17 08:41:18 2020
-Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+Mon May 24 16:19:12 2021
+Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Standard Edition
 
 
 ---------------------
@@ -38,28 +38,28 @@ agreement for further details.
 
 
 
-+----------------------------------------------------------------------------------+
-; Flow Summary                                                                     ;
-+------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Fri Jul 17 08:40:50 2020       ;
-; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
-; Revision Name                      ; top                                         ;
-; Top-level Entity Name              ; DE10_LITE_Golden_Top                        ;
-; Family                             ; MAX 10                                      ;
-; Device                             ; 10M50DAF484C6GES                            ;
-; Timing Models                      ; Preliminary                                 ;
-; Total logic elements               ; 2,121 / 49,760 ( 4 % )                      ;
-;     Total combinational functions  ; 1,945 / 49,760 ( 4 % )                      ;
-;     Dedicated logic registers      ; 1,183 / 49,760 ( 2 % )                      ;
-; Total registers                    ; 1183                                        ;
-; Total pins                         ; 71 / 360 ( 20 % )                           ;
-; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 1,059,840 / 1,677,312 ( 63 % )              ;
-; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                             ;
-; Total PLLs                         ; 0 / 4 ( 0 % )                               ;
-; UFM blocks                         ; 0 / 1 ( 0 % )                               ;
-; ADC blocks                         ; 0 / 2 ( 0 % )                               ;
-+------------------------------------+---------------------------------------------+
++--------------------------------------------------------------------------------------+
+; Flow Summary                                                                         ;
++------------------------------------+-------------------------------------------------+
+; Flow Status                        ; Successful - Mon May 24 16:18:39 2021           ;
+; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Standard Edition ;
+; Revision Name                      ; top                                             ;
+; Top-level Entity Name              ; top                                             ;
+; Family                             ; MAX 10                                          ;
+; Device                             ; 10M50DAF484C6GES                                ;
+; Timing Models                      ; Preliminary                                     ;
+; Total logic elements               ; 2,168 / 49,760 ( 4 % )                          ;
+;     Total combinational functions  ; 1,988 / 49,760 ( 4 % )                          ;
+;     Dedicated logic registers      ; 1,202 / 49,760 ( 2 % )                          ;
+; Total registers                    ; 1202                                            ;
+; Total pins                         ; 71 / 360 ( 20 % )                               ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 1,059,840 / 1,677,312 ( 63 % )                  ;
+; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                                 ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
+; UFM blocks                         ; 0 / 1 ( 0 % )                                   ;
+; ADC blocks                         ; 0 / 2 ( 0 % )                                   ;
++------------------------------------+-------------------------------------------------+
 
 
 +-----------------------------------------+
@@ -67,35 +67,34 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/17/2020 08:37:27 ;
+; Start date & time ; 05/24/2021 16:15:13 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; top                 ;
 +-------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                           ;
-+-------------------------------------+------------------------------------------------------------------+---------------+----------------------+------------+
-; Assignment Name                     ; Value                                                            ; Default Value ; Entity Name          ; Section Id ;
-+-------------------------------------+------------------------------------------------------------------+---------------+----------------------+------------+
-; COMPILER_SIGNATURE_ID               ; 8796759670293.159496784713724                                    ; --            ; --                   ; --         ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                                               ; --            ; --                   ; --         ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                                                ; --            ; --                   ; --         ;
-; MISC_FILE                           ; ../qsys/nios_128k_base/synthesis/../nios_128k_base.cmp           ; --            ; --                   ; --         ;
-; MISC_FILE                           ; ../qsys/nios_128k_base/synthesis/../../nios_128k_base.qsys       ; --            ; --                   ; --         ;
-; PARTITION_COLOR                     ; 16764057                                                         ; --            ; DE10_LITE_Golden_Top ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                                            ; --            ; DE10_LITE_Golden_Top ; Top        ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                                                           ; --            ; DE10_LITE_Golden_Top ; Top        ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                                              ; --            ; --                   ; --         ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                            ; --            ; --                   ; --         ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                                                     ; --            ; --                   ; --         ;
-; SLD_FILE                            ; ../qsys/nios_128k_base/synthesis/nios_128k_base.regmap           ; --            ; --                   ; --         ;
-; SLD_FILE                            ; ../qsys/nios_128k_base/synthesis/nios_128k_base.debuginfo        ; --            ; --                   ; --         ;
-; SLD_INFO                            ; QSYS_NAME nios_128k_base HAS_SOPCINFO 1 GENERATION_ID 1594914478 ; --            ; nios_128k_base       ; --         ;
-; SOPCINFO_FILE                       ; ../qsys/nios_128k_base/synthesis/../../nios_128k_base.sopcinfo   ; --            ; --                   ; --         ;
-; SYNTHESIS_ONLY_QIP                  ; On                                                               ; --            ; --                   ; --         ;
-; TOP_LEVEL_ENTITY                    ; DE10_LITE_Golden_Top                                             ; top           ; --                   ; --         ;
-+-------------------------------------+------------------------------------------------------------------+---------------+----------------------+------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                     ;
++-------------------------------------+------------------------------------------------------------------+---------------+----------------+------------+
+; Assignment Name                     ; Value                                                            ; Default Value ; Entity Name    ; Section Id ;
++-------------------------------------+------------------------------------------------------------------+---------------+----------------+------------+
+; COMPILER_SIGNATURE_ID               ; 8796759670293.162186571324179                                    ; --            ; --             ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                                               ; --            ; --             ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                                                ; --            ; --             ; --         ;
+; MISC_FILE                           ; ../qsys/nios_128k_base/synthesis/../nios_128k_base.cmp           ; --            ; --             ; --         ;
+; MISC_FILE                           ; ../qsys/nios_128k_base/synthesis/../../nios_128k_base.qsys       ; --            ; --             ; --         ;
+; PARTITION_COLOR                     ; 16764057                                                         ; --            ; --             ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                                            ; --            ; --             ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                                           ; --            ; --             ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                                              ; --            ; --             ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                            ; --            ; --             ; --         ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                                                     ; --            ; --             ; --         ;
+; SLD_FILE                            ; ../qsys/nios_128k_base/synthesis/nios_128k_base.regmap           ; --            ; --             ; --         ;
+; SLD_FILE                            ; ../qsys/nios_128k_base/synthesis/nios_128k_base.debuginfo        ; --            ; --             ; --         ;
+; SLD_INFO                            ; QSYS_NAME nios_128k_base HAS_SOPCINFO 1 GENERATION_ID 1621865559 ; --            ; nios_128k_base ; --         ;
+; SOPCINFO_FILE                       ; ../qsys/nios_128k_base/synthesis/../../nios_128k_base.sopcinfo   ; --            ; --             ; --         ;
+; SYNTHESIS_ONLY_QIP                  ; On                                                               ; --            ; --             ; --         ;
++-------------------------------------+------------------------------------------------------------------+---------------+----------------+------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -103,11 +102,11 @@ agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:01:38     ; 1.0                     ; 1321 MB             ; 00:01:20                           ;
-; Fitter                    ; 00:01:07     ; 1.0                     ; 1488 MB             ; 00:01:00                           ;
-; Assembler                 ; 00:00:07     ; 1.0                     ; 1033 MB             ; 00:00:05                           ;
-; TimeQuest Timing Analyzer ; 00:00:18     ; 1.0                     ; 1103 MB             ; 00:00:15                           ;
-; Total                     ; 00:03:10     ; --                      ; --                  ; 00:02:40                           ;
+; Analysis & Synthesis      ; 00:01:42     ; 1.0                     ; 1324 MB             ; 00:01:22                           ;
+; Fitter                    ; 00:01:08     ; 1.0                     ; 1501 MB             ; 00:00:56                           ;
+; Assembler                 ; 00:00:08     ; 1.0                     ; 1038 MB             ; 00:00:06                           ;
+; TimeQuest Timing Analyzer ; 00:00:23     ; 1.0                     ; 1108 MB             ; 00:00:18                           ;
+; Total                     ; 00:03:21     ; --                      ; --                  ; 00:02:42                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

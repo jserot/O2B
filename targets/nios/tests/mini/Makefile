@@ -32,7 +32,7 @@ build: check code
 	make -f Makefile.nios
 
 run: check main.elf
-	make -f Makefile.nios download-elf
+	make -f Makefile.nios download-elf && nios2-terminal
 
 term: check
 	nios2-terminal

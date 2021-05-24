@@ -27,7 +27,7 @@ Predefined hardware platforms are provided in the distribution.
 
 A _platform_ is a combination of 
 - a board (device type + peripherals)
-- a Nios2 CPU configuration (memory, interfaces, custom instructions, ...)
+- a system configuration (Nios CPU type and configuration, memory, interfaces, custom components/instructions, ...)
 - a _board support package_ (BSP)
 
 Instructions to design and implement new platforms are given in the directory `targets/nios/platforms`.

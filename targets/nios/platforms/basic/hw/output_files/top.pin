@@ -65,7 +65,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Standard Edition
 CHIP  "top"  ASSIGNED TO AN: 10M50DAF484C6GES
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
