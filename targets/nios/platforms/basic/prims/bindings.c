@@ -58,3 +58,7 @@ value caml_nios_timer_get_us(value unit) {
 value caml_nios_timer_get_ms(value unit) {
   return Val_int(nios_timer_get_ms());
 }
+
+value caml_nios_get_sys_id(value unit) {
+  return Val_int(nios_get_sys_id());
+}

@@ -83,3 +83,8 @@ struct
     external get_us : unit -> int = "caml_nios_timer_get_us" [@@noalloc]
     external get_ms : unit -> int = "caml_nios_timer_get_ms" [@@noalloc]
 end
+
+module Sys =
+struct
+    external sys_id : unit -> int = "caml_nios_get_sys_id" [@@noalloc]
+end

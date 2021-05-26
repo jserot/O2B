@@ -21,4 +21,6 @@ int nios_timer_init();
 int nios_timer_get_us();
 int nios_timer_get_ms();
 
+int nios_get_sys_id();
+
 #endif
