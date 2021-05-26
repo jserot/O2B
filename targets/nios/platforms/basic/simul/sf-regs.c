@@ -74,3 +74,9 @@ int nios_timer_get_ms()
   printf("nios_timer_get_ms()\n");
   return 0;
 }
+
+int nios_get_sys_id()
+{
+  printf("nios_get_sys_id()\n");
+  return 0;
+}
