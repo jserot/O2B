@@ -27,6 +27,7 @@ let chrono f =
   r, t2-t1
   
 let () =
+  let _ = Nios.Sys.sys_id () in 
   if Nios.Timer.init () < 0 then error "Timer init failed";
   while true do
     let r1, t1 = chrono gcd in

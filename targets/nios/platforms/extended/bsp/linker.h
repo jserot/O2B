@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
  * SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
  *
- * Generated: Sat Jul 18 10:06:13 CEST 2020
+ * Generated: Wed May 26 23:31:05 CEST 2021
  */
 
 /*
@@ -65,9 +65,9 @@
  *
  */
 
-#define ONCHIP_MEMORY_REGION_BASE 0x20
+#define ONCHIP_MEMORY_REGION_BASE 0x20020
 #define ONCHIP_MEMORY_REGION_SPAN 131040
-#define RESET_REGION_BASE 0x0
+#define RESET_REGION_BASE 0x20000
 #define RESET_REGION_SPAN 32
 
 

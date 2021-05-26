@@ -75,6 +75,12 @@ int nios_timer_get_ms()
   return 0;
 }
 
+int nios_get_sys_id()
+{
+  printf("nios_get_sys_id()\n");
+  return 0;
+}
+
 int nios_gcd(int m, int n)
 {
   printf("nios_gcd(%d,%d)\n", m, n);

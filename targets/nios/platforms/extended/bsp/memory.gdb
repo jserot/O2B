@@ -3,7 +3,7 @@
 # Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
 # SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
 #
-# Generated: Sat Jul 18 10:06:13 CEST 2020
+# Generated: Wed May 26 23:31:05 CEST 2021
 
 # DO NOT MODIFY THIS FILE
 #
@@ -47,4 +47,4 @@
 # by allowing GDB to cache memory contents on the host.
 
 # onchip_memory
-memory 0x0 0x20000 cache
+memory 0x20000 0x40000 cache
