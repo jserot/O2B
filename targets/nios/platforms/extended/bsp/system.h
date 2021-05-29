@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
  * SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
  *
- * Generated: Wed May 26 23:48:19 CEST 2021
+ * Generated: Thu May 27 11:42:58 CEST 2021
  */
 
 /*
@@ -149,6 +149,7 @@
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2_GEN2
 #define __GCD
+#define __GCD_CC
 
 
 /*
@@ -212,6 +213,20 @@
 #define BUTTON_RESET_VALUE 0
 #define BUTTON_SPAN 16
 #define BUTTON_TYPE "altera_avalon_pio"
+
+
+/*
+ * gcd_cc configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_gcd_cc GCD_CC
+#define GCD_CC_BASE 0x0
+#define GCD_CC_IRQ -1
+#define GCD_CC_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define GCD_CC_NAME "/dev/gcd_cc"
+#define GCD_CC_SPAN 64
+#define GCD_CC_TYPE "GCD_CC"
 
 
 /*
@@ -500,7 +515,7 @@
 #define SYS_ID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYS_ID_NAME "/dev/sys_id"
 #define SYS_ID_SPAN 8
-#define SYS_ID_TIMESTAMP 1622065410
+#define SYS_ID_TIMESTAMP 1622108181
 #define SYS_ID_TYPE "altera_avalon_sysid_qsys"
 
 

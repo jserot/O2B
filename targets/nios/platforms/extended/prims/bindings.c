@@ -72,3 +72,7 @@ value caml_nios_gcd(value m, value n) {
 value caml_nios_gcd_ci(value m, value n) {
   return Val_int(nios_gcd_ci(Int_val(m), Int_val(n)));
 }
+
+value caml_nios_gcd_cc(value m, value n) {
+  return Val_int(nios_gcd_cc(Int_val(m), Int_val(n)));
+}

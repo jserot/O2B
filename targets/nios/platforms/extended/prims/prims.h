@@ -29,4 +29,6 @@ int nios_gcd(int m, int n);
 
 int nios_gcd_ci(int m, int n);
 
+int nios_gcd_cc(int m, int n);
+
 #endif

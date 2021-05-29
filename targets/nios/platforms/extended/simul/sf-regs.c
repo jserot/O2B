@@ -92,3 +92,9 @@ int nios_gcd_ci(int m, int n)
   printf("nios_gcd_ci(%d,%d)\n", m, n);
   return 1;
 }
+
+int nios_gcd_cc(int m, int n)
+{
+  printf("nios_gcd_cc(%d,%d)\n", m, n);
+  return 1;
+}

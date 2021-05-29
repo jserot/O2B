@@ -96,5 +96,6 @@ end
 
 module Rtl =
 struct
-  external gcd : int -> int -> int = "caml_nios_gcd_ci" [@@noalloc]
+  external gcd_ci : int -> int -> int = "caml_nios_gcd_ci" [@@noalloc]
+  external gcd_cc : int -> int -> int = "caml_nios_gcd_cc" [@@noalloc]
 end

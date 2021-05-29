@@ -61,7 +61,8 @@ sig
   external gcd : int -> int -> int = "caml_nios_gcd" [@@noalloc]
 end
 
-module Rtl : (* Primitives implemented as custom, RT-level, instructions *)
+module Rtl : (* Primitives implemented as RT-level custom instruction and component *)
 sig
-  external gcd : int -> int -> int = "caml_nios_gcd_ci" [@@noalloc]
+  external gcd_ci : int -> int -> int = "caml_nios_gcd_ci" [@@noalloc]
+  external gcd_cc : int -> int -> int = "caml_nios_gcd_cc" [@@noalloc]
 end

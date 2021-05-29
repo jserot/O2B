@@ -15,5 +15,6 @@ These presets can be modified by updating the file hw/top.vhd
 RAM=128k
 HAL library with Small-C lib and reduced drivers
 
-One custom instruction: GCD
+One custom instruction: GCD_CI
+One custom component: GCD_CC
   

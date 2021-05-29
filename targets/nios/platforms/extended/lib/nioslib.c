@@ -208,6 +208,28 @@ int nios_gcd_ci(int m, int n)
   return ALT_CI_GCD(m, n);  // The ALT_CI_GCD macro is defined in the "system.h" file of the BSP
 }
 
+#define GCD_CC_CTL 0   // Control/status register for the GCD custom component
+#define GCD_CC_ARG1 1
+#define GCD_CC_ARG2 2
+#define GCD_CC_RESULT 3
+
+int nios_gcd_cc(int m, int n)
+{
+  alt_u32 r;
+  r = IORD(GCD_CC_BASE, GCD_CC_CTL); // Get RDY status by reading control/status reg 
+  if ( !r ) return 0; 
+
+  IOWR(GCD_CC_BASE, GCD_CC_ARG1, m);  // Write arguments
+  IOWR(GCD_CC_BASE, GCD_CC_ARG2, n);
+
+  IOWR(GCD_CC_BASE, GCD_CC_CTL, 1);  // Assert start
+
+  while ( (r = IORD(GCD_CC_BASE, GCD_CC_CTL)) == 0 ); // Wait for rdy
+  r = IORD(GCD_CC_BASE, GCD_CC_RESULT); // Read result
+
+  return r;
+}
+
 // The following fonctions are defined just to ensure compatibility with OMicrob framework.
 // They do not have a direct interpretation on NIOS.
 

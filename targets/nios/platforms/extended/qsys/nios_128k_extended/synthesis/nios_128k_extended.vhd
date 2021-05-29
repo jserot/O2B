@@ -23,19 +23,6 @@ entity nios_128k_extended is
 end entity nios_128k_extended;
 
 architecture rtl of nios_128k_extended is
-	component custom_gcd is
-		port (
-			clk_en : in  std_logic                     := 'X';             -- clk_en
-			start  : in  std_logic                     := 'X';             -- start
-			done   : out std_logic;                                        -- done
-			dataa  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- dataa
-			datab  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- datab
-			result : out std_logic_vector(31 downto 0);                    -- result
-			clk    : in  std_logic                     := 'X';             -- clk
-			reset  : in  std_logic                     := 'X'              -- reset
-		);
-	end component custom_gcd;
-
 	component nios_128k_extended_button is
 		port (
 			clk      : in  std_logic                     := 'X';             -- clk
@@ -93,6 +80,31 @@ architecture rtl of nios_128k_extended is
 			W_ci_ipending                       : out std_logic_vector(31 downto 0)                     -- ipending
 		);
 	end component nios_128k_extended_cpu;
+
+	component avs_gcd is
+		port (
+			avs_s0_address   : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- address
+			avs_s0_read      : in  std_logic                     := 'X';             -- read
+			avs_s0_readdata  : out std_logic_vector(31 downto 0);                    -- readdata
+			avs_s0_write     : in  std_logic                     := 'X';             -- write
+			avs_s0_writedata : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			clock_clk        : in  std_logic                     := 'X';             -- clk
+			reset_reset      : in  std_logic                     := 'X'              -- reset
+		);
+	end component avs_gcd;
+
+	component custom_gcd is
+		port (
+			clk_en : in  std_logic                     := 'X';             -- clk_en
+			start  : in  std_logic                     := 'X';             -- start
+			done   : out std_logic;                                        -- done
+			dataa  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- dataa
+			datab  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- datab
+			result : out std_logic_vector(31 downto 0);                    -- result
+			clk    : in  std_logic                     := 'X';             -- clk
+			reset  : in  std_logic                     := 'X'              -- reset
+		);
+	end component custom_gcd;
 
 	component nios_128k_extended_hex0 is
 		port (
@@ -359,6 +371,11 @@ architecture rtl of nios_128k_extended is
 			cpu_debug_mem_slave_byteenable          : out std_logic_vector(3 downto 0);                     -- byteenable
 			cpu_debug_mem_slave_waitrequest         : in  std_logic                     := 'X';             -- waitrequest
 			cpu_debug_mem_slave_debugaccess         : out std_logic;                                        -- debugaccess
+			gcd_cc_s0_address                       : out std_logic_vector(3 downto 0);                     -- address
+			gcd_cc_s0_write                         : out std_logic;                                        -- write
+			gcd_cc_s0_read                          : out std_logic;                                        -- read
+			gcd_cc_s0_readdata                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			gcd_cc_s0_writedata                     : out std_logic_vector(31 downto 0);                    -- writedata
 			hex0_s1_address                         : out std_logic_vector(1 downto 0);                     -- address
 			hex0_s1_write                           : out std_logic;                                        -- write
 			hex0_s1_readdata                        : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -548,14 +565,14 @@ architecture rtl of nios_128k_extended is
 	signal cpu_custom_instruction_master_multi_xconnect_ci_master0_dataa          : std_logic_vector(31 downto 0); -- cpu_custom_instruction_master_multi_xconnect:ci_master0_dataa -> cpu_custom_instruction_master_multi_slave_translator0:ci_slave_dataa
 	signal cpu_custom_instruction_master_multi_xconnect_ci_master0_reset          : std_logic;                     -- cpu_custom_instruction_master_multi_xconnect:ci_master0_reset -> cpu_custom_instruction_master_multi_slave_translator0:ci_slave_reset
 	signal cpu_custom_instruction_master_multi_xconnect_ci_master0_writerc        : std_logic;                     -- cpu_custom_instruction_master_multi_xconnect:ci_master0_writerc -> cpu_custom_instruction_master_multi_slave_translator0:ci_slave_writerc
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_result : std_logic_vector(31 downto 0); -- GCD:result -> cpu_custom_instruction_master_multi_slave_translator0:ci_master_result
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk    : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_clk -> GCD:clk
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk_en : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_clken -> GCD:clk_en
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_datab  : std_logic_vector(31 downto 0); -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_datab -> GCD:datab
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_dataa  : std_logic_vector(31 downto 0); -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_dataa -> GCD:dataa
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_start  : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_start -> GCD:start
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_reset  : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_reset -> GCD:reset
-	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_done   : std_logic;                     -- GCD:done -> cpu_custom_instruction_master_multi_slave_translator0:ci_master_done
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_result : std_logic_vector(31 downto 0); -- gcd_ci:result -> cpu_custom_instruction_master_multi_slave_translator0:ci_master_result
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk    : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_clk -> gcd_ci:clk
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk_en : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_clken -> gcd_ci:clk_en
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_datab  : std_logic_vector(31 downto 0); -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_datab -> gcd_ci:datab
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_dataa  : std_logic_vector(31 downto 0); -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_dataa -> gcd_ci:dataa
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_start  : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_start -> gcd_ci:start
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_reset  : std_logic;                     -- cpu_custom_instruction_master_multi_slave_translator0:ci_master_reset -> gcd_ci:reset
+	signal cpu_custom_instruction_master_multi_slave_translator0_ci_master_done   : std_logic;                     -- gcd_ci:done -> cpu_custom_instruction_master_multi_slave_translator0:ci_master_done
 	signal cpu_data_master_readdata                                               : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_data_master_readdata -> cpu:d_readdata
 	signal cpu_data_master_waitrequest                                            : std_logic;                     -- mm_interconnect_0:cpu_data_master_waitrequest -> cpu:d_waitrequest
 	signal cpu_data_master_debugaccess                                            : std_logic;                     -- cpu:debug_mem_slave_debugaccess_to_roms -> mm_interconnect_0:cpu_data_master_debugaccess
@@ -585,6 +602,11 @@ architecture rtl of nios_128k_extended is
 	signal mm_interconnect_0_cpu_debug_mem_slave_byteenable                       : std_logic_vector(3 downto 0);  -- mm_interconnect_0:cpu_debug_mem_slave_byteenable -> cpu:debug_mem_slave_byteenable
 	signal mm_interconnect_0_cpu_debug_mem_slave_write                            : std_logic;                     -- mm_interconnect_0:cpu_debug_mem_slave_write -> cpu:debug_mem_slave_write
 	signal mm_interconnect_0_cpu_debug_mem_slave_writedata                        : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_debug_mem_slave_writedata -> cpu:debug_mem_slave_writedata
+	signal mm_interconnect_0_gcd_cc_s0_readdata                                   : std_logic_vector(31 downto 0); -- gcd_cc:avs_s0_readdata -> mm_interconnect_0:gcd_cc_s0_readdata
+	signal mm_interconnect_0_gcd_cc_s0_address                                    : std_logic_vector(3 downto 0);  -- mm_interconnect_0:gcd_cc_s0_address -> gcd_cc:avs_s0_address
+	signal mm_interconnect_0_gcd_cc_s0_read                                       : std_logic;                     -- mm_interconnect_0:gcd_cc_s0_read -> gcd_cc:avs_s0_read
+	signal mm_interconnect_0_gcd_cc_s0_write                                      : std_logic;                     -- mm_interconnect_0:gcd_cc_s0_write -> gcd_cc:avs_s0_write
+	signal mm_interconnect_0_gcd_cc_s0_writedata                                  : std_logic_vector(31 downto 0); -- mm_interconnect_0:gcd_cc_s0_writedata -> gcd_cc:avs_s0_writedata
 	signal mm_interconnect_0_onchip_memory_s1_chipselect                          : std_logic;                     -- mm_interconnect_0:onchip_memory_s1_chipselect -> onchip_memory:chipselect
 	signal mm_interconnect_0_onchip_memory_s1_readdata                            : std_logic_vector(31 downto 0); -- onchip_memory:readdata -> mm_interconnect_0:onchip_memory_s1_readdata
 	signal mm_interconnect_0_onchip_memory_s1_address                             : std_logic_vector(14 downto 0); -- mm_interconnect_0:onchip_memory_s1_address -> onchip_memory:address
@@ -639,7 +661,7 @@ architecture rtl of nios_128k_extended is
 	signal irq_mapper_receiver0_irq                                               : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	signal irq_mapper_receiver1_irq                                               : std_logic;                     -- timer:irq -> irq_mapper:receiver1_irq
 	signal cpu_irq_irq                                                            : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
-	signal rst_controller_reset_out_reset                                         : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                         : std_logic;                     -- rst_controller:reset_out -> [gcd_cc:reset_reset, irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                                     : std_logic;                     -- rst_controller:reset_req -> [cpu:reset_req, onchip_memory:reset_req, rst_translator:reset_req_in]
 	signal reset_reset_n_ports_inv                                                : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv           : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
@@ -655,18 +677,6 @@ architecture rtl of nios_128k_extended is
 	signal rst_controller_reset_out_reset_ports_inv                               : std_logic;                     -- rst_controller_reset_out_reset:inv -> [button:reset_n, cpu:reset_n, hex0:reset_n, hex1:reset_n, hex2:reset_n, hex3:reset_n, hex4:reset_n, hex5:reset_n, jtag_uart:rst_n, led:reset_n, switch:reset_n, sys_id:reset_n, timer:reset_n]
 
 begin
-
-	gcd : component custom_gcd
-		port map (
-			clk_en => cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk_en, -- nios_custom_instruction_slave.clk_en
-			start  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_start,  --                              .start
-			done   => cpu_custom_instruction_master_multi_slave_translator0_ci_master_done,   --                              .done
-			dataa  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_dataa,  --                              .dataa
-			datab  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_datab,  --                              .datab
-			result => cpu_custom_instruction_master_multi_slave_translator0_ci_master_result, --                              .result
-			clk    => cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk,    --                              .clk
-			reset  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_reset   --                              .reset
-		);
 
 	button : component nios_128k_extended_button
 		port map (
@@ -722,6 +732,29 @@ begin
 			E_ci_multi_reset_req                => cpu_custom_instruction_master_reset_req,           --                          .reset_req
 			W_ci_estatus                        => cpu_custom_instruction_master_estatus,             --                          .estatus
 			W_ci_ipending                       => cpu_custom_instruction_master_ipending             --                          .ipending
+		);
+
+	gcd_cc : component avs_gcd
+		port map (
+			avs_s0_address   => mm_interconnect_0_gcd_cc_s0_address,   --    s0.address
+			avs_s0_read      => mm_interconnect_0_gcd_cc_s0_read,      --      .read
+			avs_s0_readdata  => mm_interconnect_0_gcd_cc_s0_readdata,  --      .readdata
+			avs_s0_write     => mm_interconnect_0_gcd_cc_s0_write,     --      .write
+			avs_s0_writedata => mm_interconnect_0_gcd_cc_s0_writedata, --      .writedata
+			clock_clk        => clk_clk,                               -- clock.clk
+			reset_reset      => rst_controller_reset_out_reset         -- reset.reset
+		);
+
+	gcd_ci : component custom_gcd
+		port map (
+			clk_en => cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk_en, -- nios_custom_instruction_slave.clk_en
+			start  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_start,  --                              .start
+			done   => cpu_custom_instruction_master_multi_slave_translator0_ci_master_done,   --                              .done
+			dataa  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_dataa,  --                              .dataa
+			datab  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_datab,  --                              .datab
+			result => cpu_custom_instruction_master_multi_slave_translator0_ci_master_result, --                              .result
+			clk    => cpu_custom_instruction_master_multi_slave_translator0_ci_master_clk,    --                              .clk
+			reset  => cpu_custom_instruction_master_multi_slave_translator0_ci_master_reset   --                              .reset
 		);
 
 	hex0 : component nios_128k_extended_hex0
@@ -1039,6 +1072,11 @@ begin
 			cpu_debug_mem_slave_byteenable          => mm_interconnect_0_cpu_debug_mem_slave_byteenable,          --                                .byteenable
 			cpu_debug_mem_slave_waitrequest         => mm_interconnect_0_cpu_debug_mem_slave_waitrequest,         --                                .waitrequest
 			cpu_debug_mem_slave_debugaccess         => mm_interconnect_0_cpu_debug_mem_slave_debugaccess,         --                                .debugaccess
+			gcd_cc_s0_address                       => mm_interconnect_0_gcd_cc_s0_address,                       --                       gcd_cc_s0.address
+			gcd_cc_s0_write                         => mm_interconnect_0_gcd_cc_s0_write,                         --                                .write
+			gcd_cc_s0_read                          => mm_interconnect_0_gcd_cc_s0_read,                          --                                .read
+			gcd_cc_s0_readdata                      => mm_interconnect_0_gcd_cc_s0_readdata,                      --                                .readdata
+			gcd_cc_s0_writedata                     => mm_interconnect_0_gcd_cc_s0_writedata,                     --                                .writedata
 			hex0_s1_address                         => mm_interconnect_0_hex0_s1_address,                         --                         hex0_s1.address
 			hex0_s1_write                           => mm_interconnect_0_hex0_s1_write,                           --                                .write
 			hex0_s1_readdata                        => mm_interconnect_0_hex0_s1_readdata,                        --                                .readdata

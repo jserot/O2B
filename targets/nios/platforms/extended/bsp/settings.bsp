@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>26 mai 2021 23:52:06</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1622065926179</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>29 mai 2021 09:42:16</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1622274136339</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>./</BspGeneratedLocation>
         <BspSettingsFile>bsp/settings.bsp</BspSettingsFile>
         <SopcDesignFile>../qsys/nios_128k_extended.sopcinfo</SopcDesignFile>
@@ -886,6 +886,12 @@
                 <Enabled>false</Enabled>
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
+        <MemoryMap>
+                <slaveDescriptor>gcd_cc</slaveDescriptor>
+                <addressRange>0x00000000 - 0x0000003F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>onchip_memory</slaveDescriptor>
                 <addressRange>0x00020000 - 0x0003FFFF</addressRange>

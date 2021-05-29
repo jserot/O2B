@@ -32,7 +32,8 @@ let () =
   while true do
     let r1, t1 = chrono gcd in
     let r2, t2 = chrono Nios.C.gcd in
-    let r3, t3 = chrono Nios.Rtl.gcd in
-    print_timings [t1;t2;t3];
-    print_int ((r2-r1)*10+(r3-r1)) (* should be 0 *)
+    let r3, t3 = chrono Nios.Rtl.gcd_ci in
+    let r4, t4 = chrono Nios.Rtl.gcd_cc in
+    print_timings [t1;t2;t3;t4];
+    print_int ((r2-r1)*100+(r3-r1)*10+(r4-r1)) (* should be 0 *)
   done
