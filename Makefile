@@ -18,6 +18,11 @@ etc/Makefile.conf:
 omicrob:
 	(cd omicrob; make)
 
+test: omicrob
+	(cd platforms/quartus/basic; make omicrob)
+	(cd apps/mini; make code && make sim)
+	(cd apps/mini; make platform-makefile && make build)
+
 clean:
 	(cd omicrob; make clean)
 	(cd platforms; make clean)

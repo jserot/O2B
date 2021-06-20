@@ -1,4 +1,4 @@
-SUBDIRS=gcd ios ledshade mini rotdisplay sieve sieve2
+SUBDIRS=mini # gcd ios ledshade rotdisplay sieve sieve2
 
 clean:
 	for i in $(SUBDIRS); do (cd $$i; make clean); done
