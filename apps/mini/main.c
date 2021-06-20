@@ -14,7 +14,7 @@
 
 #define OCAML_GC_MARK_AND_COMPACT
 
-#include </media/sf_SF2/ml/O2B-master/omicrob/include/vm/values.h>
+#include </media/sf_SF2/ml/O2B/omicrob/include/vm/values.h>
 
 #define OCAML_ACC0                        0
 #define OCAML_ACC1                        1
@@ -612,7 +612,7 @@ PROGMEM opcode_t const ocaml_bytecode[OCAML_BYTECODE_BSIZE] = {
   /* 691 */  OCAML_STOP
 };
 
-#include </media/sf_SF2/ml/O2B-master/omicrob/include/vm/runtime.c>
+#include </media/sf_SF2/ml/O2B/omicrob/include/vm/runtime.c>
 
 PROGMEM void * const ocaml_primitives[OCAML_PRIMITIVE_NUMBER] = {
   /*  0 */  (void *) &caml_string_of_int,

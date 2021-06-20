@@ -1,12 +1,19 @@
-include ../../../../etc/Makefile.conf
+include ../../etc/Makefile.conf
 
-PLATFORM=basic
-PLATFORM_DIR=../../platforms/$(PLATFORM)
+PLATFORM_DIR=../../platforms/quartus/basic
 
 OMICROBC=$(BIN)/omicrob
 OMICROB_OPTS=-no-shortcut-initialization
 
 #-include ../make_opts
+
+omicrob: main.c
+
+main.c: main.ml
+	$(OMICROBC) $(OMICROB_OPTS) -platform_dir $(PLATFORM_DIR) -v -mlopt -verbose -o main.c main.ml
+
+sim:
+	./main.byte
 
 all: Makefile.nios build
 
@@ -23,12 +30,7 @@ Makefile.nios: check
 	mv Makefile Makefile.nios
 	mv Makefile.top Makefile
 
-main.c: main.ml
-	$(OMICROBC) $(OMICROB_OPTS) -device de10lite -v -mlopt -verbose -o main.c main.ml
-
-code: main.c
-
-build: check code
+build: check main.c
 	make -f Makefile.nios
 
 run: check main.elf

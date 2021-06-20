@@ -1,6 +1,7 @@
-#ifndef PRIMS_H_NIOS
-#define PRIMS_H_NIOS
+#ifndef SF_REG_H
+#define SF_REG_H
 
+#include <stdint.h>
 #include <stdbool.h>
 
 void nios_serial_write_char(char c);
