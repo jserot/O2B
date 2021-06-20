@@ -15,8 +15,13 @@ etc/Makefile.conf:
 	@exit 1
 
 
-#	@rm -rf lib/targets/nios
-	$(call clean, targets/nios)
+omicrob:
+	(cd omicrob; make)
+
+clean:
+	(cd omicrob; make clean)
+	(cd platforms; make clean)
+	(cd apps; make clean)
 	@rm -f *~ */*~ */*/*~ */*/*/*~
 
 .PHONY: all config omicrob nios clean

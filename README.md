@@ -27,45 +27,51 @@ Predefined hardware platforms are provided in the distribution.
 
 A _platform_ is a combination of 
 - a board (device type + peripherals)
-- a system configuration (Nios CPU type and configuration, memory, interfaces, custom components/instructions, ...)
+- a system configuration (Softcore CPU type and configuration, memory, interfaces, custom components/instructions, ...)
 - a _board support package_ (BSP)
 
-Instructions to design and implement new platforms are given in the directory `targets/nios/platforms`.
+Instructions to design and implement new platforms for Altera/Intel boards are given in the
+directory `./platforms/quartus/Reeadme.md`.
 
 When targeting a FPGA, the OMicroB compiler is only used to generate the main C file from the
 bytecode representation of the program. This C file is then compiled using the Nios-specific C
-compiler to generate an `.elf` file which is then uploaded to the Nios processor which has been
+compiler to generate an `.elf` file which is then uploaded to the softcore processor which has been
 instanciated on the FPGA. The latter steps are carried out using the vendor-specific suite of tools
 (Quartus2 for Nios processors running on Intel FPGAs).
 
 ### To build / run an application
 
-1. Choose or write a specific platform (see `targets/nios/platforms/Readme.md`)
+1. Configure 
 
-2. Build the `OMicroB` support for this platform. From the top directory run
+   - `./configure`
 
-   - `./configure -target nios-<platform>` 
+   This will write in `./etc/Makefile.conf` and `./etc/config.ml` several definitions related to
+   your local `ocaml` installation and paths.
    
-   where `<platform>` is the name of the selected platform (currently, either `basic` or `extended`)
+2. Build the `OMicroB` tools. From the top directory run
 
-   - `make clean`
-   - `make`
+   - `make omicrob`
 
+   This will build `./omicrob/bin/{bc2c,omicrob}`  and `./omicrob/lib`.
+   
 3. Go to the selected platform directory and upload the hardware configuration :
 
-   - `cd targets/nios/platforms/<platform>` 
-   - `make bsp`
+   - `cd platforms/quartus/<platform>` 
    - `make hw` 
 
-4. Go to the application directory, build and upload the software
+4. Go to the application directory and first generate the C code
 
-   - `cd targets/nios/tests/<app>` 
-   - `make nios-makefile` 
-   - `make` 
+   - `cd apps/<app>` 
+   - `make code`
+
+   This will generate the file `main.c` from the source in `main.ml`. 
+   This file can be executed on the host machine (without using the target platform physical IOs of
+   course !) by running
+   
+   - `make sim`
+   
+5. Build, compile and upload the softcore code on the target board
+
+   - `make platform-makefile` 
+   - `make build`
    - `make run`
-
-When changing the application but not the platform, only step 4 needs to be re-taken.
-
-When changing the platform, steps 2-3 have to be retaken.
-
-The name of the required platform for a given application is given at the top of `<app>/Makefile`.
