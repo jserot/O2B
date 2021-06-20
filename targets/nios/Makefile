@@ -1,7 +1,7 @@
-PLATFORMS=basic extended
+include ../../etc/Makefile.conf
 
 all:
-	for i in $(PLATFORMS); do (cd platforms/$$i; make omicrob); done
+	(cd platforms/$(NIOS_PLATFORM); make omicrob)
 
 clean:
 	for i in $(PLATFORMS); do (cd platforms/$$i; make clean); done
