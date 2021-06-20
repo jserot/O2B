@@ -1,0 +1,6 @@
+./omicrob
+    OMicroB, target/platform independent source code, binaries and doc
+./platforms
+    Platform-specific material
+./apps
+    Example/test applications
