@@ -12,7 +12,9 @@ The system configuration ("SoPC") is in subdirectory `qsys`.
 The BSP description is in subdirectory `bsp`.
 The source code of custom components or instructions, when present, is is subdirectory `rtl`.
 
-The interface to the OMicroB framework is located in subdirectories `ml`, `prims` and `simul`.
+The interface to the OMicroB framework is located in subdirectories `ml`, `byterun` and `lib`.
+
+Applications running on the considered platform are located in subdirecty `apps`.
 
 The system configuration of a platform includes a unique "system ID" which can be edited using the
 `qsys` tools. This system ID can be retrieved and checked by an application uploaded on the hosted

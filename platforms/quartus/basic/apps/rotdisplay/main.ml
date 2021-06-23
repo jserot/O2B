@@ -1,6 +1,8 @@
+open Platform
+   
 let get_text () =
-  Nios.Serial.write_string "Enter text:";
-  Nios.Serial.read_string () |> String.uppercase_ascii
+  Serial.write_string "Enter text:";
+  Serial.read_string () |> String.uppercase_ascii
   
 let rotate s =
   let l = String.length s in
@@ -15,12 +17,12 @@ let () =
   (* let txt = ref (get_text ()) in *)
   let txt = ref "ABCDEF" in
   let led = ref true in
-  Nios.Ssd.display_string !txt;
-  Nios.Led.set 9 !led;
+  Ssd.display_string !txt;
+  Led.set 9 !led;
   while true do
     txt := rotate !txt;
     led := not !led;
-    Nios.delay 500;
-    Nios.Ssd.display_string !txt;
-    Nios.Led.set 9 !led
+    delay 500;
+    Ssd.display_string !txt;
+    Led.set 9 !led
   done

@@ -20,8 +20,8 @@ omicrob:
 
 test: omicrob
 	(cd platforms/quartus/basic; make omicrob)
-	(cd apps/mini; make code && make sim)
-	(cd apps/mini; make platform-makefile && make build)
+	(cd platforms/quartus/basic/apps/mini; make code && make sim)
+	(cd platforms/quartus/basic/apps/mini; make platform-makefile && make build)
 
 clean:
 	(cd omicrob; make clean)
@@ -29,4 +29,4 @@ clean:
 	(cd apps; make clean)
 	@rm -f *~ */*~ */*/*~ */*/*/*~
 
-.PHONY: all config omicrob nios clean
+.PHONY: all config omicrob clean

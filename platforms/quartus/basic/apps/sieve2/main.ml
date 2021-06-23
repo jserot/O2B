@@ -33,9 +33,11 @@ let sieve max =
   in
     h [] (interval 2 max)
 
+open Platform 
+
 let print_int n =
-  Nios.Ssd.display_int n;
-  Nios.delay 100
+  Ssd.display_int n;
+  delay 100
 
 let () =
   while true do

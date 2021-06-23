@@ -1,5 +1,4 @@
-This directory contains test applications.
-All these applications have been tested on a DE10-Lite board.
+This directory contains test applications for the Quartus "basic" platform (DE10Lite board with Nios2 CPU)
 
 - "mini" is a simple application computing `fact 5` and displaying the result (120) on the seven-segments
   display (SSD) of the board
@@ -9,12 +8,3 @@ All these applications have been tested on a DE10-Lite board.
 - "sieve2" is a variant of "sieve" using tail recursive functions (and hence reducing the stack and
    heap memory requirements)
 - "ledshade" makes the 10 LEDs pulsating using a PWM
-   
-All these applications use the "de10l-basic" platform.
-
-- "gcd" illustrates how to use external functions, implemented in C or in VHDL (as custom
-  instructions) in the Caml code
-  
-This application uses the "de10l-extended" platform.
-
-  

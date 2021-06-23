@@ -1,0 +1,2 @@
+PLATFORM_DIR=../..
+OMICROB_OPTS=-no-shortcut-initialization
