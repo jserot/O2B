@@ -23,12 +23,17 @@ O2B currently supports Nios2 platforms on Intel/Altera FPGAs.
 
 ## Using 
 
-Predefined hardware platforms are provided in the distribution.
+The concept of physical _target_ in OMicroB is replaced by that of _platform_ in O2B.
 
 A _platform_ is a combination of 
 - a board (device type + peripherals)
 - a system configuration (Softcore CPU type and configuration, memory, interfaces, custom components/instructions, ...)
 - a _board support package_ (BSP)
+
+Each application, written in OCaml, and compiled to C code is intended to be run on a given
+platform.
+
+Predefined platforms are provided in the distribution.
 
 Instructions to design and implement new platforms for Altera/Intel boards are given in the
 directory `./platforms/quartus/Reeadme.md`.
@@ -39,14 +44,13 @@ compiler to generate an `.elf` file which is then uploaded to the softcore proce
 instanciated on the FPGA. The latter steps are carried out using the vendor-specific suite of tools
 (Quartus2 for Nios processors running on Intel FPGAs).
 
-### To build / run an application
+### To configure and build the platform-independent tools
 
 1. Configure 
 
    - `./configure`
 
-   This will write in `./etc/Makefile.conf` and `./etc/config.ml` several definitions related to
-   your local `ocaml` installation and paths.
+   This will write several configuration files in `./etc`
    
 2. Build the `OMicroB` tools. From the top directory run
 
@@ -54,14 +58,24 @@ instanciated on the FPGA. The latter steps are carried out using the vendor-spec
 
    This will build `./omicrob/bin/{bc2c,omicrob}`  and `./omicrob/lib`.
    
-3. Go to the selected platform directory and upload the hardware configuration :
+### To build / run an application
+
+1. Go to the corresponding platform directory and upload the hardware configuration :
 
    - `cd platforms/quartus/<platform>` 
    - `make hw` 
 
-4. Go to the application directory and first generate the C code
+   and build the OMicroB interfaces
+   
+   - `make omicrob`
 
-   - `cd apps/<app>` 
+2. Go to the associated application directory and generate the required Makefiles :
+
+   - `cd platforms/quartus/<platform>/apps/<app>` 
+   - `./make_makefiles`
+   
+   Generate the target C code
+
    - `make code`
 
    This will generate the file `main.c` from the source in `main.ml`. 
@@ -70,8 +84,7 @@ instanciated on the FPGA. The latter steps are carried out using the vendor-spec
    
    - `make sim`
    
-5. Build, compile and upload the softcore code on the target board
+3. Build, compile and upload the softcore code on the target board
 
-   - `make platform-makefile` 
    - `make build`
    - `make run`

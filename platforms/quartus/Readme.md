@@ -1,6 +1,7 @@
 ## DESCRIPTION
 
-This directory contains several predefined _platforms_ for the Quartus-supported hardware.
+This directory contains several predefined _platforms_ implemented on Intel/Altera boards using the
+Quartus suite of tools.
 
 A _platform_ is a combination of 
 - a board (device type + peripherals)
