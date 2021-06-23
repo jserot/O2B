@@ -229,18 +229,3 @@ int nios_gcd_cc(int m, int n)
 
   return r;
 }
-
-// The following fonctions are defined just to ensure compatibility with OMicrob framework.
-// They do not have a direct interpretation on NIOS.
-
-void set_bit(uint8_t reg, uint8_t bit) { }
-
-void clear_bit(uint8_t reg, uint8_t bit) { }
-
-bool read_bit(uint8_t reg, uint8_t bit) { return 0; }
-
-void write_register(uint8_t reg, uint8_t val) { }
-
-uint8_t read_register(uint8_t reg) { return 0; }
-
-

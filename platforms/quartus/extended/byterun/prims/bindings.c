@@ -1,11 +1,3 @@
-#ifdef __OCAML__
-#include <caml/mlvalues.h>
-#else
-#include "../vm/values.h"
-#endif
-
-#include "prims.h"
-
 value caml_nios_serial_write_char(value val) {
   nios_serial_write_char(Int_val(val));
   return Val_unit;

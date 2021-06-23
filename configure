@@ -113,10 +113,24 @@ LIB=\"$OMICROB/lib\"
 ETC=\"$ROOT/etc\"
 LIBDIR=\"$OMICROB/lib\"
 INCLUDEDIR=\"$OMICROB/include\"
-" > etc/config
+" > etc/config.sh
 
 echo -n "\
-include config
+VERSION     := $VERSION
+OCAMLCLEAN  := $OCAMLCLEAN
+OMICROB      := $OMICROB
+GXX         := $GXX
+OCAMLC      := $OCAMLC -w A-58-e -warn-error A -safe-string -strict-formats -strict-sequence
+OCAMLOPT    := $OCAMLOPT -w A-58-e -warn-error A -safe-string -strict-formats -strict-sequence
+OCAMLDOC    := $OCAMLDOC
+OCAMLBUILD  := $OCAMLBUILD -cflags -w,A-58-e,-warn-error,A,-safe-string,-strict-formats,-strict-sequence -lflags -w,A-58-e,-warn-error,A,-safe-string,-strict-formats,-strict-sequence -no-links -classic-display -build-dir .build
+OCAMLWHERE  := $OCAMLWHERE
+SRC         := $OMICROB/src
+BIN         := $OMICROB/bin
+LIB         := $OMICROB/lib
+ETC         := $ROOT/etc
+LIBDIR      := $OMICROB/lib
+INCLUDEDIR  := $OMICROB/include
 
 define compile
         @\$(MAKE) --no-print-directory -q -C \$1 && \$(MAKE) --no-print-directory -C \$1 || \$(MAKE) -C \$1
@@ -125,10 +139,7 @@ endef
 define clean
         @\$(MAKE) --no-print-directory -C \$1 clean > /dev/null
 endef
-" > etc/Makefile.conf
-
-
-################################################################################
+" > etc/config.make
 
 echo -n "\
 let builddir    = \"$ROOT\"

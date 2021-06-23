@@ -48,4 +48,4 @@ clean:
 clobber: clean
 	@rm -f *~
 
-.PHONY: clean clo
+.PHONY: clean clobber

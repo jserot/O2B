@@ -35,7 +35,8 @@ bsp-edit: check
 clean:
 	(cd ml; make clean)
 	(cd byterun; make clean)
-	rm -f *~
 
 clobber: clean
+	(cd ml; make clobber)
 	(cd bsp; make clean)
+	rm -f *~
