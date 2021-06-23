@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source ./config
+source ../../../../../etc/config.sh
+
+if [ -n "$QUARTUS_ROOTDIR" ]; then
+echo "* Generating platform-specific makefile"
+nios2-app-generate-makefile --app-dir . --bsp-dir $PLATFORM_DIR/bsp --set APP_CFLAGS_OPTIMIZATION -Os --set APP_CFLAGS_USER_FLAGS "-std=c11 -I$INCLUDEDIR -I$PLATFORM_DIR/lib -I$PLATFORM_DIR/byterun" --src-files ./main.c
+mv Makefile Makefile.platform
+echo "* Platform-specicic makefile written to Makefile.platform"
+
+echo "* Generating top-level makefile"
+echo "OMICROB_OPTS=$OMICROB_OPTS" > Makefile
+cat ../../../_etc/Makefile.templ >> Makefile
+else
+echo "** You must run the nios2_command_shell command before invoking this script !"
+fi

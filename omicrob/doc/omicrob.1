@@ -1,0 +1,72 @@
+.TH OMICROB 1
+
+.SH NAME
+omicrob \- OCaml compiler and linker for FPGA Boards
+
+.SH SYNOPSIS
+  omicrob [ OPTIONS ] -c <src.mli>                 (compile .mli  -> .cmi  using ocamlc)
+  omicrob [ OPTIONS ] -c <src.ml>                  (compile .ml   -> .cmo  using ocamlc)
+  omicrob [ OPTIONS ] <src.cmo> -o <out.byte>      (compile .cmo  -> .byte using ocamlc)
+  omicrob [ OPTIONS ] <in.byte> -o <out.c>         (compile .byte -> .c    using bc2c)
+  omicrob [ OPTIONS ] <in.c> -o <out.elf>          (compile .c    -> .elf  using c++)
+
+.SH DESCRIPTION
+
+The \fBomicrob\fR(1) command compiles and links an OCaml program for a soft-core CPU running on an FPGA.
+
+It just runs the following commands with right arguments and in the right environment:
+
+  - \fBocamlc\fR(1)        to compile and link OCaml programs into a bytecode file
+  - \fBocamlclean\fR(1)    to clean ocaml bytecode
+  - \fBbc2c\fR(1)          to generate a C file from an OCaml bytecode file
+  - \fBg++\fR(1)           to compile the generated C file f
+
+
+.SH OPTIONS
+
+The following command-line options are recognized by \fBomicrob(1)\fR:
+
+  -c                           Compile only
+  -i                           Print inferred interface of a .ml file
+  -o <file>                    Set output file
+  -n                           Just print commands, do not execute them
+  -v                           Be verbose, print executed commands
+  -local                       Use the OMicroB build directory instead of installation directory
+  -trace                       Set verbosity of traces: print informations about execution at runtime (default: 0)
+
+  -platform-dir <dir-name>     Set the location of the platform-specific files 
+
+  -stack-size <word-nb>        Set stack size (default: 64)
+  -heap-size <word-nb>         Set heap size (default: 256)
+  -gc <gc-algo>                Set garbage collector algorithm Stop&Copy or Mark&Compact (default: MAC)
+  -arch <bit-nb>               Set virtual machine architecture (default: 32)
+
+  -mlopt <option>              Pass the given option to the OCaml compiler
+  -mlopts <opt1,opt2,...>      Pass the given options to the OCaml compiler
+  -cxxopt <option>             Pass the given option to the C compiler                                                                                                      
+  -cxxopts <opt1,opt2,...>     Pass the given options to the C compiler                                                                                                     
+  -where                       Print location of standard library and exit
+  -ocaml                       Print location of OCaml toplevel and exit
+  -ocamlc                      Print location of OCaml bytecode compiler and exit
+  -ocamlclean                  Print location of ocamlclean and exit
+  -bc2c                        Print location of bc2c and exit
+  -cxx                         Print location of C compiler and exit
+
+  -version                     Print version and exit
+  -help                        Print list of options and exit
+
+.SH EXAMPLES
+To compile the file program written in src1.ml and src2.ml into example.elf, run:
+
+        omicrob src1.ml src2.ml -o example.elf
+
+which is a shortcut for:
+
+        omicrob -c src1.ml
+        omicrob -c src2.ml
+        omicrob src1.cmo src2.cmo -o example.byte
+        omicrob example.byte -o example.c
+        omicrob example.c -o example.elf
+
+.SH SEE ALSO
+.BR ocamlc\fR(1),\ \fBocamlclean\fR(1),\ \fBbc2c\fR(1)
