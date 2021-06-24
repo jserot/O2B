@@ -54,27 +54,42 @@ instanciated on the FPGA. The latter steps are carried out using the vendor-spec
    
 2. Build the `OMicroB` tools. From the top directory run
 
-   - `make omicrob`
+   - `make`
 
    This will build `./omicrob/bin/{bc2c,omicrob}`  and `./omicrob/lib`.
    
 ### To build / run an application
 
-1. Go to the corresponding platform directory and upload the hardware configuration :
+1. Go to the corresponding platform directory
 
-   - `cd platforms/quartus/<platform>` 
-   - `make hw` 
+   - `cd platforms/<family>/<platform>`
 
-   and build the OMicroB interfaces
+2. Build the OMicroB interfaces
    
    - `make omicrob`
 
-2. Go to the associated application directory and generate the required Makefiles :
+3. For Intel/FPGA platforms, run the `nios2_command_shell` script (located
+   in `<altera>/nios2eds` directory, where `<altera>` is the root of the Intel/Altera software
+   installation)
 
-   - `cd platforms/quartus/<platform>/apps/<app>` 
+   - `<altera>/nios2eds/nios_command_shell.sh`
+
+4. Build the BSP
+
+   - `make bsp` 
+   
+4. Connect the target board and upload the hardware configuration :
+
+   - `make hw` 
+
+   The platform is now ready to receive and execute the application code
+   
+5. Go to the associated application directory and generate the required Makefiles :
+
+   - `cd apps/<app>` 
    - `./make_makefiles`
    
-   Generate the target C code
+6. Generate the target C code
 
    - `make code`
 
@@ -84,7 +99,7 @@ instanciated on the FPGA. The latter steps are carried out using the vendor-spec
    
    - `make sim`
    
-3. Build, compile and upload the softcore code on the target board
+7. Build, compile and upload the softcore code on the target board
 
    - `make build`
    - `make run`
