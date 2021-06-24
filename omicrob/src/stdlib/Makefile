@@ -1,4 +1,4 @@
-include ../../../etc/Makefile.conf
+include ../../../etc/config.make
 
 BASES :=                                                         \
   char bytes bytesLabels string stringLabels                     \
