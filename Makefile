@@ -26,7 +26,6 @@ test: omicrob
 clean:
 	(cd omicrob; make clean)
 	(cd platforms; make clean)
-	(cd apps; make clean)
 	@rm -f *~ */*~ */*/*~ */*/*/*~
 
 .PHONY: all config omicrob clean
