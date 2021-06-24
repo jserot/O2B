@@ -1,2 +1,2 @@
 PLATFORM_DIR=../..
-OMICROB_OPTS=-no-shortcut-initialization -stack-size 64 -heap-size 512
+OMICROB_OPTS='-no-shortcut-initialization -stack-size 64 -heap-size 512'
