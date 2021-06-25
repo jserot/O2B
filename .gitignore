@@ -21,4 +21,3 @@ etc/config.*
 src/byterun/nios/
 platforms/*/docs/
 extra-docs/
-omicrob/bin/
