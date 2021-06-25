@@ -2,7 +2,7 @@ include ../../../../etc/config.make
 
 TARGETLIB=libcamlrun.a
 
-GENERATED_SRCS=prims.h bindings.c
+GENERATED_SRCS=prims.h bindings.c sf-regs.c sf-regs.h
 
 HEADERS := $(wildcard */*.h)
 
@@ -24,7 +24,7 @@ $(TARGETLIB): $(OBJECTS)
 	ar rs $@ $(OBJECTS)
 
 srcs: 
-	cat $(SRC)/byterun/prims/indep-prims.h ./prims/prims.h > prims.h
+	cat $(SRC)/byterun/prims/indep-prims.h ../lib/platform.h > prims.h
 	cat $(SRC)/byterun/prims/indep-bindings.c ./prims/bindings.c > bindings.c
 	cat $(SRC)/byterun/simul/platform-indep-sf-regs.c ./simul/sf-regs.c > sf-regs.c
 	cat $(SRC)/byterun/simul/platform-indep-sf-regs.h ./simul/sf-regs.c > sf-regs.h
