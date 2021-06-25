@@ -14,6 +14,10 @@ The BSP description is in subdirectory `bsp`.
 The source code of custom components or instructions, when present, is is subdirectory `rtl`.
 
 The interface to the OMicroB framework is located in subdirectories `ml`, `byterun` and `lib`.
+The file `lib/platform.c` and `byterun/prims/prims.h` contains the C API to the platform specific
+functions. *TO FIX*
+The file `byterun/prims/bindings.c` contains the OCaml wrappers to these functions.
+The files `ml/platform.{ml,mli}` describe the OCaml interface to the platform. 
 
 Applications running on the considered platform are located in subdirecty `apps`.
 
