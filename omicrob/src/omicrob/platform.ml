@@ -11,7 +11,7 @@ let compile_ml_to_byte ~ppx_options ~mlopts ~cxxopts ~local ~trace ~verbose ~pla
     let cmd = if trace > 0 then cmd @ [ "-ccopt"; "-DDEBUG=" ^ string_of_int trace ] else cmd in
     let cmd = cmd @ List.flatten (List.map (fun cxxopt -> [ "-ccopt"; cxxopt ]) cxxopts) in
     let cmd = cmd @ [ "-I"; bytedir; "-I"; mldir; Filename.concat mldir "platform.cma" ] in
-    let cmd = cmd @ [ "-open"; String.capitalize_ascii platform_module_name ] in 
+    (* let cmd = cmd @ [ "-open"; String.capitalize_ascii platform_module_name ] in  *)
     let cmd = cmd @ inputs @ [ "-o"; output ] in
     Tools.run ~vars ~verbose cmd
 
