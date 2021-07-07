@@ -1,4 +1,4 @@
-PLATFORMS=basic extended
+PLATFORMS=basic extended arrays
 
 clean:
 	for i in $(PLATFORMS); do (cd $$i; make clean); done

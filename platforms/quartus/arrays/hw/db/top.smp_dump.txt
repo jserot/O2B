@@ -1,0 +1,15 @@
+
+State Machine - |top|nios_128k_extended:u0|nios_128k_extended_cpu:cpu|nios_128k_extended_cpu_cpu:cpu|nios_128k_extended_cpu_cpu_nios2_oci:the_nios_128k_extended_cpu_cpu_nios2_oci|nios_128k_extended_cpu_cpu_debug_slave_wrapper:the_nios_128k_extended_cpu_cpu_debug_slave_wrapper|nios_128k_extended_cpu_cpu_debug_slave_tck:the_nios_128k_extended_cpu_cpu_debug_slave_tck|DRsize
+Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
+DRsize.000 0 0 0 0 0 0 
+DRsize.001 0 0 0 0 1 1 
+DRsize.010 0 0 0 1 0 1 
+DRsize.011 0 0 1 0 0 1 
+DRsize.100 0 1 0 0 0 1 
+DRsize.101 1 0 0 0 0 1 
+
+State Machine - |top|nios_128k_extended:u0|stab_cc:stab_cc_0|state
+Name state.WaitRd state.SeqRd state.Idle 
+state.Idle 0 0 0 
+state.SeqRd 0 1 1 
+state.WaitRd 1 0 1 

@@ -1,0 +1,19 @@
+Device=Max10 10M50DAF484C7G
+Board=DE10-Lite
+Peripherals=
+  2 push-buttons
+  10 switches
+  10 leds
+  6 seven-segments displays
+  1 hi-res interval timer
+  1 jtag-uart
+  1 system ID (set to 0x101)
+LED 0 (LEDR0) is hardwired to BUTTON 1 (KEY1)
+LED 1 (LEDR1) is hardwired to SWITCH 1 (SW1)
+LED 2-9 are available for Nios control
+These presets can be modified by updating the file hw/top.vhd
+CORE RAM=128k
+HAL library with Small-C lib and reduced drivers
+
+One custom component: STAB_CC
+  
