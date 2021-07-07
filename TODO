@@ -1,0 +1,3 @@
+- fix bug in xxx/platform.c:char_to_ssd fn ('5' and '6' are merged !)
+- reorganize platform specific files in platform subdirs (lib,ml,byterun)
+- name platform.qsys
