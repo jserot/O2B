@@ -15,5 +15,7 @@ These presets can be modified by updating the file hw/top.vhd
 CORE RAM=128k
 HAL library with Small-C lib and reduced drivers
 
-One custom component: STAB_CC
+Two custom components:
+- STAB_CC (compute the sum of an array)
+- AMAP_CC (map a (int->int) function over an array)
   

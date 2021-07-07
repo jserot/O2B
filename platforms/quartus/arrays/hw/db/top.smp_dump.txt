@@ -8,6 +8,13 @@ DRsize.011 0 0 1 0 0 1
 DRsize.100 0 1 0 0 0 1 
 DRsize.101 1 0 0 0 0 1 
 
+State Machine - |top|nios_128k_extended:u0|amap_cc:amap_cc_0|state
+Name state.WaitWr state.WaitRd state.Rd state.Idle 
+state.Idle 0 0 0 0 
+state.Rd 0 0 1 1 
+state.WaitRd 0 1 0 1 
+state.WaitWr 1 0 0 1 
+
 State Machine - |top|nios_128k_extended:u0|stab_cc:stab_cc_0|state
 Name state.WaitRd state.SeqRd state.Idle 
 state.Idle 0 0 0 

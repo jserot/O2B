@@ -92,3 +92,13 @@ int nios_arr_sum_cc(int* addr, unsigned size)
 {
   printf("nios_arr_sum_cc(%x,%d)\n", addr, size);
 }
+
+int nios_arr_map(int* src, int *dst, unsigned size)
+{
+  printf("nios_arr_map(%x,%x,,%d)\n", src, dst, size);
+}
+
+int nios_arr_map_cc(int* src, int *dst, unsigned size)
+{
+  printf("nios_arr_map_cc(%x,%x,,%d)\n", src, dst, size);
+}

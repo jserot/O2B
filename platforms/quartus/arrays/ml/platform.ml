@@ -92,9 +92,11 @@ end
 module C =
 struct
   external arr_sum : int array -> int = "caml_nios_arr_sum" [@@noalloc]
+  external arr_map : int array -> int array -> unit = "caml_nios_arr_map" [@@noalloc]
 end
 
 module Rtl =
 struct
   external arr_sum : int array -> int = "caml_nios_arr_sum_cc" [@@noalloc]
+  external arr_map : int array -> int array -> unit = "caml_nios_arr_map_cc" [@@noalloc]
 end

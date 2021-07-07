@@ -221,3 +221,25 @@ int nios_arr_sum_cc(int32_t* addr, unsigned size)
 
   return result;
 }
+
+int nios_arr_map(int32_t* src, int32_t *dst, unsigned size)
+{
+  int i;
+  for ( i=0; i<size; i++, src++, dst++ )
+    *dst = Val_int(Int_val(*src)+1); // TO BE GENERALIZED !
+  return 0;
+}
+
+int nios_arr_map_cc(int32_t* src, int32_t *dst, unsigned size)
+{
+  // INVOKE CUSTOM COMPONENT
+  IOWR(AMAP_CC_0_BASE, 1, src); // Start address
+  IOWR(AMAP_CC_0_BASE, 2, dst); // Start address
+  IOWR(AMAP_CC_0_BASE, 3, size); // Size
+  
+  IOWR(AMAP_CC_0_BASE, 0, 1);  // Writing control/status register starts operation
+
+  while ( IORD(AMAP_CC_0_BASE, 0) == 0 ); // Wait for rdy
+
+  return 0;
+}

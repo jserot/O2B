@@ -1,6 +1,5 @@
 # # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
 # 
-preplace inst nios_128k_extended.shared_mem -pg 1 -lvl 2 -y 1450
 preplace inst nios_128k_extended.clk -pg 1 -lvl 1 -y 370
 preplace inst nios_128k_extended.sys_id -pg 1 -lvl 3 -y 1220
 preplace inst nios_128k_extended.STAB_CC_0 -pg 1 -lvl 1 -y 1350
@@ -21,20 +20,20 @@ preplace inst nios_128k_extended.hex4 -pg 1 -lvl 3 -y 780
 preplace inst nios_128k_extended.hex5 -pg 1 -lvl 3 -y 890
 preplace inst nios_128k_extended.onchip_memory -pg 1 -lvl 3 -y 360
 preplace inst nios_128k_extended.cpu.reset_bridge -pg 1
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)clk.clk_in_reset,(SLAVE)nios_128k_extended.reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.hex2_external_connection,(SLAVE)hex2.external_connection) 1 0 3 NJ 590 NJ 590 NJ
 preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)hex4.external_connection,(SLAVE)nios_128k_extended.hex4_external_connection) 1 0 3 NJ 810 NJ 810 NJ
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.hex5_external_connection,(SLAVE)hex5.external_connection) 1 0 3 NJ 920 NJ 920 NJ
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.hex1_external_connection,(SLAVE)hex1.external_connection) 1 0 3 NJ 1280 NJ 1340 NJ
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)hex3.external_connection,(SLAVE)nios_128k_extended.hex3_external_connection) 1 0 3 NJ 700 NJ 700 NJ
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)led.external_connection,(SLAVE)nios_128k_extended.led_external_connection) 1 0 3 NJ 1030 NJ 1030 NJ
+preplace netloc FAN_OUT<net_container>nios_128k_extended</net_container>(SLAVE)led.reset,(SLAVE)hex3.reset,(SLAVE)hex4.reset,(SLAVE)timer.reset,(SLAVE)hex1.reset,(SLAVE)STAB_CC_0.reset,(SLAVE)hex2.reset,(SLAVE)hex0.reset,(SLAVE)button.reset,(SLAVE)cpu.reset,(SLAVE)hex5.reset,(SLAVE)jtag_uart.reset,(SLAVE)switch.reset,(SLAVE)onchip_memory.reset1,(SLAVE)sys_id.reset,(MASTER)clk.clk_reset) 1 0 3 200 1300 500 1360 940
 preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)hex0.external_connection,(SLAVE)nios_128k_extended.hex0_external_connection) 1 0 3 NJ 170 NJ 170 NJ
-preplace netloc INTERCONNECT<net_container>nios_128k_extended</net_container>(SLAVE)timer.s1,(SLAVE)hex0.s1,(SLAVE)hex4.s1,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)button.s1,(SLAVE)led.s1,(SLAVE)hex1.s1,(SLAVE)hex3.s1,(MASTER)cpu.data_master,(MASTER)STAB_CC_0.rm,(SLAVE)sys_id.control_slave,(SLAVE)shared_mem.s1,(SLAVE)onchip_memory.s1,(SLAVE)cpu.debug_mem_slave,(SLAVE)hex2.s1,(SLAVE)STAB_CC_0.s0,(SLAVE)hex5.s1,(SLAVE)switch.s1,(MASTER)cpu.instruction_master) 1 0 3 240 1460 440 1250 880
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.led_external_connection,(SLAVE)led.external_connection) 1 0 3 NJ 1030 NJ 1030 NJ
-preplace netloc FAN_OUT<net_container>nios_128k_extended</net_container>(SLAVE)hex3.clk,(SLAVE)jtag_uart.clk,(SLAVE)switch.clk,(SLAVE)button.clk,(SLAVE)led.clk,(SLAVE)timer.clk,(MASTER)clk.clk,(SLAVE)cpu.clk,(SLAVE)onchip_memory.clk1,(SLAVE)hex0.clk,(SLAVE)hex4.clk,(SLAVE)hex2.clk,(SLAVE)shared_mem.clk1,(SLAVE)STAB_CC_0.clock,(SLAVE)hex1.clk,(SLAVE)hex5.clk,(SLAVE)sys_id.clk) 1 0 3 200 1480 460 1230 920
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.hex3_external_connection,(SLAVE)hex3.external_connection) 1 0 3 NJ 700 NJ 700 NJ
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)hex2.external_connection,(SLAVE)nios_128k_extended.hex2_external_connection) 1 0 3 NJ 590 NJ 590 NJ
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)hex1.external_connection,(SLAVE)nios_128k_extended.hex1_external_connection) 1 0 3 NJ 1340 NJ 1340 NJ
-preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)button.external_connection,(SLAVE)nios_128k_extended.button_external_connection) 1 0 3 NJ 60 NJ 60 NJ
+preplace netloc INTERCONNECT<net_container>nios_128k_extended</net_container>(SLAVE)hex0.s1,(MASTER)cpu.instruction_master,(SLAVE)button.s1,(SLAVE)led.s1,(SLAVE)hex1.s1,(SLAVE)hex4.s1,(MASTER)cpu.data_master,(SLAVE)hex3.s1,(SLAVE)sys_id.control_slave,(SLAVE)STAB_CC_0.s0,(SLAVE)cpu.debug_mem_slave,(MASTER)STAB_CC_0.rm,(SLAVE)switch.s1,(SLAVE)onchip_memory.s1,(SLAVE)hex5.s1,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)timer.s1,(SLAVE)hex2.s1) 1 0 3 220 1340 460 1380 880
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)hex5.external_connection,(SLAVE)nios_128k_extended.hex5_external_connection) 1 0 3 NJ 920 NJ 920 NJ
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.button_external_connection,(SLAVE)button.external_connection) 1 0 3 NJ 60 NJ 60 NJ
 preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.switch_external_connection,(SLAVE)switch.external_connection) 1 0 3 NJ 1140 NJ 1140 NJ
-preplace netloc FAN_OUT<net_container>nios_128k_extended</net_container>(SLAVE)timer.irq,(MASTER)cpu.irq,(SLAVE)jtag_uart.irq) 1 2 1 900
+preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.reset,(SLAVE)clk.clk_in_reset) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>nios_128k_extended</net_container>(SLAVE)onchip_memory.clk1,(MASTER)clk.clk,(SLAVE)hex3.clk,(SLAVE)hex0.clk,(SLAVE)hex5.clk,(SLAVE)jtag_uart.clk,(SLAVE)hex4.clk,(SLAVE)STAB_CC_0.clock,(SLAVE)led.clk,(SLAVE)hex2.clk,(SLAVE)sys_id.clk,(SLAVE)button.clk,(SLAVE)timer.clk,(SLAVE)hex1.clk,(SLAVE)switch.clk,(SLAVE)cpu.clk) 1 0 3 240 1320 440 1320 920
 preplace netloc EXPORT<net_container>nios_128k_extended</net_container>(SLAVE)nios_128k_extended.clk,(SLAVE)clk.clk_in) 1 0 1 NJ
-preplace netloc FAN_OUT<net_container>nios_128k_extended</net_container>(SLAVE)led.reset,(SLAVE)sys_id.reset,(SLAVE)button.reset,(SLAVE)hex5.reset,(SLAVE)switch.reset,(SLAVE)hex1.reset,(SLAVE)onchip_memory.reset1,(SLAVE)jtag_uart.reset,(SLAVE)hex0.reset,(MASTER)clk.clk_reset,(SLAVE)hex2.reset,(SLAVE)STAB_CC_0.reset,(SLAVE)shared_mem.reset1,(SLAVE)hex4.reset,(SLAVE)timer.reset,(SLAVE)cpu.reset,(SLAVE)hex3.reset) 1 0 3 220 1440 480 1270 940
+preplace netloc FAN_OUT<net_container>nios_128k_extended</net_container>(SLAVE)jtag_uart.irq,(SLAVE)timer.irq,(MASTER)cpu.irq) 1 2 1 900
 levelinfo -pg 1 0 170 1160
 levelinfo -hier nios_128k_extended 180 270 640 1000 1150

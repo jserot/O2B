@@ -20,3 +20,6 @@ int nios_get_sys_id();
 
 int nios_arr_sum(int* addr, unsigned size);
 int nios_arr_sum_cc(int* addr, unsigned size);
+
+int nios_arr_map(int* src, int *dst, unsigned size);
+int nios_arr_map_cc(int* src, int *dst, unsigned size);

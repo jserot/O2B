@@ -1,4 +1,4 @@
-SUBDIRS=arr_sum
+SUBDIRS=arr_sum arr_map
 
 clean:
 	for i in $(SUBDIRS); do (cd $$i; make -f ../../../_etc/Makefile.templ clean); done

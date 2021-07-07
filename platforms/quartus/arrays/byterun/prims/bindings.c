@@ -70,3 +70,11 @@ value caml_nios_arr_sum(value a) {
 value caml_nios_arr_sum_cc(value a) {
   return Val_int(nios_arr_sum_cc(BLOCK_ADDR(a),Wosize_val(a)));
 }
+
+value caml_nios_arr_map(value s, value d) {
+  return Val_int(nios_arr_map(BLOCK_ADDR(s), BLOCK_ADDR(d), Wosize_val(s)));
+}
+
+value caml_nios_arr_map_cc(value s, value d) {
+  return Val_int(nios_arr_map_cc(BLOCK_ADDR(s), BLOCK_ADDR(d), Wosize_val(s)));
+}

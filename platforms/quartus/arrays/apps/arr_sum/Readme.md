@@ -4,4 +4,4 @@ Evaluating performance on three implementations of a function computing the sum 
 - `arr_sum_cc` function implemented in hardware and called as a custom component interfaced to the
            nios uP using the Avalon bus
 
-The two latter implementations are provided by the `extended2` platform. 
+The two latter implementations are provided by the `arrays` platform. 

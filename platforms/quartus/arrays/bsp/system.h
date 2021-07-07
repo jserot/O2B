@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
  * SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
  *
- * Generated: Wed Jul 07 09:32:28 CEST 2021
+ * Generated: Wed Jul 07 10:56:22 CEST 2021
  */
 
 /*
@@ -139,6 +139,7 @@
 #define __ALTERA_AVALON_SYSID_QSYS
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2_GEN2
+#define __AMAP_CC
 #define __STAB_CC
 
 
@@ -148,7 +149,7 @@
  */
 
 #define ALT_MODULE_CLASS_STAB_CC_0 STAB_CC
-#define STAB_CC_0_BASE 0x21020
+#define STAB_CC_0_BASE 0x21040
 #define STAB_CC_0_IRQ -1
 #define STAB_CC_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define STAB_CC_0_NAME "/dev/STAB_CC_0"
@@ -172,19 +173,19 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart"
-#define ALT_STDERR_BASE 0x210d8
+#define ALT_STDERR_BASE 0x210f8
 #define ALT_STDERR_DEV jtag_uart
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart"
-#define ALT_STDIN_BASE 0x210d8
+#define ALT_STDIN_BASE 0x210f8
 #define ALT_STDIN_DEV jtag_uart
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart"
-#define ALT_STDOUT_BASE 0x210d8
+#define ALT_STDOUT_BASE 0x210f8
 #define ALT_STDOUT_DEV jtag_uart
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
@@ -193,12 +194,26 @@
 
 
 /*
+ * amap_cc_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_amap_cc_0 amap_cc
+#define AMAP_CC_0_BASE 0x21000
+#define AMAP_CC_0_IRQ -1
+#define AMAP_CC_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define AMAP_CC_0_NAME "/dev/amap_cc_0"
+#define AMAP_CC_0_SPAN 32
+#define AMAP_CC_0_TYPE "amap_cc"
+
+
+/*
  * button configuration
  *
  */
 
 #define ALT_MODULE_CLASS_button altera_avalon_pio
-#define BUTTON_BASE 0x210c0
+#define BUTTON_BASE 0x210e0
 #define BUTTON_BIT_CLEARING_EDGE_REGISTER 0
 #define BUTTON_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define BUTTON_CAPTURE 0
@@ -236,7 +251,7 @@
  */
 
 #define ALT_MODULE_CLASS_hex0 altera_avalon_pio
-#define HEX0_BASE 0x21090
+#define HEX0_BASE 0x210b0
 #define HEX0_BIT_CLEARING_EDGE_REGISTER 0
 #define HEX0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HEX0_CAPTURE 0
@@ -263,7 +278,7 @@
  */
 
 #define ALT_MODULE_CLASS_hex1 altera_avalon_pio
-#define HEX1_BASE 0x21080
+#define HEX1_BASE 0x210a0
 #define HEX1_BIT_CLEARING_EDGE_REGISTER 0
 #define HEX1_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HEX1_CAPTURE 0
@@ -290,7 +305,7 @@
  */
 
 #define ALT_MODULE_CLASS_hex2 altera_avalon_pio
-#define HEX2_BASE 0x21070
+#define HEX2_BASE 0x21090
 #define HEX2_BIT_CLEARING_EDGE_REGISTER 0
 #define HEX2_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HEX2_CAPTURE 0
@@ -317,7 +332,7 @@
  */
 
 #define ALT_MODULE_CLASS_hex3 altera_avalon_pio
-#define HEX3_BASE 0x21060
+#define HEX3_BASE 0x21080
 #define HEX3_BIT_CLEARING_EDGE_REGISTER 0
 #define HEX3_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HEX3_CAPTURE 0
@@ -344,7 +359,7 @@
  */
 
 #define ALT_MODULE_CLASS_hex4 altera_avalon_pio
-#define HEX4_BASE 0x21050
+#define HEX4_BASE 0x21070
 #define HEX4_BIT_CLEARING_EDGE_REGISTER 0
 #define HEX4_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HEX4_CAPTURE 0
@@ -371,7 +386,7 @@
  */
 
 #define ALT_MODULE_CLASS_hex5 altera_avalon_pio
-#define HEX5_BASE 0x21040
+#define HEX5_BASE 0x21060
 #define HEX5_BIT_CLEARING_EDGE_REGISTER 0
 #define HEX5_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HEX5_CAPTURE 0
@@ -398,7 +413,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart altera_avalon_jtag_uart
-#define JTAG_UART_BASE 0x210d8
+#define JTAG_UART_BASE 0x210f8
 #define JTAG_UART_IRQ 0
 #define JTAG_UART_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_NAME "/dev/jtag_uart"
@@ -416,7 +431,7 @@
  */
 
 #define ALT_MODULE_CLASS_led altera_avalon_pio
-#define LED_BASE 0x210a0
+#define LED_BASE 0x210c0
 #define LED_BIT_CLEARING_EDGE_REGISTER 0
 #define LED_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define LED_CAPTURE 0
@@ -472,7 +487,7 @@
  */
 
 #define ALT_MODULE_CLASS_switch altera_avalon_pio
-#define SWITCH_BASE 0x210b0
+#define SWITCH_BASE 0x210d0
 #define SWITCH_BIT_CLEARING_EDGE_REGISTER 0
 #define SWITCH_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define SWITCH_CAPTURE 0
@@ -499,13 +514,13 @@
  */
 
 #define ALT_MODULE_CLASS_sys_id altera_avalon_sysid_qsys
-#define SYS_ID_BASE 0x210d0
+#define SYS_ID_BASE 0x210f0
 #define SYS_ID_ID 257
 #define SYS_ID_IRQ -1
 #define SYS_ID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYS_ID_NAME "/dev/sys_id"
 #define SYS_ID_SPAN 8
-#define SYS_ID_TIMESTAMP 1625642750
+#define SYS_ID_TIMESTAMP 1625647830
 #define SYS_ID_TYPE "altera_avalon_sysid_qsys"
 
 
@@ -516,7 +531,7 @@
 
 #define ALT_MODULE_CLASS_timer altera_avalon_timer
 #define TIMER_ALWAYS_RUN 0
-#define TIMER_BASE 0x21000
+#define TIMER_BASE 0x21020
 #define TIMER_COUNTER_SIZE 32
 #define TIMER_FIXED_PERIOD 0
 #define TIMER_FREQ 50000000
