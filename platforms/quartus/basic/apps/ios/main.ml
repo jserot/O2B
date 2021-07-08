@@ -8,7 +8,7 @@ let manifest () =
 let get_and_display_text () =
   (* let msg = "HELLO" in *)
   Serial.write_string "Enter text:";
-  let msg = Serial.read_string () |> String.uppercase in
+  let msg = Serial.read_string () |> String.uppercase_ascii in
   Serial.write_string msg;
   Serial.write_string "\n";
   Ssd.display_string msg

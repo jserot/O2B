@@ -51,7 +51,7 @@ sig
     (* Returns the number of elapsed ms *)
 end
 
-module Sys : (* System description *)
+module System : (* System description *)
 sig
     external sys_id : unit -> int = "caml_nios_get_sys_id" [@@noalloc]
 end
