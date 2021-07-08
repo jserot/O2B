@@ -1,5 +1,4 @@
 - reorganize platform specific files in platform subdirs (lib,ml,byterun)
 - get rid of bsp compilation warnings
-- rename platorm dir quartus "altera"
 - add "mini" platform
 - add list_upd.vhd CC
