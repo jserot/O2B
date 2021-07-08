@@ -1,6 +1,7 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.caml.all;
 
 entity amap_cc is
 	port (
@@ -41,15 +42,15 @@ architecture rtl of amap_cc is
   signal count: unsigned(31 downto 0);
   signal rdy: std_logic;
   
-  function f(x: unsigned(31 downto 0)) return unsigned is  -- the mapped function (to be adjusted)
+  function f(x: caml_int) return caml_int is  -- the mapped function (to be adjusted)
   begin
-    return x+1;
+    return resize(x+1,31);
   end;
     
 begin
 
   WRITE: process (reset_reset, clock_clk)
-    variable arg, res: unsigned(31 downto 0); 
+    variable arg, res: caml_int;
   begin
     if reset_reset = '1' then
       avm_rm_read <= '0';
@@ -86,9 +87,9 @@ begin
         when WaitRd =>  
           if avm_rm_waitrequest = '0' then -- end of read transfer
             avm_rm_read <= '0';
-            arg := unsigned('0' & avm_rm_readdata(31 downto 1)); -- Get rid of OCaml tag
+            arg := caml_decode_int(avm_rm_readdata);
             res := f(arg);
-            avm_wm_writedata <= std_logic_vector(res(30 downto 0)) & '1'; -- Re-tag value
+            avm_wm_writedata <= caml_encode_int(res);
             avm_wm_address <= std_logic_vector(waddr);
             avm_wm_write <= '1';
             state <= WaitWr;

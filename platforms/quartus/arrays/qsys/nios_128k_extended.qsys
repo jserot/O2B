@@ -285,6 +285,22 @@
          type = "String";
       }
    }
+   element nios_128k_extended
+   {
+      datum _originalDeviceFamily
+      {
+         value = "MAX 10";
+         type = "String";
+      }
+   }
+   element nios_128k_extended
+   {
+      datum _originalDeviceFamily
+      {
+         value = "MAX 10";
+         type = "String";
+      }
+   }
    element onchip_memory
    {
       datum _sortIndex

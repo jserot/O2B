@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
  * SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
  *
- * Generated: Thu Jul 08 08:41:51 CEST 2021
+ * Generated: Thu Jul 08 11:51:19 CEST 2021
  */
 
 /*
@@ -520,7 +520,7 @@
 #define SYS_ID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYS_ID_NAME "/dev/sys_id"
 #define SYS_ID_SPAN 8
-#define SYS_ID_TIMESTAMP 1625725577
+#define SYS_ID_TIMESTAMP 1625733768
 #define SYS_ID_TYPE "altera_avalon_sysid_qsys"
 
 

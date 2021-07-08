@@ -2,7 +2,7 @@ set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_TOOL_VERSION "15.1"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "nios_128k_extended" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../nios_128k_extended.sopcinfo"]
-set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name SLD_INFO "QSYS_NAME nios_128k_extended HAS_SOPCINFO 1 GENERATION_ID 1625725577"
+set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name SLD_INFO "QSYS_NAME nios_128k_extended HAS_SOPCINFO 1 GENERATION_ID 1625733768"
 set_global_assignment -library "nios_128k_extended" -name MISC_FILE [file join $::quartus(qip_path) "../nios_128k_extended.cmp"]
 set_global_assignment -library "nios_128k_extended" -name SLD_FILE [file join $::quartus(qip_path) "nios_128k_extended.regmap"]
 set_global_assignment -library "nios_128k_extended" -name SLD_FILE [file join $::quartus(qip_path) "nios_128k_extended.debuginfo"]
@@ -16,7 +16,7 @@ set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_REPORT_HIERARCHY "On"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTYyNTcyNTU3Nw==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTYyNTczMzc2OA==::QXV0byBHRU5FUkFUSU9OX0lE"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::TUFYIDEw::QXV0byBERVZJQ0VfRkFNSUxZ"
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::MTBNNTBEQUY0ODRDNkdFUw==::QXV0byBERVZJQ0U="
 set_global_assignment -entity "nios_128k_extended" -library "nios_128k_extended" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::Ng==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
@@ -1261,6 +1261,7 @@ set_global_assignment -library "nios_128k_extended" -name VERILOG_FILE [file joi
 set_global_assignment -library "nios_128k_extended" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/nios_128k_extended_cpu_cpu_debug_slave_tck.v"]
 set_global_assignment -library "nios_128k_extended" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/nios_128k_extended_button.v"]
 set_global_assignment -library "nios_128k_extended" -name VHDL_FILE [file join $::quartus(qip_path) "submodules/arr_reduce.vhd"]
+set_global_assignment -library "nios_128k_extended" -name VHDL_FILE [file join $::quartus(qip_path) "submodules/caml.vhd"]
 set_global_assignment -library "nios_128k_extended" -name VHDL_FILE [file join $::quartus(qip_path) "submodules/arr_map.vhd"]
 
 set_global_assignment -entity "altera_reset_controller" -library "nios_128k_extended" -name IP_TOOL_NAME "altera_reset_controller"

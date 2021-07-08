@@ -8,7 +8,7 @@
    <name preferredWidth="208" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library,Project/my_ips" />
+ <library expandedCategories="Library,Project,Project/my_ips" />
  <window width="1100" height="691" x="0" y="0" />
  <generation synthesis="VHDL" />
 </preferences>
