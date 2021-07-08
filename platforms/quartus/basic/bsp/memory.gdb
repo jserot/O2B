@@ -1,9 +1,9 @@
 # memory.gdb - GDB memory region definitions
 #
-# Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_base'
-# SOPC Builder design path: ../qsys/nios_128k_base.sopcinfo
+# Machine generated for CPU 'cpu' in SOPC Builder design 'platform'
+# SOPC Builder design path: ../qsys/platform.sopcinfo
 #
-# Generated: Fri Jul 17 10:57:03 CEST 2020
+# Generated: Thu Jul 08 12:29:34 CEST 2021
 
 # DO NOT MODIFY THIS FILE
 #

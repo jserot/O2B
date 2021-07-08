@@ -1,3 +1,5 @@
+- add "mini" platform
+- rename "extended" as "extops"
 - reorganize platform specific files in platform subdirs (lib,ml,byterun)
-- name platform.qsys
 - rename Platform.Sys module (conflict with stdlb)
+- add list_upd.vhd CC

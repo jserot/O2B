@@ -1,7 +1,7 @@
 HW_FILE=./hw/top.qpf
 SOF_FILE=./hw/output_files/top.sof
-SOPC_FILE=./qsys/nios_128k_base.qsys
-SOPCINFO_FILE=./qsys/nios_128k_base.sopcinfo
+SOPC_FILE=./qsys/platform.qsys
+SOPCINFO_FILE=./qsys/platform.sopcinfo
 BSP_SETTINGS=./bsp/settings.bsp
 BSP_OPTS=--set hal.sys_clk_timer none --set hal.timestamp_timer sys_timer 
 
@@ -18,6 +18,11 @@ endif
 
 sopc-edit: check
 	qsys-edit $(SOPC_FILE)
+
+hw-build: $(HW_FILE)
+	(cd hw; quartus_map --read_settings_files=on --write_settings_files=off top -c top)
+	(cd hw; quartus_fit --read_settings_files=off --write_settings_files=off top -c top)
+	(cd hw; quartus_asm --read_settings_files=off --write_settings_files=off top -c top)
 
 hw:  check
 	@echo "Check that the DE10-Lite board is connected and the USB-Blaster connection active"

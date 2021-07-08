@@ -1,11 +1,11 @@
 
-State Machine - |top|nios_128k_extended:u0|custom_gcd:gcd_ci|etat
+State Machine - |top|platform:u0|custom_gcd:gcd_ci|etat
 Name etat.Fin etat.Calcul etat.Repos 
 etat.Repos 0 0 0 
 etat.Calcul 0 1 1 
 etat.Fin 1 0 1 
 
-State Machine - |top|nios_128k_extended:u0|nios_128k_extended_cpu:cpu|nios_128k_extended_cpu_cpu:cpu|nios_128k_extended_cpu_cpu_nios2_oci:the_nios_128k_extended_cpu_cpu_nios2_oci|nios_128k_extended_cpu_cpu_debug_slave_wrapper:the_nios_128k_extended_cpu_cpu_debug_slave_wrapper|nios_128k_extended_cpu_cpu_debug_slave_tck:the_nios_128k_extended_cpu_cpu_debug_slave_tck|DRsize
+State Machine - |top|platform:u0|platform_cpu:cpu|platform_cpu_cpu:cpu|platform_cpu_cpu_nios2_oci:the_platform_cpu_cpu_nios2_oci|platform_cpu_cpu_debug_slave_wrapper:the_platform_cpu_cpu_debug_slave_wrapper|platform_cpu_cpu_debug_slave_tck:the_platform_cpu_cpu_debug_slave_tck|DRsize
 Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
 DRsize.000 0 0 0 0 0 0 
 DRsize.001 0 0 0 0 1 1 

@@ -101,7 +101,7 @@ ACDS_VERSION := 15.1
 # BUILD_NUMBER: 185
 
 SETTINGS_FILE := settings.bsp
-SOPC_FILE := ../qsys/nios_128k_extended.sopcinfo
+SOPC_FILE := ../qsys/platform.sopcinfo
 
 #-------------------------------------------------------------------------------
 #                             TOOL & COMMAND DEFINITIONS

@@ -17,7 +17,7 @@ end entity;
 
 architecture rtl of top is
 
-	component nios_128k_base is   -- Imported from ../qsys/nios_128k_base/synthesis/nios_128k_inst.vhd
+	component platform is
 		port (
 			button_external_connection_export : in  std_logic_vector(1 downto 0) := (others => 'X'); -- export
 			clk_clk                           : in  std_logic                    := 'X';             -- clk
@@ -37,7 +37,7 @@ architecture rtl of top is
  
 begin
 
-	u0 : component nios_128k_base
+	u0 : component platform
 		port map (
 			button_external_connection_export => KEY,
 			clk_clk                           => MAX10_CLK1_50,

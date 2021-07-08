@@ -1,10 +1,10 @@
 /*
  * alt_sys_init.c - HAL initialization source
  *
- * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_base'
- * SOPC Builder design path: ../qsys/nios_128k_base.sopcinfo
+ * Machine generated for CPU 'cpu' in SOPC Builder design 'platform'
+ * SOPC Builder design path: ../qsys/platform.sopcinfo
  *
- * Generated: Mon May 24 16:20:15 CEST 2021
+ * Generated: Thu Jul 08 12:29:34 CEST 2021
  */
 
 /*

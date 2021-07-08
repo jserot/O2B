@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="alt_sld_fab" kind="alt_sld_fab" version="1.0" fabric="QSYS">
  <!-- Format version 15.1 185 (Future versions may contain additional information.) -->
- <!-- 2021.07.08.11:43:33 -->
+ <!-- 2021.07.08.12:50:05 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_DEVICE_FAMILY">
   <type>java.lang.String</type>
@@ -56,7 +56,7 @@
 the requested settings for a module instance. -->
   <parameter name="DESIGN_HASH">
    <type>java.lang.String</type>
-   <value>46195674b55c551dd97a</value>
+   <value>e0b5fab6d99b677ea97d</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -104,7 +104,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="EP_INFOS">
    <type>java.lang.String</type>
-   <value>{hpath {nios_128k_extended:u0|nios_128k_extended_jtag_uart:jtag_uart|alt_jtag_atlantic:nios_128k_extended_jtag_uart_alt_jtag_atlantic|altera_sld_agent_endpoint:inst|altera_fabric_endpoint:ep} } {hpath {nios_128k_extended:u0|nios_128k_extended_cpu:cpu|nios_128k_extended_cpu_cpu:cpu|nios_128k_extended_cpu_cpu_nios2_oci:the_nios_128k_extended_cpu_cpu_nios2_oci|nios_128k_extended_cpu_cpu_debug_slave_wrapper:the_nios_128k_extended_cpu_cpu_debug_slave_wrapper|sld_virtual_jtag_basic:nios_128k_extended_cpu_cpu_debug_slave_phy|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } </value>
+   <value>{hpath {platform:u0|platform_jtag_uart:jtag_uart|alt_jtag_atlantic:platform_jtag_uart_alt_jtag_atlantic|altera_sld_agent_endpoint:inst|altera_fabric_endpoint:ep} } {hpath {platform:u0|platform_cpu:cpu|platform_cpu_cpu:cpu|platform_cpu_cpu_nios2_oci:the_platform_cpu_cpu_nios2_oci|platform_cpu_cpu_debug_slave_wrapper:the_platform_cpu_cpu_debug_slave_wrapper|sld_virtual_jtag_basic:platform_cpu_cpu_debug_slave_phy|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } </value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2165,7 +2165,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="DESIGN_HASH">
    <type>java.lang.String</type>
-   <value>46195674b55c551dd97a</value>
+   <value>e0b5fab6d99b677ea97d</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>

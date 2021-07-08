@@ -1,7 +1,7 @@
 HW_FILE=./hw/top.qpf
 SOF_FILE=./hw/output_files/top.sof
-SOPC_FILE=./qsys/nios_128k_extended.qsys
-SOPCINFO_FILE=./qsys/nios_128k_extended.sopcinfo
+SOPC_FILE=./qsys/platform.qsys
+SOPCINFO_FILE=./qsys/platform.sopcinfo
 BSP_SETTINGS=./bsp/settings.bsp
 BSP_OPTS=--set hal.sys_clk_timer none --set hal.timestamp_timer timer 
 

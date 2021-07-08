@@ -1,10 +1,10 @@
 /*
  * system.h - SOPC Builder system and BSP software package information
  *
- * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
- * SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
+ * Machine generated for CPU 'cpu' in SOPC Builder design 'platform'
+ * SOPC Builder design path: ../qsys/platform.sopcinfo
  *
- * Generated: Thu May 27 11:42:58 CEST 2021
+ * Generated: Thu Jul 08 12:42:19 CEST 2021
  */
 
 /*
@@ -185,7 +185,7 @@
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
 #define ALT_STDOUT_TYPE "altera_avalon_jtag_uart"
-#define ALT_SYSTEM_NAME "nios_128k_extended"
+#define ALT_SYSTEM_NAME "platform"
 
 
 /*
@@ -459,7 +459,7 @@
 #define ONCHIP_MEMORY_CONTENTS_INFO ""
 #define ONCHIP_MEMORY_DUAL_PORT 0
 #define ONCHIP_MEMORY_GUI_RAM_BLOCK_TYPE "AUTO"
-#define ONCHIP_MEMORY_INIT_CONTENTS_FILE "nios_128k_extended_onchip_memory"
+#define ONCHIP_MEMORY_INIT_CONTENTS_FILE "platform_onchip_memory"
 #define ONCHIP_MEMORY_INIT_MEM_CONTENT 0
 #define ONCHIP_MEMORY_INSTANCE_ID "NONE"
 #define ONCHIP_MEMORY_IRQ -1
@@ -515,7 +515,7 @@
 #define SYS_ID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYS_ID_NAME "/dev/sys_id"
 #define SYS_ID_SPAN 8
-#define SYS_ID_TIMESTAMP 1622108181
+#define SYS_ID_TIMESTAMP 1625740496
 #define SYS_ID_TYPE "altera_avalon_sysid_qsys"
 
 
