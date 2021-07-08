@@ -23,8 +23,8 @@ int nios_get_sys_id();
 
 // Extended functions
 
-int nios_arr_sum(int32_t* addr, unsigned size);
-int nios_arr_sum_cc(int32_t* addr, unsigned size);
+int nios_arr_reduce(int32_t* src, unsigned size);
+int nios_arr_reduce_cc(int32_t* src, unsigned size);
 
 int nios_arr_map(int32_t* src, int32_t *dst, unsigned size);
 int nios_arr_map_cc(int32_t* src, int32_t *dst, unsigned size);

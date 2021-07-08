@@ -1,3 +1,4 @@
-- generalize STAB_CC to AFOLD_CC
+- add a Caml VHDL package to handle conversion from/to Caml values
 - reorganize platform specific files in platform subdirs (lib,ml,byterun)
 - name platform.qsys
+- rename Platform.Sys module (conflict with stdlb)

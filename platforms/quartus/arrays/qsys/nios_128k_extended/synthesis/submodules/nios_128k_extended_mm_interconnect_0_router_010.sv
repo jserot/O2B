@@ -199,15 +199,15 @@ module nios_128k_extended_mm_interconnect_0_router_010
             src_channel = 16'b00010;
         end
 
-        if (destid == 0  && read_transaction) begin
+        if (destid == 2  && read_transaction) begin
             src_channel = 16'b00100;
         end
 
-        if (destid == 1  && read_transaction) begin
+        if (destid == 0  && read_transaction) begin
             src_channel = 16'b01000;
         end
 
-        if (destid == 2  && write_transaction) begin
+        if (destid == 1  && write_transaction) begin
             src_channel = 16'b10000;
         end
 

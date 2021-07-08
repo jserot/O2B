@@ -36,7 +36,7 @@ let size = 1000
 let src = Array.init size (fun i -> i)
 let dst = Array.make size 0
                  
-let chrono f =
+let chrono f src dst =
   let t1 = Timer.get_us () in
   let _ = f src dst in
   let t2 = Timer.get_us () in
@@ -47,14 +47,14 @@ let () =
   if Timer.init () < 0 then error "Timer init failed";
   print_array 4 src;
   for i=1 to 1 do
-    let t1 = chrono arr_map in
+    let t1 = chrono arr_map src dst in
     print_array 4 dst;
     Array.fill dst 0 (Array.length dst - 1) 0; (* erase previous result *)
-    let t2 = chrono C.arr_map in
+    let t2 = chrono C.arr_map src dst in
     (* let t2 = 0 in *)
     print_array 4 dst;
     Array.fill dst 0 (Array.length dst - 1) 0; (* erase previous result *)
-    let t3 = chrono Rtl.arr_map in
+    let t3 = chrono Rtl.arr_map src dst in
     (* let t3 = 0 in *)
     print_array 4 dst;
     print_timings [t1;t2;t3]

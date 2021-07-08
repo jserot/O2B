@@ -83,22 +83,22 @@ int nios_get_sys_id()
   return 0;
 }
 
-int nios_arr_sum(int* addr, unsigned size)
+int nios_arr_reduce(int* src, unsigned size)
 {
-  printf("nios_arr_sum(%x,%d)\n", addr, size);
+  printf("nios_arr_reduce(%x,%d)\n", src, size);
 }
 
-int nios_arr_sum_cc(int* addr, unsigned size)
+int nios_arr_reduce_cc(int* src, unsigned size)
 {
-  printf("nios_arr_sum_cc(%x,%d)\n", addr, size);
+  printf("nios_arr_reduce_cc(%x,%d)\n", src, size);
 }
 
-int nios_arr_map(int* src, int *dst, unsigned size)
+int nios_arr_map(int* src, int* dst, unsigned size)
 {
-  printf("nios_arr_map(%x,%x,,%d)\n", src, dst, size);
+  printf("nios_arr_map(%x,%x,%d)\n", src, dst, size);
 }
 
-int nios_arr_map_cc(int* src, int *dst, unsigned size)
+int nios_arr_map_cc(int* src, int* dst, unsigned size)
 {
-  printf("nios_arr_map_cc(%x,%x,,%d)\n", src, dst, size);
+  printf("nios_arr_map(%x,%x,%d)\n", src, dst, size);
 }

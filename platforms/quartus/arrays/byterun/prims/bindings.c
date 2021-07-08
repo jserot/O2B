@@ -63,12 +63,12 @@ value caml_nios_get_sys_id(value unit) {
 #define BLOCK_ADDR(v) ((int32_t *)(Ram_block_val(v)))
 #endif
 
-value caml_nios_arr_sum(value a) {
-  return Val_int(nios_arr_sum(BLOCK_ADDR(a),Wosize_val(a)));
+value caml_nios_arr_reduce(value a) {
+  return Val_int(nios_arr_reduce(BLOCK_ADDR(a),Wosize_val(a)));
 }
 
-value caml_nios_arr_sum_cc(value a) {
-  return Val_int(nios_arr_sum_cc(BLOCK_ADDR(a),Wosize_val(a)));
+value caml_nios_arr_reduce_cc(value a) {
+  return Val_int(nios_arr_reduce_cc(BLOCK_ADDR(a),Wosize_val(a)));
 }
 
 value caml_nios_arr_map(value s, value d) {

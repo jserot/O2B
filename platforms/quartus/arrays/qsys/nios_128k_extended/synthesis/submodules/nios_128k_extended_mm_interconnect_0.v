@@ -17,6 +17,11 @@ module nios_128k_extended_mm_interconnect_0 (
 		output wire        amap_cc_0_wm_waitrequest,                //                                .waitrequest
 		input  wire        amap_cc_0_wm_write,                      //                                .write
 		input  wire [31:0] amap_cc_0_wm_writedata,                  //                                .writedata
+		input  wire [31:0] ared_cc_0_rm_address,                    //                    ared_cc_0_rm.address
+		output wire        ared_cc_0_rm_waitrequest,                //                                .waitrequest
+		input  wire        ared_cc_0_rm_read,                       //                                .read
+		output wire [31:0] ared_cc_0_rm_readdata,                   //                                .readdata
+		output wire [1:0]  ared_cc_0_rm_response,                   //                                .response
 		input  wire [17:0] cpu_data_master_address,                 //                 cpu_data_master.address
 		output wire        cpu_data_master_waitrequest,             //                                .waitrequest
 		input  wire [3:0]  cpu_data_master_byteenable,              //                                .byteenable
@@ -29,16 +34,16 @@ module nios_128k_extended_mm_interconnect_0 (
 		output wire        cpu_instruction_master_waitrequest,      //                                .waitrequest
 		input  wire        cpu_instruction_master_read,             //                                .read
 		output wire [31:0] cpu_instruction_master_readdata,         //                                .readdata
-		input  wire [31:0] STAB_CC_0_rm_address,                    //                    STAB_CC_0_rm.address
-		output wire        STAB_CC_0_rm_waitrequest,                //                                .waitrequest
-		input  wire        STAB_CC_0_rm_read,                       //                                .read
-		output wire [31:0] STAB_CC_0_rm_readdata,                   //                                .readdata
-		output wire [1:0]  STAB_CC_0_rm_response,                   //                                .response
 		output wire [2:0]  amap_cc_0_s0_address,                    //                    amap_cc_0_s0.address
 		output wire        amap_cc_0_s0_write,                      //                                .write
 		output wire        amap_cc_0_s0_read,                       //                                .read
 		input  wire [31:0] amap_cc_0_s0_readdata,                   //                                .readdata
 		output wire [31:0] amap_cc_0_s0_writedata,                  //                                .writedata
+		output wire [2:0]  ared_cc_0_s0_address,                    //                    ared_cc_0_s0.address
+		output wire        ared_cc_0_s0_write,                      //                                .write
+		output wire        ared_cc_0_s0_read,                       //                                .read
+		input  wire [31:0] ared_cc_0_s0_readdata,                   //                                .readdata
+		output wire [31:0] ared_cc_0_s0_writedata,                  //                                .writedata
 		output wire [1:0]  button_s1_address,                       //                       button_s1.address
 		input  wire [31:0] button_s1_readdata,                      //                                .readdata
 		output wire [8:0]  cpu_debug_mem_slave_address,             //             cpu_debug_mem_slave.address
@@ -98,11 +103,6 @@ module nios_128k_extended_mm_interconnect_0 (
 		output wire [3:0]  onchip_memory_s1_byteenable,             //                                .byteenable
 		output wire        onchip_memory_s1_chipselect,             //                                .chipselect
 		output wire        onchip_memory_s1_clken,                  //                                .clken
-		output wire [2:0]  STAB_CC_0_s0_address,                    //                    STAB_CC_0_s0.address
-		output wire        STAB_CC_0_s0_write,                      //                                .write
-		output wire        STAB_CC_0_s0_read,                       //                                .read
-		input  wire [31:0] STAB_CC_0_s0_readdata,                   //                                .readdata
-		output wire [31:0] STAB_CC_0_s0_writedata,                  //                                .writedata
 		output wire [1:0]  switch_s1_address,                       //                       switch_s1.address
 		input  wire [31:0] switch_s1_readdata,                      //                                .readdata
 		output wire [0:0]  sys_id_control_slave_address,            //            sys_id_control_slave.address
@@ -148,24 +148,24 @@ module nios_128k_extended_mm_interconnect_0 (
 	wire   [15:0] rsp_mux_001_src_channel;                                                   // rsp_mux_001:src_channel -> cpu_instruction_master_agent:rp_channel
 	wire          rsp_mux_001_src_startofpacket;                                             // rsp_mux_001:src_startofpacket -> cpu_instruction_master_agent:rp_startofpacket
 	wire          rsp_mux_001_src_endofpacket;                                               // rsp_mux_001:src_endofpacket -> cpu_instruction_master_agent:rp_endofpacket
-	wire          stab_cc_0_rm_translator_avalon_universal_master_0_waitrequest;             // STAB_CC_0_rm_agent:av_waitrequest -> STAB_CC_0_rm_translator:uav_waitrequest
-	wire   [31:0] stab_cc_0_rm_translator_avalon_universal_master_0_readdata;                // STAB_CC_0_rm_agent:av_readdata -> STAB_CC_0_rm_translator:uav_readdata
-	wire          stab_cc_0_rm_translator_avalon_universal_master_0_debugaccess;             // STAB_CC_0_rm_translator:uav_debugaccess -> STAB_CC_0_rm_agent:av_debugaccess
-	wire   [31:0] stab_cc_0_rm_translator_avalon_universal_master_0_address;                 // STAB_CC_0_rm_translator:uav_address -> STAB_CC_0_rm_agent:av_address
-	wire          stab_cc_0_rm_translator_avalon_universal_master_0_read;                    // STAB_CC_0_rm_translator:uav_read -> STAB_CC_0_rm_agent:av_read
-	wire    [3:0] stab_cc_0_rm_translator_avalon_universal_master_0_byteenable;              // STAB_CC_0_rm_translator:uav_byteenable -> STAB_CC_0_rm_agent:av_byteenable
-	wire          stab_cc_0_rm_translator_avalon_universal_master_0_readdatavalid;           // STAB_CC_0_rm_agent:av_readdatavalid -> STAB_CC_0_rm_translator:uav_readdatavalid
-	wire    [1:0] stab_cc_0_rm_translator_avalon_universal_master_0_response;                // STAB_CC_0_rm_agent:av_response -> STAB_CC_0_rm_translator:uav_response
-	wire          stab_cc_0_rm_translator_avalon_universal_master_0_lock;                    // STAB_CC_0_rm_translator:uav_lock -> STAB_CC_0_rm_agent:av_lock
-	wire          stab_cc_0_rm_translator_avalon_universal_master_0_write;                   // STAB_CC_0_rm_translator:uav_write -> STAB_CC_0_rm_agent:av_write
-	wire   [31:0] stab_cc_0_rm_translator_avalon_universal_master_0_writedata;               // STAB_CC_0_rm_translator:uav_writedata -> STAB_CC_0_rm_agent:av_writedata
-	wire    [2:0] stab_cc_0_rm_translator_avalon_universal_master_0_burstcount;              // STAB_CC_0_rm_translator:uav_burstcount -> STAB_CC_0_rm_agent:av_burstcount
-	wire          rsp_mux_002_src_valid;                                                     // rsp_mux_002:src_valid -> STAB_CC_0_rm_agent:rp_valid
-	wire  [109:0] rsp_mux_002_src_data;                                                      // rsp_mux_002:src_data -> STAB_CC_0_rm_agent:rp_data
-	wire          rsp_mux_002_src_ready;                                                     // STAB_CC_0_rm_agent:rp_ready -> rsp_mux_002:src_ready
-	wire   [15:0] rsp_mux_002_src_channel;                                                   // rsp_mux_002:src_channel -> STAB_CC_0_rm_agent:rp_channel
-	wire          rsp_mux_002_src_startofpacket;                                             // rsp_mux_002:src_startofpacket -> STAB_CC_0_rm_agent:rp_startofpacket
-	wire          rsp_mux_002_src_endofpacket;                                               // rsp_mux_002:src_endofpacket -> STAB_CC_0_rm_agent:rp_endofpacket
+	wire          ared_cc_0_rm_translator_avalon_universal_master_0_waitrequest;             // ared_cc_0_rm_agent:av_waitrequest -> ared_cc_0_rm_translator:uav_waitrequest
+	wire   [31:0] ared_cc_0_rm_translator_avalon_universal_master_0_readdata;                // ared_cc_0_rm_agent:av_readdata -> ared_cc_0_rm_translator:uav_readdata
+	wire          ared_cc_0_rm_translator_avalon_universal_master_0_debugaccess;             // ared_cc_0_rm_translator:uav_debugaccess -> ared_cc_0_rm_agent:av_debugaccess
+	wire   [31:0] ared_cc_0_rm_translator_avalon_universal_master_0_address;                 // ared_cc_0_rm_translator:uav_address -> ared_cc_0_rm_agent:av_address
+	wire          ared_cc_0_rm_translator_avalon_universal_master_0_read;                    // ared_cc_0_rm_translator:uav_read -> ared_cc_0_rm_agent:av_read
+	wire    [3:0] ared_cc_0_rm_translator_avalon_universal_master_0_byteenable;              // ared_cc_0_rm_translator:uav_byteenable -> ared_cc_0_rm_agent:av_byteenable
+	wire          ared_cc_0_rm_translator_avalon_universal_master_0_readdatavalid;           // ared_cc_0_rm_agent:av_readdatavalid -> ared_cc_0_rm_translator:uav_readdatavalid
+	wire    [1:0] ared_cc_0_rm_translator_avalon_universal_master_0_response;                // ared_cc_0_rm_agent:av_response -> ared_cc_0_rm_translator:uav_response
+	wire          ared_cc_0_rm_translator_avalon_universal_master_0_lock;                    // ared_cc_0_rm_translator:uav_lock -> ared_cc_0_rm_agent:av_lock
+	wire          ared_cc_0_rm_translator_avalon_universal_master_0_write;                   // ared_cc_0_rm_translator:uav_write -> ared_cc_0_rm_agent:av_write
+	wire   [31:0] ared_cc_0_rm_translator_avalon_universal_master_0_writedata;               // ared_cc_0_rm_translator:uav_writedata -> ared_cc_0_rm_agent:av_writedata
+	wire    [2:0] ared_cc_0_rm_translator_avalon_universal_master_0_burstcount;              // ared_cc_0_rm_translator:uav_burstcount -> ared_cc_0_rm_agent:av_burstcount
+	wire          rsp_mux_002_src_valid;                                                     // rsp_mux_002:src_valid -> ared_cc_0_rm_agent:rp_valid
+	wire  [109:0] rsp_mux_002_src_data;                                                      // rsp_mux_002:src_data -> ared_cc_0_rm_agent:rp_data
+	wire          rsp_mux_002_src_ready;                                                     // ared_cc_0_rm_agent:rp_ready -> rsp_mux_002:src_ready
+	wire   [15:0] rsp_mux_002_src_channel;                                                   // rsp_mux_002:src_channel -> ared_cc_0_rm_agent:rp_channel
+	wire          rsp_mux_002_src_startofpacket;                                             // rsp_mux_002:src_startofpacket -> ared_cc_0_rm_agent:rp_startofpacket
+	wire          rsp_mux_002_src_endofpacket;                                               // rsp_mux_002:src_endofpacket -> ared_cc_0_rm_agent:rp_endofpacket
 	wire          amap_cc_0_rm_translator_avalon_universal_master_0_waitrequest;             // amap_cc_0_rm_agent:av_waitrequest -> amap_cc_0_rm_translator:uav_waitrequest
 	wire   [31:0] amap_cc_0_rm_translator_avalon_universal_master_0_readdata;                // amap_cc_0_rm_agent:av_readdata -> amap_cc_0_rm_translator:uav_readdata
 	wire          amap_cc_0_rm_translator_avalon_universal_master_0_debugaccess;             // amap_cc_0_rm_translator:uav_debugaccess -> amap_cc_0_rm_agent:av_debugaccess
@@ -281,33 +281,33 @@ module nios_128k_extended_mm_interconnect_0 (
 	wire   [15:0] cmd_mux_002_src_channel;                                                   // cmd_mux_002:src_channel -> cpu_debug_mem_slave_agent:cp_channel
 	wire          cmd_mux_002_src_startofpacket;                                             // cmd_mux_002:src_startofpacket -> cpu_debug_mem_slave_agent:cp_startofpacket
 	wire          cmd_mux_002_src_endofpacket;                                               // cmd_mux_002:src_endofpacket -> cpu_debug_mem_slave_agent:cp_endofpacket
-	wire   [31:0] stab_cc_0_s0_agent_m0_readdata;                                            // STAB_CC_0_s0_translator:uav_readdata -> STAB_CC_0_s0_agent:m0_readdata
-	wire          stab_cc_0_s0_agent_m0_waitrequest;                                         // STAB_CC_0_s0_translator:uav_waitrequest -> STAB_CC_0_s0_agent:m0_waitrequest
-	wire          stab_cc_0_s0_agent_m0_debugaccess;                                         // STAB_CC_0_s0_agent:m0_debugaccess -> STAB_CC_0_s0_translator:uav_debugaccess
-	wire   [31:0] stab_cc_0_s0_agent_m0_address;                                             // STAB_CC_0_s0_agent:m0_address -> STAB_CC_0_s0_translator:uav_address
-	wire    [3:0] stab_cc_0_s0_agent_m0_byteenable;                                          // STAB_CC_0_s0_agent:m0_byteenable -> STAB_CC_0_s0_translator:uav_byteenable
-	wire          stab_cc_0_s0_agent_m0_read;                                                // STAB_CC_0_s0_agent:m0_read -> STAB_CC_0_s0_translator:uav_read
-	wire          stab_cc_0_s0_agent_m0_readdatavalid;                                       // STAB_CC_0_s0_translator:uav_readdatavalid -> STAB_CC_0_s0_agent:m0_readdatavalid
-	wire          stab_cc_0_s0_agent_m0_lock;                                                // STAB_CC_0_s0_agent:m0_lock -> STAB_CC_0_s0_translator:uav_lock
-	wire   [31:0] stab_cc_0_s0_agent_m0_writedata;                                           // STAB_CC_0_s0_agent:m0_writedata -> STAB_CC_0_s0_translator:uav_writedata
-	wire          stab_cc_0_s0_agent_m0_write;                                               // STAB_CC_0_s0_agent:m0_write -> STAB_CC_0_s0_translator:uav_write
-	wire    [2:0] stab_cc_0_s0_agent_m0_burstcount;                                          // STAB_CC_0_s0_agent:m0_burstcount -> STAB_CC_0_s0_translator:uav_burstcount
-	wire          stab_cc_0_s0_agent_rf_source_valid;                                        // STAB_CC_0_s0_agent:rf_source_valid -> STAB_CC_0_s0_agent_rsp_fifo:in_valid
-	wire  [110:0] stab_cc_0_s0_agent_rf_source_data;                                         // STAB_CC_0_s0_agent:rf_source_data -> STAB_CC_0_s0_agent_rsp_fifo:in_data
-	wire          stab_cc_0_s0_agent_rf_source_ready;                                        // STAB_CC_0_s0_agent_rsp_fifo:in_ready -> STAB_CC_0_s0_agent:rf_source_ready
-	wire          stab_cc_0_s0_agent_rf_source_startofpacket;                                // STAB_CC_0_s0_agent:rf_source_startofpacket -> STAB_CC_0_s0_agent_rsp_fifo:in_startofpacket
-	wire          stab_cc_0_s0_agent_rf_source_endofpacket;                                  // STAB_CC_0_s0_agent:rf_source_endofpacket -> STAB_CC_0_s0_agent_rsp_fifo:in_endofpacket
-	wire          stab_cc_0_s0_agent_rsp_fifo_out_valid;                                     // STAB_CC_0_s0_agent_rsp_fifo:out_valid -> STAB_CC_0_s0_agent:rf_sink_valid
-	wire  [110:0] stab_cc_0_s0_agent_rsp_fifo_out_data;                                      // STAB_CC_0_s0_agent_rsp_fifo:out_data -> STAB_CC_0_s0_agent:rf_sink_data
-	wire          stab_cc_0_s0_agent_rsp_fifo_out_ready;                                     // STAB_CC_0_s0_agent:rf_sink_ready -> STAB_CC_0_s0_agent_rsp_fifo:out_ready
-	wire          stab_cc_0_s0_agent_rsp_fifo_out_startofpacket;                             // STAB_CC_0_s0_agent_rsp_fifo:out_startofpacket -> STAB_CC_0_s0_agent:rf_sink_startofpacket
-	wire          stab_cc_0_s0_agent_rsp_fifo_out_endofpacket;                               // STAB_CC_0_s0_agent_rsp_fifo:out_endofpacket -> STAB_CC_0_s0_agent:rf_sink_endofpacket
-	wire          cmd_mux_003_src_valid;                                                     // cmd_mux_003:src_valid -> STAB_CC_0_s0_agent:cp_valid
-	wire  [109:0] cmd_mux_003_src_data;                                                      // cmd_mux_003:src_data -> STAB_CC_0_s0_agent:cp_data
-	wire          cmd_mux_003_src_ready;                                                     // STAB_CC_0_s0_agent:cp_ready -> cmd_mux_003:src_ready
-	wire   [15:0] cmd_mux_003_src_channel;                                                   // cmd_mux_003:src_channel -> STAB_CC_0_s0_agent:cp_channel
-	wire          cmd_mux_003_src_startofpacket;                                             // cmd_mux_003:src_startofpacket -> STAB_CC_0_s0_agent:cp_startofpacket
-	wire          cmd_mux_003_src_endofpacket;                                               // cmd_mux_003:src_endofpacket -> STAB_CC_0_s0_agent:cp_endofpacket
+	wire   [31:0] ared_cc_0_s0_agent_m0_readdata;                                            // ared_cc_0_s0_translator:uav_readdata -> ared_cc_0_s0_agent:m0_readdata
+	wire          ared_cc_0_s0_agent_m0_waitrequest;                                         // ared_cc_0_s0_translator:uav_waitrequest -> ared_cc_0_s0_agent:m0_waitrequest
+	wire          ared_cc_0_s0_agent_m0_debugaccess;                                         // ared_cc_0_s0_agent:m0_debugaccess -> ared_cc_0_s0_translator:uav_debugaccess
+	wire   [31:0] ared_cc_0_s0_agent_m0_address;                                             // ared_cc_0_s0_agent:m0_address -> ared_cc_0_s0_translator:uav_address
+	wire    [3:0] ared_cc_0_s0_agent_m0_byteenable;                                          // ared_cc_0_s0_agent:m0_byteenable -> ared_cc_0_s0_translator:uav_byteenable
+	wire          ared_cc_0_s0_agent_m0_read;                                                // ared_cc_0_s0_agent:m0_read -> ared_cc_0_s0_translator:uav_read
+	wire          ared_cc_0_s0_agent_m0_readdatavalid;                                       // ared_cc_0_s0_translator:uav_readdatavalid -> ared_cc_0_s0_agent:m0_readdatavalid
+	wire          ared_cc_0_s0_agent_m0_lock;                                                // ared_cc_0_s0_agent:m0_lock -> ared_cc_0_s0_translator:uav_lock
+	wire   [31:0] ared_cc_0_s0_agent_m0_writedata;                                           // ared_cc_0_s0_agent:m0_writedata -> ared_cc_0_s0_translator:uav_writedata
+	wire          ared_cc_0_s0_agent_m0_write;                                               // ared_cc_0_s0_agent:m0_write -> ared_cc_0_s0_translator:uav_write
+	wire    [2:0] ared_cc_0_s0_agent_m0_burstcount;                                          // ared_cc_0_s0_agent:m0_burstcount -> ared_cc_0_s0_translator:uav_burstcount
+	wire          ared_cc_0_s0_agent_rf_source_valid;                                        // ared_cc_0_s0_agent:rf_source_valid -> ared_cc_0_s0_agent_rsp_fifo:in_valid
+	wire  [110:0] ared_cc_0_s0_agent_rf_source_data;                                         // ared_cc_0_s0_agent:rf_source_data -> ared_cc_0_s0_agent_rsp_fifo:in_data
+	wire          ared_cc_0_s0_agent_rf_source_ready;                                        // ared_cc_0_s0_agent_rsp_fifo:in_ready -> ared_cc_0_s0_agent:rf_source_ready
+	wire          ared_cc_0_s0_agent_rf_source_startofpacket;                                // ared_cc_0_s0_agent:rf_source_startofpacket -> ared_cc_0_s0_agent_rsp_fifo:in_startofpacket
+	wire          ared_cc_0_s0_agent_rf_source_endofpacket;                                  // ared_cc_0_s0_agent:rf_source_endofpacket -> ared_cc_0_s0_agent_rsp_fifo:in_endofpacket
+	wire          ared_cc_0_s0_agent_rsp_fifo_out_valid;                                     // ared_cc_0_s0_agent_rsp_fifo:out_valid -> ared_cc_0_s0_agent:rf_sink_valid
+	wire  [110:0] ared_cc_0_s0_agent_rsp_fifo_out_data;                                      // ared_cc_0_s0_agent_rsp_fifo:out_data -> ared_cc_0_s0_agent:rf_sink_data
+	wire          ared_cc_0_s0_agent_rsp_fifo_out_ready;                                     // ared_cc_0_s0_agent:rf_sink_ready -> ared_cc_0_s0_agent_rsp_fifo:out_ready
+	wire          ared_cc_0_s0_agent_rsp_fifo_out_startofpacket;                             // ared_cc_0_s0_agent_rsp_fifo:out_startofpacket -> ared_cc_0_s0_agent:rf_sink_startofpacket
+	wire          ared_cc_0_s0_agent_rsp_fifo_out_endofpacket;                               // ared_cc_0_s0_agent_rsp_fifo:out_endofpacket -> ared_cc_0_s0_agent:rf_sink_endofpacket
+	wire          cmd_mux_003_src_valid;                                                     // cmd_mux_003:src_valid -> ared_cc_0_s0_agent:cp_valid
+	wire  [109:0] cmd_mux_003_src_data;                                                      // cmd_mux_003:src_data -> ared_cc_0_s0_agent:cp_data
+	wire          cmd_mux_003_src_ready;                                                     // ared_cc_0_s0_agent:cp_ready -> cmd_mux_003:src_ready
+	wire   [15:0] cmd_mux_003_src_channel;                                                   // cmd_mux_003:src_channel -> ared_cc_0_s0_agent:cp_channel
+	wire          cmd_mux_003_src_startofpacket;                                             // cmd_mux_003:src_startofpacket -> ared_cc_0_s0_agent:cp_startofpacket
+	wire          cmd_mux_003_src_endofpacket;                                               // cmd_mux_003:src_endofpacket -> ared_cc_0_s0_agent:cp_endofpacket
 	wire   [31:0] amap_cc_0_s0_agent_m0_readdata;                                            // amap_cc_0_s0_translator:uav_readdata -> amap_cc_0_s0_agent:m0_readdata
 	wire          amap_cc_0_s0_agent_m0_waitrequest;                                         // amap_cc_0_s0_translator:uav_waitrequest -> amap_cc_0_s0_agent:m0_waitrequest
 	wire          amap_cc_0_s0_agent_m0_debugaccess;                                         // amap_cc_0_s0_agent:m0_debugaccess -> amap_cc_0_s0_translator:uav_debugaccess
@@ -654,11 +654,11 @@ module nios_128k_extended_mm_interconnect_0 (
 	wire   [15:0] router_001_src_channel;                                                    // router_001:src_channel -> cmd_demux_001:sink_channel
 	wire          router_001_src_startofpacket;                                              // router_001:src_startofpacket -> cmd_demux_001:sink_startofpacket
 	wire          router_001_src_endofpacket;                                                // router_001:src_endofpacket -> cmd_demux_001:sink_endofpacket
-	wire          stab_cc_0_rm_agent_cp_valid;                                               // STAB_CC_0_rm_agent:cp_valid -> router_002:sink_valid
-	wire  [109:0] stab_cc_0_rm_agent_cp_data;                                                // STAB_CC_0_rm_agent:cp_data -> router_002:sink_data
-	wire          stab_cc_0_rm_agent_cp_ready;                                               // router_002:sink_ready -> STAB_CC_0_rm_agent:cp_ready
-	wire          stab_cc_0_rm_agent_cp_startofpacket;                                       // STAB_CC_0_rm_agent:cp_startofpacket -> router_002:sink_startofpacket
-	wire          stab_cc_0_rm_agent_cp_endofpacket;                                         // STAB_CC_0_rm_agent:cp_endofpacket -> router_002:sink_endofpacket
+	wire          ared_cc_0_rm_agent_cp_valid;                                               // ared_cc_0_rm_agent:cp_valid -> router_002:sink_valid
+	wire  [109:0] ared_cc_0_rm_agent_cp_data;                                                // ared_cc_0_rm_agent:cp_data -> router_002:sink_data
+	wire          ared_cc_0_rm_agent_cp_ready;                                               // router_002:sink_ready -> ared_cc_0_rm_agent:cp_ready
+	wire          ared_cc_0_rm_agent_cp_startofpacket;                                       // ared_cc_0_rm_agent:cp_startofpacket -> router_002:sink_startofpacket
+	wire          ared_cc_0_rm_agent_cp_endofpacket;                                         // ared_cc_0_rm_agent:cp_endofpacket -> router_002:sink_endofpacket
 	wire          router_002_src_valid;                                                      // router_002:src_valid -> cmd_demux_002:sink_valid
 	wire  [109:0] router_002_src_data;                                                       // router_002:src_data -> cmd_demux_002:sink_data
 	wire          router_002_src_ready;                                                      // cmd_demux_002:sink_ready -> router_002:src_ready
@@ -720,11 +720,11 @@ module nios_128k_extended_mm_interconnect_0 (
 	wire   [15:0] router_007_src_channel;                                                    // router_007:src_channel -> rsp_demux_002:sink_channel
 	wire          router_007_src_startofpacket;                                              // router_007:src_startofpacket -> rsp_demux_002:sink_startofpacket
 	wire          router_007_src_endofpacket;                                                // router_007:src_endofpacket -> rsp_demux_002:sink_endofpacket
-	wire          stab_cc_0_s0_agent_rp_valid;                                               // STAB_CC_0_s0_agent:rp_valid -> router_008:sink_valid
-	wire  [109:0] stab_cc_0_s0_agent_rp_data;                                                // STAB_CC_0_s0_agent:rp_data -> router_008:sink_data
-	wire          stab_cc_0_s0_agent_rp_ready;                                               // router_008:sink_ready -> STAB_CC_0_s0_agent:rp_ready
-	wire          stab_cc_0_s0_agent_rp_startofpacket;                                       // STAB_CC_0_s0_agent:rp_startofpacket -> router_008:sink_startofpacket
-	wire          stab_cc_0_s0_agent_rp_endofpacket;                                         // STAB_CC_0_s0_agent:rp_endofpacket -> router_008:sink_endofpacket
+	wire          ared_cc_0_s0_agent_rp_valid;                                               // ared_cc_0_s0_agent:rp_valid -> router_008:sink_valid
+	wire  [109:0] ared_cc_0_s0_agent_rp_data;                                                // ared_cc_0_s0_agent:rp_data -> router_008:sink_data
+	wire          ared_cc_0_s0_agent_rp_ready;                                               // router_008:sink_ready -> ared_cc_0_s0_agent:rp_ready
+	wire          ared_cc_0_s0_agent_rp_startofpacket;                                       // ared_cc_0_s0_agent:rp_startofpacket -> router_008:sink_startofpacket
+	wire          ared_cc_0_s0_agent_rp_endofpacket;                                         // ared_cc_0_s0_agent:rp_endofpacket -> router_008:sink_endofpacket
 	wire          router_008_src_valid;                                                      // router_008:src_valid -> rsp_demux_003:sink_valid
 	wire  [109:0] router_008_src_data;                                                       // router_008:src_data -> rsp_demux_003:sink_data
 	wire          router_008_src_ready;                                                      // rsp_demux_003:sink_ready -> router_008:src_ready
@@ -1136,13 +1136,13 @@ module nios_128k_extended_mm_interconnect_0 (
 	wire   [33:0] avalon_st_adapter_002_out_0_data;                                          // avalon_st_adapter_002:out_0_data -> cpu_debug_mem_slave_agent:rdata_fifo_sink_data
 	wire          avalon_st_adapter_002_out_0_ready;                                         // cpu_debug_mem_slave_agent:rdata_fifo_sink_ready -> avalon_st_adapter_002:out_0_ready
 	wire    [0:0] avalon_st_adapter_002_out_0_error;                                         // avalon_st_adapter_002:out_0_error -> cpu_debug_mem_slave_agent:rdata_fifo_sink_error
-	wire          stab_cc_0_s0_agent_rdata_fifo_src_valid;                                   // STAB_CC_0_s0_agent:rdata_fifo_src_valid -> avalon_st_adapter_003:in_0_valid
-	wire   [33:0] stab_cc_0_s0_agent_rdata_fifo_src_data;                                    // STAB_CC_0_s0_agent:rdata_fifo_src_data -> avalon_st_adapter_003:in_0_data
-	wire          stab_cc_0_s0_agent_rdata_fifo_src_ready;                                   // avalon_st_adapter_003:in_0_ready -> STAB_CC_0_s0_agent:rdata_fifo_src_ready
-	wire          avalon_st_adapter_003_out_0_valid;                                         // avalon_st_adapter_003:out_0_valid -> STAB_CC_0_s0_agent:rdata_fifo_sink_valid
-	wire   [33:0] avalon_st_adapter_003_out_0_data;                                          // avalon_st_adapter_003:out_0_data -> STAB_CC_0_s0_agent:rdata_fifo_sink_data
-	wire          avalon_st_adapter_003_out_0_ready;                                         // STAB_CC_0_s0_agent:rdata_fifo_sink_ready -> avalon_st_adapter_003:out_0_ready
-	wire    [0:0] avalon_st_adapter_003_out_0_error;                                         // avalon_st_adapter_003:out_0_error -> STAB_CC_0_s0_agent:rdata_fifo_sink_error
+	wire          ared_cc_0_s0_agent_rdata_fifo_src_valid;                                   // ared_cc_0_s0_agent:rdata_fifo_src_valid -> avalon_st_adapter_003:in_0_valid
+	wire   [33:0] ared_cc_0_s0_agent_rdata_fifo_src_data;                                    // ared_cc_0_s0_agent:rdata_fifo_src_data -> avalon_st_adapter_003:in_0_data
+	wire          ared_cc_0_s0_agent_rdata_fifo_src_ready;                                   // avalon_st_adapter_003:in_0_ready -> ared_cc_0_s0_agent:rdata_fifo_src_ready
+	wire          avalon_st_adapter_003_out_0_valid;                                         // avalon_st_adapter_003:out_0_valid -> ared_cc_0_s0_agent:rdata_fifo_sink_valid
+	wire   [33:0] avalon_st_adapter_003_out_0_data;                                          // avalon_st_adapter_003:out_0_data -> ared_cc_0_s0_agent:rdata_fifo_sink_data
+	wire          avalon_st_adapter_003_out_0_ready;                                         // ared_cc_0_s0_agent:rdata_fifo_sink_ready -> avalon_st_adapter_003:out_0_ready
+	wire    [0:0] avalon_st_adapter_003_out_0_error;                                         // avalon_st_adapter_003:out_0_error -> ared_cc_0_s0_agent:rdata_fifo_sink_error
 	wire          amap_cc_0_s0_agent_rdata_fifo_src_valid;                                   // amap_cc_0_s0_agent:rdata_fifo_src_valid -> avalon_st_adapter_004:in_0_valid
 	wire   [33:0] amap_cc_0_s0_agent_rdata_fifo_src_data;                                    // amap_cc_0_s0_agent:rdata_fifo_src_data -> avalon_st_adapter_004:in_0_data
 	wire          amap_cc_0_s0_agent_rdata_fifo_src_ready;                                   // avalon_st_adapter_004:in_0_ready -> amap_cc_0_s0_agent:rdata_fifo_src_ready
@@ -1372,26 +1372,26 @@ module nios_128k_extended_mm_interconnect_0 (
 		.UAV_CONSTANT_BURST_BEHAVIOR (0),
 		.AV_LINEWRAPBURSTS           (0),
 		.AV_REGISTERINCOMINGSIGNALS  (0)
-	) stab_cc_0_rm_translator (
+	) ared_cc_0_rm_translator (
 		.clk                    (clk_clk_clk),                                                     //                       clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset),                           //                     reset.reset
-		.uav_address            (stab_cc_0_rm_translator_avalon_universal_master_0_address),       // avalon_universal_master_0.address
-		.uav_burstcount         (stab_cc_0_rm_translator_avalon_universal_master_0_burstcount),    //                          .burstcount
-		.uav_read               (stab_cc_0_rm_translator_avalon_universal_master_0_read),          //                          .read
-		.uav_write              (stab_cc_0_rm_translator_avalon_universal_master_0_write),         //                          .write
-		.uav_waitrequest        (stab_cc_0_rm_translator_avalon_universal_master_0_waitrequest),   //                          .waitrequest
-		.uav_readdatavalid      (stab_cc_0_rm_translator_avalon_universal_master_0_readdatavalid), //                          .readdatavalid
-		.uav_byteenable         (stab_cc_0_rm_translator_avalon_universal_master_0_byteenable),    //                          .byteenable
-		.uav_readdata           (stab_cc_0_rm_translator_avalon_universal_master_0_readdata),      //                          .readdata
-		.uav_writedata          (stab_cc_0_rm_translator_avalon_universal_master_0_writedata),     //                          .writedata
-		.uav_lock               (stab_cc_0_rm_translator_avalon_universal_master_0_lock),          //                          .lock
-		.uav_debugaccess        (stab_cc_0_rm_translator_avalon_universal_master_0_debugaccess),   //                          .debugaccess
-		.uav_response           (stab_cc_0_rm_translator_avalon_universal_master_0_response),      //                          .response
-		.av_address             (STAB_CC_0_rm_address),                                            //      avalon_anti_master_0.address
-		.av_waitrequest         (STAB_CC_0_rm_waitrequest),                                        //                          .waitrequest
-		.av_read                (STAB_CC_0_rm_read),                                               //                          .read
-		.av_readdata            (STAB_CC_0_rm_readdata),                                           //                          .readdata
-		.av_response            (STAB_CC_0_rm_response),                                           //                          .response
+		.uav_address            (ared_cc_0_rm_translator_avalon_universal_master_0_address),       // avalon_universal_master_0.address
+		.uav_burstcount         (ared_cc_0_rm_translator_avalon_universal_master_0_burstcount),    //                          .burstcount
+		.uav_read               (ared_cc_0_rm_translator_avalon_universal_master_0_read),          //                          .read
+		.uav_write              (ared_cc_0_rm_translator_avalon_universal_master_0_write),         //                          .write
+		.uav_waitrequest        (ared_cc_0_rm_translator_avalon_universal_master_0_waitrequest),   //                          .waitrequest
+		.uav_readdatavalid      (ared_cc_0_rm_translator_avalon_universal_master_0_readdatavalid), //                          .readdatavalid
+		.uav_byteenable         (ared_cc_0_rm_translator_avalon_universal_master_0_byteenable),    //                          .byteenable
+		.uav_readdata           (ared_cc_0_rm_translator_avalon_universal_master_0_readdata),      //                          .readdata
+		.uav_writedata          (ared_cc_0_rm_translator_avalon_universal_master_0_writedata),     //                          .writedata
+		.uav_lock               (ared_cc_0_rm_translator_avalon_universal_master_0_lock),          //                          .lock
+		.uav_debugaccess        (ared_cc_0_rm_translator_avalon_universal_master_0_debugaccess),   //                          .debugaccess
+		.uav_response           (ared_cc_0_rm_translator_avalon_universal_master_0_response),      //                          .response
+		.av_address             (ared_cc_0_rm_address),                                            //      avalon_anti_master_0.address
+		.av_waitrequest         (ared_cc_0_rm_waitrequest),                                        //                          .waitrequest
+		.av_read                (ared_cc_0_rm_read),                                               //                          .read
+		.av_readdata            (ared_cc_0_rm_readdata),                                           //                          .readdata
+		.av_response            (ared_cc_0_rm_response),                                           //                          .response
 		.av_burstcount          (1'b1),                                                            //               (terminated)
 		.av_byteenable          (4'b1111),                                                         //               (terminated)
 		.av_beginbursttransfer  (1'b0),                                                            //               (terminated)
@@ -1746,25 +1746,25 @@ module nios_128k_extended_mm_interconnect_0 (
 		.AV_WRITE_WAIT_CYCLES           (0),
 		.AV_SETUP_WAIT_CYCLES           (0),
 		.AV_DATA_HOLD_CYCLES            (0)
-	) stab_cc_0_s0_translator (
+	) ared_cc_0_s0_translator (
 		.clk                    (clk_clk_clk),                           //                      clk.clk
 		.reset                  (cpu_reset_reset_bridge_in_reset_reset), //                    reset.reset
-		.uav_address            (stab_cc_0_s0_agent_m0_address),         // avalon_universal_slave_0.address
-		.uav_burstcount         (stab_cc_0_s0_agent_m0_burstcount),      //                         .burstcount
-		.uav_read               (stab_cc_0_s0_agent_m0_read),            //                         .read
-		.uav_write              (stab_cc_0_s0_agent_m0_write),           //                         .write
-		.uav_waitrequest        (stab_cc_0_s0_agent_m0_waitrequest),     //                         .waitrequest
-		.uav_readdatavalid      (stab_cc_0_s0_agent_m0_readdatavalid),   //                         .readdatavalid
-		.uav_byteenable         (stab_cc_0_s0_agent_m0_byteenable),      //                         .byteenable
-		.uav_readdata           (stab_cc_0_s0_agent_m0_readdata),        //                         .readdata
-		.uav_writedata          (stab_cc_0_s0_agent_m0_writedata),       //                         .writedata
-		.uav_lock               (stab_cc_0_s0_agent_m0_lock),            //                         .lock
-		.uav_debugaccess        (stab_cc_0_s0_agent_m0_debugaccess),     //                         .debugaccess
-		.av_address             (STAB_CC_0_s0_address),                  //      avalon_anti_slave_0.address
-		.av_write               (STAB_CC_0_s0_write),                    //                         .write
-		.av_read                (STAB_CC_0_s0_read),                     //                         .read
-		.av_readdata            (STAB_CC_0_s0_readdata),                 //                         .readdata
-		.av_writedata           (STAB_CC_0_s0_writedata),                //                         .writedata
+		.uav_address            (ared_cc_0_s0_agent_m0_address),         // avalon_universal_slave_0.address
+		.uav_burstcount         (ared_cc_0_s0_agent_m0_burstcount),      //                         .burstcount
+		.uav_read               (ared_cc_0_s0_agent_m0_read),            //                         .read
+		.uav_write              (ared_cc_0_s0_agent_m0_write),           //                         .write
+		.uav_waitrequest        (ared_cc_0_s0_agent_m0_waitrequest),     //                         .waitrequest
+		.uav_readdatavalid      (ared_cc_0_s0_agent_m0_readdatavalid),   //                         .readdatavalid
+		.uav_byteenable         (ared_cc_0_s0_agent_m0_byteenable),      //                         .byteenable
+		.uav_readdata           (ared_cc_0_s0_agent_m0_readdata),        //                         .readdata
+		.uav_writedata          (ared_cc_0_s0_agent_m0_writedata),       //                         .writedata
+		.uav_lock               (ared_cc_0_s0_agent_m0_lock),            //                         .lock
+		.uav_debugaccess        (ared_cc_0_s0_agent_m0_debugaccess),     //                         .debugaccess
+		.av_address             (ared_cc_0_s0_address),                  //      avalon_anti_slave_0.address
+		.av_write               (ared_cc_0_s0_write),                    //                         .write
+		.av_read                (ared_cc_0_s0_read),                     //                         .read
+		.av_readdata            (ared_cc_0_s0_readdata),                 //                         .readdata
+		.av_writedata           (ared_cc_0_s0_writedata),                //                         .writedata
 		.av_begintransfer       (),                                      //              (terminated)
 		.av_beginbursttransfer  (),                                      //              (terminated)
 		.av_burstcount          (),                                      //              (terminated)
@@ -2760,32 +2760,32 @@ module nios_128k_extended_mm_interconnect_0 (
 		.ST_CHANNEL_W              (16),
 		.AV_BURSTCOUNT_W           (3),
 		.SUPPRESS_0_BYTEEN_RSP     (0),
-		.ID                        (0),
+		.ID                        (2),
 		.BURSTWRAP_VALUE           (7),
 		.CACHE_VALUE               (0),
 		.SECURE_ACCESS_BIT         (1),
 		.USE_READRESPONSE          (1),
 		.USE_WRITERESPONSE         (0)
-	) stab_cc_0_rm_agent (
+	) ared_cc_0_rm_agent (
 		.clk                   (clk_clk_clk),                                                     //       clk.clk
 		.reset                 (cpu_reset_reset_bridge_in_reset_reset),                           // clk_reset.reset
-		.av_address            (stab_cc_0_rm_translator_avalon_universal_master_0_address),       //        av.address
-		.av_write              (stab_cc_0_rm_translator_avalon_universal_master_0_write),         //          .write
-		.av_read               (stab_cc_0_rm_translator_avalon_universal_master_0_read),          //          .read
-		.av_writedata          (stab_cc_0_rm_translator_avalon_universal_master_0_writedata),     //          .writedata
-		.av_readdata           (stab_cc_0_rm_translator_avalon_universal_master_0_readdata),      //          .readdata
-		.av_waitrequest        (stab_cc_0_rm_translator_avalon_universal_master_0_waitrequest),   //          .waitrequest
-		.av_readdatavalid      (stab_cc_0_rm_translator_avalon_universal_master_0_readdatavalid), //          .readdatavalid
-		.av_byteenable         (stab_cc_0_rm_translator_avalon_universal_master_0_byteenable),    //          .byteenable
-		.av_burstcount         (stab_cc_0_rm_translator_avalon_universal_master_0_burstcount),    //          .burstcount
-		.av_debugaccess        (stab_cc_0_rm_translator_avalon_universal_master_0_debugaccess),   //          .debugaccess
-		.av_lock               (stab_cc_0_rm_translator_avalon_universal_master_0_lock),          //          .lock
-		.av_response           (stab_cc_0_rm_translator_avalon_universal_master_0_response),      //          .response
-		.cp_valid              (stab_cc_0_rm_agent_cp_valid),                                     //        cp.valid
-		.cp_data               (stab_cc_0_rm_agent_cp_data),                                      //          .data
-		.cp_startofpacket      (stab_cc_0_rm_agent_cp_startofpacket),                             //          .startofpacket
-		.cp_endofpacket        (stab_cc_0_rm_agent_cp_endofpacket),                               //          .endofpacket
-		.cp_ready              (stab_cc_0_rm_agent_cp_ready),                                     //          .ready
+		.av_address            (ared_cc_0_rm_translator_avalon_universal_master_0_address),       //        av.address
+		.av_write              (ared_cc_0_rm_translator_avalon_universal_master_0_write),         //          .write
+		.av_read               (ared_cc_0_rm_translator_avalon_universal_master_0_read),          //          .read
+		.av_writedata          (ared_cc_0_rm_translator_avalon_universal_master_0_writedata),     //          .writedata
+		.av_readdata           (ared_cc_0_rm_translator_avalon_universal_master_0_readdata),      //          .readdata
+		.av_waitrequest        (ared_cc_0_rm_translator_avalon_universal_master_0_waitrequest),   //          .waitrequest
+		.av_readdatavalid      (ared_cc_0_rm_translator_avalon_universal_master_0_readdatavalid), //          .readdatavalid
+		.av_byteenable         (ared_cc_0_rm_translator_avalon_universal_master_0_byteenable),    //          .byteenable
+		.av_burstcount         (ared_cc_0_rm_translator_avalon_universal_master_0_burstcount),    //          .burstcount
+		.av_debugaccess        (ared_cc_0_rm_translator_avalon_universal_master_0_debugaccess),   //          .debugaccess
+		.av_lock               (ared_cc_0_rm_translator_avalon_universal_master_0_lock),          //          .lock
+		.av_response           (ared_cc_0_rm_translator_avalon_universal_master_0_response),      //          .response
+		.cp_valid              (ared_cc_0_rm_agent_cp_valid),                                     //        cp.valid
+		.cp_data               (ared_cc_0_rm_agent_cp_data),                                      //          .data
+		.cp_startofpacket      (ared_cc_0_rm_agent_cp_startofpacket),                             //          .startofpacket
+		.cp_endofpacket        (ared_cc_0_rm_agent_cp_endofpacket),                               //          .endofpacket
+		.cp_ready              (ared_cc_0_rm_agent_cp_ready),                                     //          .ready
 		.rp_valid              (rsp_mux_002_src_valid),                                           //        rp.valid
 		.rp_data               (rsp_mux_002_src_data),                                            //          .data
 		.rp_channel            (rsp_mux_002_src_channel),                                         //          .channel
@@ -2841,7 +2841,7 @@ module nios_128k_extended_mm_interconnect_0 (
 		.ST_CHANNEL_W              (16),
 		.AV_BURSTCOUNT_W           (3),
 		.SUPPRESS_0_BYTEEN_RSP     (0),
-		.ID                        (1),
+		.ID                        (0),
 		.BURSTWRAP_VALUE           (7),
 		.CACHE_VALUE               (0),
 		.SECURE_ACCESS_BIT         (1),
@@ -2922,7 +2922,7 @@ module nios_128k_extended_mm_interconnect_0 (
 		.ST_CHANNEL_W              (16),
 		.AV_BURSTCOUNT_W           (3),
 		.SUPPRESS_0_BYTEEN_RSP     (0),
-		.ID                        (2),
+		.ID                        (1),
 		.BURSTWRAP_VALUE           (7),
 		.CACHE_VALUE               (0),
 		.SECURE_ACCESS_BIT         (1),
@@ -3370,48 +3370,48 @@ module nios_128k_extended_mm_interconnect_0 (
 		.USE_READRESPONSE          (0),
 		.USE_WRITERESPONSE         (0),
 		.ECC_ENABLE                (0)
-	) stab_cc_0_s0_agent (
+	) ared_cc_0_s0_agent (
 		.clk                     (clk_clk_clk),                                   //             clk.clk
 		.reset                   (cpu_reset_reset_bridge_in_reset_reset),         //       clk_reset.reset
-		.m0_address              (stab_cc_0_s0_agent_m0_address),                 //              m0.address
-		.m0_burstcount           (stab_cc_0_s0_agent_m0_burstcount),              //                .burstcount
-		.m0_byteenable           (stab_cc_0_s0_agent_m0_byteenable),              //                .byteenable
-		.m0_debugaccess          (stab_cc_0_s0_agent_m0_debugaccess),             //                .debugaccess
-		.m0_lock                 (stab_cc_0_s0_agent_m0_lock),                    //                .lock
-		.m0_readdata             (stab_cc_0_s0_agent_m0_readdata),                //                .readdata
-		.m0_readdatavalid        (stab_cc_0_s0_agent_m0_readdatavalid),           //                .readdatavalid
-		.m0_read                 (stab_cc_0_s0_agent_m0_read),                    //                .read
-		.m0_waitrequest          (stab_cc_0_s0_agent_m0_waitrequest),             //                .waitrequest
-		.m0_writedata            (stab_cc_0_s0_agent_m0_writedata),               //                .writedata
-		.m0_write                (stab_cc_0_s0_agent_m0_write),                   //                .write
-		.rp_endofpacket          (stab_cc_0_s0_agent_rp_endofpacket),             //              rp.endofpacket
-		.rp_ready                (stab_cc_0_s0_agent_rp_ready),                   //                .ready
-		.rp_valid                (stab_cc_0_s0_agent_rp_valid),                   //                .valid
-		.rp_data                 (stab_cc_0_s0_agent_rp_data),                    //                .data
-		.rp_startofpacket        (stab_cc_0_s0_agent_rp_startofpacket),           //                .startofpacket
+		.m0_address              (ared_cc_0_s0_agent_m0_address),                 //              m0.address
+		.m0_burstcount           (ared_cc_0_s0_agent_m0_burstcount),              //                .burstcount
+		.m0_byteenable           (ared_cc_0_s0_agent_m0_byteenable),              //                .byteenable
+		.m0_debugaccess          (ared_cc_0_s0_agent_m0_debugaccess),             //                .debugaccess
+		.m0_lock                 (ared_cc_0_s0_agent_m0_lock),                    //                .lock
+		.m0_readdata             (ared_cc_0_s0_agent_m0_readdata),                //                .readdata
+		.m0_readdatavalid        (ared_cc_0_s0_agent_m0_readdatavalid),           //                .readdatavalid
+		.m0_read                 (ared_cc_0_s0_agent_m0_read),                    //                .read
+		.m0_waitrequest          (ared_cc_0_s0_agent_m0_waitrequest),             //                .waitrequest
+		.m0_writedata            (ared_cc_0_s0_agent_m0_writedata),               //                .writedata
+		.m0_write                (ared_cc_0_s0_agent_m0_write),                   //                .write
+		.rp_endofpacket          (ared_cc_0_s0_agent_rp_endofpacket),             //              rp.endofpacket
+		.rp_ready                (ared_cc_0_s0_agent_rp_ready),                   //                .ready
+		.rp_valid                (ared_cc_0_s0_agent_rp_valid),                   //                .valid
+		.rp_data                 (ared_cc_0_s0_agent_rp_data),                    //                .data
+		.rp_startofpacket        (ared_cc_0_s0_agent_rp_startofpacket),           //                .startofpacket
 		.cp_ready                (cmd_mux_003_src_ready),                         //              cp.ready
 		.cp_valid                (cmd_mux_003_src_valid),                         //                .valid
 		.cp_data                 (cmd_mux_003_src_data),                          //                .data
 		.cp_startofpacket        (cmd_mux_003_src_startofpacket),                 //                .startofpacket
 		.cp_endofpacket          (cmd_mux_003_src_endofpacket),                   //                .endofpacket
 		.cp_channel              (cmd_mux_003_src_channel),                       //                .channel
-		.rf_sink_ready           (stab_cc_0_s0_agent_rsp_fifo_out_ready),         //         rf_sink.ready
-		.rf_sink_valid           (stab_cc_0_s0_agent_rsp_fifo_out_valid),         //                .valid
-		.rf_sink_startofpacket   (stab_cc_0_s0_agent_rsp_fifo_out_startofpacket), //                .startofpacket
-		.rf_sink_endofpacket     (stab_cc_0_s0_agent_rsp_fifo_out_endofpacket),   //                .endofpacket
-		.rf_sink_data            (stab_cc_0_s0_agent_rsp_fifo_out_data),          //                .data
-		.rf_source_ready         (stab_cc_0_s0_agent_rf_source_ready),            //       rf_source.ready
-		.rf_source_valid         (stab_cc_0_s0_agent_rf_source_valid),            //                .valid
-		.rf_source_startofpacket (stab_cc_0_s0_agent_rf_source_startofpacket),    //                .startofpacket
-		.rf_source_endofpacket   (stab_cc_0_s0_agent_rf_source_endofpacket),      //                .endofpacket
-		.rf_source_data          (stab_cc_0_s0_agent_rf_source_data),             //                .data
+		.rf_sink_ready           (ared_cc_0_s0_agent_rsp_fifo_out_ready),         //         rf_sink.ready
+		.rf_sink_valid           (ared_cc_0_s0_agent_rsp_fifo_out_valid),         //                .valid
+		.rf_sink_startofpacket   (ared_cc_0_s0_agent_rsp_fifo_out_startofpacket), //                .startofpacket
+		.rf_sink_endofpacket     (ared_cc_0_s0_agent_rsp_fifo_out_endofpacket),   //                .endofpacket
+		.rf_sink_data            (ared_cc_0_s0_agent_rsp_fifo_out_data),          //                .data
+		.rf_source_ready         (ared_cc_0_s0_agent_rf_source_ready),            //       rf_source.ready
+		.rf_source_valid         (ared_cc_0_s0_agent_rf_source_valid),            //                .valid
+		.rf_source_startofpacket (ared_cc_0_s0_agent_rf_source_startofpacket),    //                .startofpacket
+		.rf_source_endofpacket   (ared_cc_0_s0_agent_rf_source_endofpacket),      //                .endofpacket
+		.rf_source_data          (ared_cc_0_s0_agent_rf_source_data),             //                .data
 		.rdata_fifo_sink_ready   (avalon_st_adapter_003_out_0_ready),             // rdata_fifo_sink.ready
 		.rdata_fifo_sink_valid   (avalon_st_adapter_003_out_0_valid),             //                .valid
 		.rdata_fifo_sink_data    (avalon_st_adapter_003_out_0_data),              //                .data
 		.rdata_fifo_sink_error   (avalon_st_adapter_003_out_0_error),             //                .error
-		.rdata_fifo_src_ready    (stab_cc_0_s0_agent_rdata_fifo_src_ready),       //  rdata_fifo_src.ready
-		.rdata_fifo_src_valid    (stab_cc_0_s0_agent_rdata_fifo_src_valid),       //                .valid
-		.rdata_fifo_src_data     (stab_cc_0_s0_agent_rdata_fifo_src_data),        //                .data
+		.rdata_fifo_src_ready    (ared_cc_0_s0_agent_rdata_fifo_src_ready),       //  rdata_fifo_src.ready
+		.rdata_fifo_src_valid    (ared_cc_0_s0_agent_rdata_fifo_src_valid),       //                .valid
+		.rdata_fifo_src_data     (ared_cc_0_s0_agent_rdata_fifo_src_data),        //                .data
 		.m0_response             (2'b00),                                         //     (terminated)
 		.m0_writeresponsevalid   (1'b0)                                           //     (terminated)
 	);
@@ -3429,19 +3429,19 @@ module nios_128k_extended_mm_interconnect_0 (
 		.USE_STORE_FORWARD   (0),
 		.USE_ALMOST_FULL_IF  (0),
 		.USE_ALMOST_EMPTY_IF (0)
-	) stab_cc_0_s0_agent_rsp_fifo (
+	) ared_cc_0_s0_agent_rsp_fifo (
 		.clk               (clk_clk_clk),                                   //       clk.clk
 		.reset             (cpu_reset_reset_bridge_in_reset_reset),         // clk_reset.reset
-		.in_data           (stab_cc_0_s0_agent_rf_source_data),             //        in.data
-		.in_valid          (stab_cc_0_s0_agent_rf_source_valid),            //          .valid
-		.in_ready          (stab_cc_0_s0_agent_rf_source_ready),            //          .ready
-		.in_startofpacket  (stab_cc_0_s0_agent_rf_source_startofpacket),    //          .startofpacket
-		.in_endofpacket    (stab_cc_0_s0_agent_rf_source_endofpacket),      //          .endofpacket
-		.out_data          (stab_cc_0_s0_agent_rsp_fifo_out_data),          //       out.data
-		.out_valid         (stab_cc_0_s0_agent_rsp_fifo_out_valid),         //          .valid
-		.out_ready         (stab_cc_0_s0_agent_rsp_fifo_out_ready),         //          .ready
-		.out_startofpacket (stab_cc_0_s0_agent_rsp_fifo_out_startofpacket), //          .startofpacket
-		.out_endofpacket   (stab_cc_0_s0_agent_rsp_fifo_out_endofpacket),   //          .endofpacket
+		.in_data           (ared_cc_0_s0_agent_rf_source_data),             //        in.data
+		.in_valid          (ared_cc_0_s0_agent_rf_source_valid),            //          .valid
+		.in_ready          (ared_cc_0_s0_agent_rf_source_ready),            //          .ready
+		.in_startofpacket  (ared_cc_0_s0_agent_rf_source_startofpacket),    //          .startofpacket
+		.in_endofpacket    (ared_cc_0_s0_agent_rf_source_endofpacket),      //          .endofpacket
+		.out_data          (ared_cc_0_s0_agent_rsp_fifo_out_data),          //       out.data
+		.out_valid         (ared_cc_0_s0_agent_rsp_fifo_out_valid),         //          .valid
+		.out_ready         (ared_cc_0_s0_agent_rsp_fifo_out_ready),         //          .ready
+		.out_startofpacket (ared_cc_0_s0_agent_rsp_fifo_out_startofpacket), //          .startofpacket
+		.out_endofpacket   (ared_cc_0_s0_agent_rsp_fifo_out_endofpacket),   //          .endofpacket
 		.csr_address       (2'b00),                                         // (terminated)
 		.csr_read          (1'b0),                                          // (terminated)
 		.csr_write         (1'b0),                                          // (terminated)
@@ -4990,11 +4990,11 @@ module nios_128k_extended_mm_interconnect_0 (
 	);
 
 	nios_128k_extended_mm_interconnect_0_router_002 router_002 (
-		.sink_ready         (stab_cc_0_rm_agent_cp_ready),           //      sink.ready
-		.sink_valid         (stab_cc_0_rm_agent_cp_valid),           //          .valid
-		.sink_data          (stab_cc_0_rm_agent_cp_data),            //          .data
-		.sink_startofpacket (stab_cc_0_rm_agent_cp_startofpacket),   //          .startofpacket
-		.sink_endofpacket   (stab_cc_0_rm_agent_cp_endofpacket),     //          .endofpacket
+		.sink_ready         (ared_cc_0_rm_agent_cp_ready),           //      sink.ready
+		.sink_valid         (ared_cc_0_rm_agent_cp_valid),           //          .valid
+		.sink_data          (ared_cc_0_rm_agent_cp_data),            //          .data
+		.sink_startofpacket (ared_cc_0_rm_agent_cp_startofpacket),   //          .startofpacket
+		.sink_endofpacket   (ared_cc_0_rm_agent_cp_endofpacket),     //          .endofpacket
 		.clk                (clk_clk_clk),                           //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready          (router_002_src_ready),                  //       src.ready
@@ -5086,11 +5086,11 @@ module nios_128k_extended_mm_interconnect_0 (
 	);
 
 	nios_128k_extended_mm_interconnect_0_router_005 router_008 (
-		.sink_ready         (stab_cc_0_s0_agent_rp_ready),           //      sink.ready
-		.sink_valid         (stab_cc_0_s0_agent_rp_valid),           //          .valid
-		.sink_data          (stab_cc_0_s0_agent_rp_data),            //          .data
-		.sink_startofpacket (stab_cc_0_s0_agent_rp_startofpacket),   //          .startofpacket
-		.sink_endofpacket   (stab_cc_0_s0_agent_rp_endofpacket),     //          .endofpacket
+		.sink_ready         (ared_cc_0_s0_agent_rp_ready),           //      sink.ready
+		.sink_valid         (ared_cc_0_s0_agent_rp_valid),           //          .valid
+		.sink_data          (ared_cc_0_s0_agent_rp_data),            //          .data
+		.sink_startofpacket (ared_cc_0_s0_agent_rp_startofpacket),   //          .startofpacket
+		.sink_endofpacket   (ared_cc_0_s0_agent_rp_endofpacket),     //          .endofpacket
 		.clk                (clk_clk_clk),                           //       clk.clk
 		.reset              (cpu_reset_reset_bridge_in_reset_reset), // clk_reset.reset
 		.src_ready          (router_008_src_ready),                  //       src.ready
@@ -6366,9 +6366,9 @@ module nios_128k_extended_mm_interconnect_0 (
 	) avalon_st_adapter_003 (
 		.in_clk_0_clk   (clk_clk_clk),                             // in_clk_0.clk
 		.in_rst_0_reset (cpu_reset_reset_bridge_in_reset_reset),   // in_rst_0.reset
-		.in_0_data      (stab_cc_0_s0_agent_rdata_fifo_src_data),  //     in_0.data
-		.in_0_valid     (stab_cc_0_s0_agent_rdata_fifo_src_valid), //         .valid
-		.in_0_ready     (stab_cc_0_s0_agent_rdata_fifo_src_ready), //         .ready
+		.in_0_data      (ared_cc_0_s0_agent_rdata_fifo_src_data),  //     in_0.data
+		.in_0_valid     (ared_cc_0_s0_agent_rdata_fifo_src_valid), //         .valid
+		.in_0_ready     (ared_cc_0_s0_agent_rdata_fifo_src_ready), //         .ready
 		.out_0_data     (avalon_st_adapter_003_out_0_data),        //    out_0.data
 		.out_0_valid    (avalon_st_adapter_003_out_0_valid),       //         .valid
 		.out_0_ready    (avalon_st_adapter_003_out_0_ready),       //         .ready

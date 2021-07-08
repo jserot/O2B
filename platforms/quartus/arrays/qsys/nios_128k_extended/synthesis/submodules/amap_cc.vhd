@@ -41,10 +41,15 @@ architecture rtl of amap_cc is
   signal count: unsigned(31 downto 0);
   signal rdy: std_logic;
   
+  function f(x: unsigned(31 downto 0)) return unsigned is  -- the mapped function (to be adjusted)
+  begin
+    return x+1;
+  end;
+    
 begin
 
   WRITE: process (reset_reset, clock_clk)
-    variable arg, res: unsigned(30 downto 0); -- 31 bits values
+    variable arg, res: unsigned(31 downto 0); 
   begin
     if reset_reset = '1' then
       avm_rm_read <= '0';
@@ -81,8 +86,8 @@ begin
         when WaitRd =>  
           if avm_rm_waitrequest = '0' then -- end of read transfer
             avm_rm_read <= '0';
-            arg := unsigned(avm_rm_readdata(31 downto 1)); -- Get rid of OCaml tag
-            res := arg+to_unsigned(1, 31);  -- TO BE GENERALIZED !
+            arg := unsigned('0' & avm_rm_readdata(31 downto 1)); -- Get rid of OCaml tag
+            res := f(arg);
             avm_wm_writedata <= std_logic_vector(res) & '1'; -- Re-tag value
             avm_wm_address <= std_logic_vector(waddr);
             avm_wm_write <= '1';

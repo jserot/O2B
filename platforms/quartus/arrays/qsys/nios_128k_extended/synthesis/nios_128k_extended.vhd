@@ -23,23 +23,6 @@ entity nios_128k_extended is
 end entity nios_128k_extended;
 
 architecture rtl of nios_128k_extended is
-	component stab_cc is
-		port (
-			avs_s0_address     : in  std_logic_vector(2 downto 0)  := (others => 'X'); -- address
-			avs_s0_write       : in  std_logic                     := 'X';             -- write
-			avs_s0_writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			avs_s0_read        : in  std_logic                     := 'X';             -- read
-			avs_s0_readdata    : out std_logic_vector(31 downto 0);                    -- readdata
-			avm_rm_address     : out std_logic_vector(31 downto 0);                    -- address
-			avm_rm_read        : out std_logic;                                        -- read
-			avm_rm_readdata    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			avm_rm_waitrequest : in  std_logic                     := 'X';             -- waitrequest
-			avm_rm_response    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- response
-			clock_clk          : in  std_logic                     := 'X';             -- clk
-			reset_reset        : in  std_logic                     := 'X'              -- reset
-		);
-	end component stab_cc;
-
 	component amap_cc is
 		port (
 			avs_s0_address     : in  std_logic_vector(2 downto 0)  := (others => 'X'); -- address
@@ -59,6 +42,23 @@ architecture rtl of nios_128k_extended is
 			reset_reset        : in  std_logic                     := 'X'              -- reset
 		);
 	end component amap_cc;
+
+	component ared_cc is
+		port (
+			avs_s0_address     : in  std_logic_vector(2 downto 0)  := (others => 'X'); -- address
+			avs_s0_write       : in  std_logic                     := 'X';             -- write
+			avs_s0_writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			avs_s0_read        : in  std_logic                     := 'X';             -- read
+			avs_s0_readdata    : out std_logic_vector(31 downto 0);                    -- readdata
+			avm_rm_address     : out std_logic_vector(31 downto 0);                    -- address
+			avm_rm_read        : out std_logic;                                        -- read
+			avm_rm_readdata    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			avm_rm_waitrequest : in  std_logic                     := 'X';             -- waitrequest
+			avm_rm_response    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- response
+			clock_clk          : in  std_logic                     := 'X';             -- clk
+			reset_reset        : in  std_logic                     := 'X'              -- reset
+		);
+	end component ared_cc;
 
 	component nios_128k_extended_button is
 		port (
@@ -201,6 +201,11 @@ architecture rtl of nios_128k_extended is
 			amap_cc_0_wm_waitrequest                : out std_logic;                                        -- waitrequest
 			amap_cc_0_wm_write                      : in  std_logic                     := 'X';             -- write
 			amap_cc_0_wm_writedata                  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			ared_cc_0_rm_address                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- address
+			ared_cc_0_rm_waitrequest                : out std_logic;                                        -- waitrequest
+			ared_cc_0_rm_read                       : in  std_logic                     := 'X';             -- read
+			ared_cc_0_rm_readdata                   : out std_logic_vector(31 downto 0);                    -- readdata
+			ared_cc_0_rm_response                   : out std_logic_vector(1 downto 0);                     -- response
 			cpu_data_master_address                 : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
 			cpu_data_master_waitrequest             : out std_logic;                                        -- waitrequest
 			cpu_data_master_byteenable              : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
@@ -213,16 +218,16 @@ architecture rtl of nios_128k_extended is
 			cpu_instruction_master_waitrequest      : out std_logic;                                        -- waitrequest
 			cpu_instruction_master_read             : in  std_logic                     := 'X';             -- read
 			cpu_instruction_master_readdata         : out std_logic_vector(31 downto 0);                    -- readdata
-			STAB_CC_0_rm_address                    : in  std_logic_vector(31 downto 0) := (others => 'X'); -- address
-			STAB_CC_0_rm_waitrequest                : out std_logic;                                        -- waitrequest
-			STAB_CC_0_rm_read                       : in  std_logic                     := 'X';             -- read
-			STAB_CC_0_rm_readdata                   : out std_logic_vector(31 downto 0);                    -- readdata
-			STAB_CC_0_rm_response                   : out std_logic_vector(1 downto 0);                     -- response
 			amap_cc_0_s0_address                    : out std_logic_vector(2 downto 0);                     -- address
 			amap_cc_0_s0_write                      : out std_logic;                                        -- write
 			amap_cc_0_s0_read                       : out std_logic;                                        -- read
 			amap_cc_0_s0_readdata                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			amap_cc_0_s0_writedata                  : out std_logic_vector(31 downto 0);                    -- writedata
+			ared_cc_0_s0_address                    : out std_logic_vector(2 downto 0);                     -- address
+			ared_cc_0_s0_write                      : out std_logic;                                        -- write
+			ared_cc_0_s0_read                       : out std_logic;                                        -- read
+			ared_cc_0_s0_readdata                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			ared_cc_0_s0_writedata                  : out std_logic_vector(31 downto 0);                    -- writedata
 			button_s1_address                       : out std_logic_vector(1 downto 0);                     -- address
 			button_s1_readdata                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			cpu_debug_mem_slave_address             : out std_logic_vector(8 downto 0);                     -- address
@@ -282,11 +287,6 @@ architecture rtl of nios_128k_extended is
 			onchip_memory_s1_byteenable             : out std_logic_vector(3 downto 0);                     -- byteenable
 			onchip_memory_s1_chipselect             : out std_logic;                                        -- chipselect
 			onchip_memory_s1_clken                  : out std_logic;                                        -- clken
-			STAB_CC_0_s0_address                    : out std_logic_vector(2 downto 0);                     -- address
-			STAB_CC_0_s0_write                      : out std_logic;                                        -- write
-			STAB_CC_0_s0_read                       : out std_logic;                                        -- read
-			STAB_CC_0_s0_readdata                   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
-			STAB_CC_0_s0_writedata                  : out std_logic_vector(31 downto 0);                    -- writedata
 			switch_s1_address                       : out std_logic_vector(1 downto 0);                     -- address
 			switch_s1_readdata                      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			sys_id_control_slave_address            : out std_logic_vector(0 downto 0);                     -- address
@@ -387,11 +387,11 @@ architecture rtl of nios_128k_extended is
 	signal cpu_instruction_master_waitrequest                            : std_logic;                     -- mm_interconnect_0:cpu_instruction_master_waitrequest -> cpu:i_waitrequest
 	signal cpu_instruction_master_address                                : std_logic_vector(17 downto 0); -- cpu:i_address -> mm_interconnect_0:cpu_instruction_master_address
 	signal cpu_instruction_master_read                                   : std_logic;                     -- cpu:i_read -> mm_interconnect_0:cpu_instruction_master_read
-	signal stab_cc_0_rm_readdata                                         : std_logic_vector(31 downto 0); -- mm_interconnect_0:STAB_CC_0_rm_readdata -> STAB_CC_0:avm_rm_readdata
-	signal stab_cc_0_rm_waitrequest                                      : std_logic;                     -- mm_interconnect_0:STAB_CC_0_rm_waitrequest -> STAB_CC_0:avm_rm_waitrequest
-	signal stab_cc_0_rm_address                                          : std_logic_vector(31 downto 0); -- STAB_CC_0:avm_rm_address -> mm_interconnect_0:STAB_CC_0_rm_address
-	signal stab_cc_0_rm_read                                             : std_logic;                     -- STAB_CC_0:avm_rm_read -> mm_interconnect_0:STAB_CC_0_rm_read
-	signal stab_cc_0_rm_response                                         : std_logic_vector(1 downto 0);  -- mm_interconnect_0:STAB_CC_0_rm_response -> STAB_CC_0:avm_rm_response
+	signal ared_cc_0_rm_readdata                                         : std_logic_vector(31 downto 0); -- mm_interconnect_0:ared_cc_0_rm_readdata -> ared_cc_0:avm_rm_readdata
+	signal ared_cc_0_rm_waitrequest                                      : std_logic;                     -- mm_interconnect_0:ared_cc_0_rm_waitrequest -> ared_cc_0:avm_rm_waitrequest
+	signal ared_cc_0_rm_address                                          : std_logic_vector(31 downto 0); -- ared_cc_0:avm_rm_address -> mm_interconnect_0:ared_cc_0_rm_address
+	signal ared_cc_0_rm_read                                             : std_logic;                     -- ared_cc_0:avm_rm_read -> mm_interconnect_0:ared_cc_0_rm_read
+	signal ared_cc_0_rm_response                                         : std_logic_vector(1 downto 0);  -- mm_interconnect_0:ared_cc_0_rm_response -> ared_cc_0:avm_rm_response
 	signal amap_cc_0_rm_readdata                                         : std_logic_vector(31 downto 0); -- mm_interconnect_0:amap_cc_0_rm_readdata -> amap_cc_0:avm_rm_readdata
 	signal amap_cc_0_rm_waitrequest                                      : std_logic;                     -- mm_interconnect_0:amap_cc_0_rm_waitrequest -> amap_cc_0:avm_rm_waitrequest
 	signal amap_cc_0_rm_address                                          : std_logic_vector(31 downto 0); -- amap_cc_0:avm_rm_address -> mm_interconnect_0:amap_cc_0_rm_address
@@ -417,11 +417,11 @@ architecture rtl of nios_128k_extended is
 	signal mm_interconnect_0_cpu_debug_mem_slave_byteenable              : std_logic_vector(3 downto 0);  -- mm_interconnect_0:cpu_debug_mem_slave_byteenable -> cpu:debug_mem_slave_byteenable
 	signal mm_interconnect_0_cpu_debug_mem_slave_write                   : std_logic;                     -- mm_interconnect_0:cpu_debug_mem_slave_write -> cpu:debug_mem_slave_write
 	signal mm_interconnect_0_cpu_debug_mem_slave_writedata               : std_logic_vector(31 downto 0); -- mm_interconnect_0:cpu_debug_mem_slave_writedata -> cpu:debug_mem_slave_writedata
-	signal mm_interconnect_0_stab_cc_0_s0_readdata                       : std_logic_vector(31 downto 0); -- STAB_CC_0:avs_s0_readdata -> mm_interconnect_0:STAB_CC_0_s0_readdata
-	signal mm_interconnect_0_stab_cc_0_s0_address                        : std_logic_vector(2 downto 0);  -- mm_interconnect_0:STAB_CC_0_s0_address -> STAB_CC_0:avs_s0_address
-	signal mm_interconnect_0_stab_cc_0_s0_read                           : std_logic;                     -- mm_interconnect_0:STAB_CC_0_s0_read -> STAB_CC_0:avs_s0_read
-	signal mm_interconnect_0_stab_cc_0_s0_write                          : std_logic;                     -- mm_interconnect_0:STAB_CC_0_s0_write -> STAB_CC_0:avs_s0_write
-	signal mm_interconnect_0_stab_cc_0_s0_writedata                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:STAB_CC_0_s0_writedata -> STAB_CC_0:avs_s0_writedata
+	signal mm_interconnect_0_ared_cc_0_s0_readdata                       : std_logic_vector(31 downto 0); -- ared_cc_0:avs_s0_readdata -> mm_interconnect_0:ared_cc_0_s0_readdata
+	signal mm_interconnect_0_ared_cc_0_s0_address                        : std_logic_vector(2 downto 0);  -- mm_interconnect_0:ared_cc_0_s0_address -> ared_cc_0:avs_s0_address
+	signal mm_interconnect_0_ared_cc_0_s0_read                           : std_logic;                     -- mm_interconnect_0:ared_cc_0_s0_read -> ared_cc_0:avs_s0_read
+	signal mm_interconnect_0_ared_cc_0_s0_write                          : std_logic;                     -- mm_interconnect_0:ared_cc_0_s0_write -> ared_cc_0:avs_s0_write
+	signal mm_interconnect_0_ared_cc_0_s0_writedata                      : std_logic_vector(31 downto 0); -- mm_interconnect_0:ared_cc_0_s0_writedata -> ared_cc_0:avs_s0_writedata
 	signal mm_interconnect_0_amap_cc_0_s0_readdata                       : std_logic_vector(31 downto 0); -- amap_cc_0:avs_s0_readdata -> mm_interconnect_0:amap_cc_0_s0_readdata
 	signal mm_interconnect_0_amap_cc_0_s0_address                        : std_logic_vector(2 downto 0);  -- mm_interconnect_0:amap_cc_0_s0_address -> amap_cc_0:avs_s0_address
 	signal mm_interconnect_0_amap_cc_0_s0_read                           : std_logic;                     -- mm_interconnect_0:amap_cc_0_s0_read -> amap_cc_0:avs_s0_read
@@ -481,7 +481,7 @@ architecture rtl of nios_128k_extended is
 	signal irq_mapper_receiver0_irq                                      : std_logic;                     -- jtag_uart:av_irq -> irq_mapper:receiver0_irq
 	signal irq_mapper_receiver1_irq                                      : std_logic;                     -- timer:irq -> irq_mapper:receiver1_irq
 	signal cpu_irq_irq                                                   : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> cpu:irq
-	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [STAB_CC_0:reset_reset, amap_cc_0:reset_reset, irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
+	signal rst_controller_reset_out_reset                                : std_logic;                     -- rst_controller:reset_out -> [amap_cc_0:reset_reset, ared_cc_0:reset_reset, irq_mapper:reset, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
 	signal rst_controller_reset_out_reset_req                            : std_logic;                     -- rst_controller:reset_req -> [cpu:reset_req, onchip_memory:reset_req, rst_translator:reset_req_in]
 	signal reset_reset_n_ports_inv                                       : std_logic;                     -- reset_reset_n:inv -> rst_controller:reset_in0
 	signal mm_interconnect_0_jtag_uart_avalon_jtag_slave_read_ports_inv  : std_logic;                     -- mm_interconnect_0_jtag_uart_avalon_jtag_slave_read:inv -> jtag_uart:av_read_n
@@ -498,22 +498,6 @@ architecture rtl of nios_128k_extended is
 
 begin
 
-	stab_cc_0 : component stab_cc
-		port map (
-			avs_s0_address     => mm_interconnect_0_stab_cc_0_s0_address,   --    s0.address
-			avs_s0_write       => mm_interconnect_0_stab_cc_0_s0_write,     --      .write
-			avs_s0_writedata   => mm_interconnect_0_stab_cc_0_s0_writedata, --      .writedata
-			avs_s0_read        => mm_interconnect_0_stab_cc_0_s0_read,      --      .read
-			avs_s0_readdata    => mm_interconnect_0_stab_cc_0_s0_readdata,  --      .readdata
-			avm_rm_address     => stab_cc_0_rm_address,                     --    rm.address
-			avm_rm_read        => stab_cc_0_rm_read,                        --      .read
-			avm_rm_readdata    => stab_cc_0_rm_readdata,                    --      .readdata
-			avm_rm_waitrequest => stab_cc_0_rm_waitrequest,                 --      .waitrequest
-			avm_rm_response    => stab_cc_0_rm_response,                    --      .response
-			clock_clk          => clk_clk,                                  -- clock.clk
-			reset_reset        => rst_controller_reset_out_reset            -- reset.reset
-		);
-
 	amap_cc_0 : component amap_cc
 		port map (
 			avs_s0_address     => mm_interconnect_0_amap_cc_0_s0_address,   --    s0.address
@@ -529,6 +513,22 @@ begin
 			avm_rm_read        => amap_cc_0_rm_read,                        --      .read
 			avm_rm_readdata    => amap_cc_0_rm_readdata,                    --      .readdata
 			avm_rm_waitrequest => amap_cc_0_rm_waitrequest,                 --      .waitrequest
+			clock_clk          => clk_clk,                                  -- clock.clk
+			reset_reset        => rst_controller_reset_out_reset            -- reset.reset
+		);
+
+	ared_cc_0 : component ared_cc
+		port map (
+			avs_s0_address     => mm_interconnect_0_ared_cc_0_s0_address,   --    s0.address
+			avs_s0_write       => mm_interconnect_0_ared_cc_0_s0_write,     --      .write
+			avs_s0_writedata   => mm_interconnect_0_ared_cc_0_s0_writedata, --      .writedata
+			avs_s0_read        => mm_interconnect_0_ared_cc_0_s0_read,      --      .read
+			avs_s0_readdata    => mm_interconnect_0_ared_cc_0_s0_readdata,  --      .readdata
+			avm_rm_address     => ared_cc_0_rm_address,                     --    rm.address
+			avm_rm_read        => ared_cc_0_rm_read,                        --      .read
+			avm_rm_readdata    => ared_cc_0_rm_readdata,                    --      .readdata
+			avm_rm_waitrequest => ared_cc_0_rm_waitrequest,                 --      .waitrequest
+			avm_rm_response    => ared_cc_0_rm_response,                    --      .response
 			clock_clk          => clk_clk,                                  -- clock.clk
 			reset_reset        => rst_controller_reset_out_reset            -- reset.reset
 		);
@@ -725,6 +725,11 @@ begin
 			amap_cc_0_wm_waitrequest                => amap_cc_0_wm_waitrequest,                                  --                                .waitrequest
 			amap_cc_0_wm_write                      => amap_cc_0_wm_write,                                        --                                .write
 			amap_cc_0_wm_writedata                  => amap_cc_0_wm_writedata,                                    --                                .writedata
+			ared_cc_0_rm_address                    => ared_cc_0_rm_address,                                      --                    ared_cc_0_rm.address
+			ared_cc_0_rm_waitrequest                => ared_cc_0_rm_waitrequest,                                  --                                .waitrequest
+			ared_cc_0_rm_read                       => ared_cc_0_rm_read,                                         --                                .read
+			ared_cc_0_rm_readdata                   => ared_cc_0_rm_readdata,                                     --                                .readdata
+			ared_cc_0_rm_response                   => ared_cc_0_rm_response,                                     --                                .response
 			cpu_data_master_address                 => cpu_data_master_address,                                   --                 cpu_data_master.address
 			cpu_data_master_waitrequest             => cpu_data_master_waitrequest,                               --                                .waitrequest
 			cpu_data_master_byteenable              => cpu_data_master_byteenable,                                --                                .byteenable
@@ -737,16 +742,16 @@ begin
 			cpu_instruction_master_waitrequest      => cpu_instruction_master_waitrequest,                        --                                .waitrequest
 			cpu_instruction_master_read             => cpu_instruction_master_read,                               --                                .read
 			cpu_instruction_master_readdata         => cpu_instruction_master_readdata,                           --                                .readdata
-			STAB_CC_0_rm_address                    => stab_cc_0_rm_address,                                      --                    STAB_CC_0_rm.address
-			STAB_CC_0_rm_waitrequest                => stab_cc_0_rm_waitrequest,                                  --                                .waitrequest
-			STAB_CC_0_rm_read                       => stab_cc_0_rm_read,                                         --                                .read
-			STAB_CC_0_rm_readdata                   => stab_cc_0_rm_readdata,                                     --                                .readdata
-			STAB_CC_0_rm_response                   => stab_cc_0_rm_response,                                     --                                .response
 			amap_cc_0_s0_address                    => mm_interconnect_0_amap_cc_0_s0_address,                    --                    amap_cc_0_s0.address
 			amap_cc_0_s0_write                      => mm_interconnect_0_amap_cc_0_s0_write,                      --                                .write
 			amap_cc_0_s0_read                       => mm_interconnect_0_amap_cc_0_s0_read,                       --                                .read
 			amap_cc_0_s0_readdata                   => mm_interconnect_0_amap_cc_0_s0_readdata,                   --                                .readdata
 			amap_cc_0_s0_writedata                  => mm_interconnect_0_amap_cc_0_s0_writedata,                  --                                .writedata
+			ared_cc_0_s0_address                    => mm_interconnect_0_ared_cc_0_s0_address,                    --                    ared_cc_0_s0.address
+			ared_cc_0_s0_write                      => mm_interconnect_0_ared_cc_0_s0_write,                      --                                .write
+			ared_cc_0_s0_read                       => mm_interconnect_0_ared_cc_0_s0_read,                       --                                .read
+			ared_cc_0_s0_readdata                   => mm_interconnect_0_ared_cc_0_s0_readdata,                   --                                .readdata
+			ared_cc_0_s0_writedata                  => mm_interconnect_0_ared_cc_0_s0_writedata,                  --                                .writedata
 			button_s1_address                       => mm_interconnect_0_button_s1_address,                       --                       button_s1.address
 			button_s1_readdata                      => mm_interconnect_0_button_s1_readdata,                      --                                .readdata
 			cpu_debug_mem_slave_address             => mm_interconnect_0_cpu_debug_mem_slave_address,             --             cpu_debug_mem_slave.address
@@ -806,11 +811,6 @@ begin
 			onchip_memory_s1_byteenable             => mm_interconnect_0_onchip_memory_s1_byteenable,             --                                .byteenable
 			onchip_memory_s1_chipselect             => mm_interconnect_0_onchip_memory_s1_chipselect,             --                                .chipselect
 			onchip_memory_s1_clken                  => mm_interconnect_0_onchip_memory_s1_clken,                  --                                .clken
-			STAB_CC_0_s0_address                    => mm_interconnect_0_stab_cc_0_s0_address,                    --                    STAB_CC_0_s0.address
-			STAB_CC_0_s0_write                      => mm_interconnect_0_stab_cc_0_s0_write,                      --                                .write
-			STAB_CC_0_s0_read                       => mm_interconnect_0_stab_cc_0_s0_read,                       --                                .read
-			STAB_CC_0_s0_readdata                   => mm_interconnect_0_stab_cc_0_s0_readdata,                   --                                .readdata
-			STAB_CC_0_s0_writedata                  => mm_interconnect_0_stab_cc_0_s0_writedata,                  --                                .writedata
 			switch_s1_address                       => mm_interconnect_0_switch_s1_address,                       --                       switch_s1.address
 			switch_s1_readdata                      => mm_interconnect_0_switch_s1_readdata,                      --                                .readdata
 			sys_id_control_slave_address            => mm_interconnect_0_sys_id_control_slave_address,            --            sys_id_control_slave.address

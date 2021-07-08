@@ -1,5 +1,5 @@
 Flow report for top
-Wed Jul  7 10:55:40 2021
+Thu Jul  8 08:38:34 2021
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Standard Edition
 
 
@@ -41,17 +41,17 @@ agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Wed Jul  7 10:55:40 2021           ;
+; Flow Status                        ; Successful - Thu Jul  8 08:38:34 2021           ;
 ; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Standard Edition ;
 ; Revision Name                      ; top                                             ;
 ; Top-level Entity Name              ; top                                             ;
 ; Family                             ; MAX 10                                          ;
 ; Device                             ; 10M50DAF484C6GES                                ;
 ; Timing Models                      ; Preliminary                                     ;
-; Total logic elements               ; 2,783 / 49,760 ( 6 % )                          ;
-;     Total combinational functions  ; 2,505 / 49,760 ( 5 % )                          ;
-;     Dedicated logic registers      ; 1,700 / 49,760 ( 3 % )                          ;
-; Total registers                    ; 1700                                            ;
+; Total logic elements               ; 2,784 / 49,760 ( 6 % )                          ;
+;     Total combinational functions  ; 2,509 / 49,760 ( 5 % )                          ;
+;     Dedicated logic registers      ; 1,701 / 49,760 ( 3 % )                          ;
+; Total registers                    ; 1701                                            ;
 ; Total pins                         ; 71 / 360 ( 20 % )                               ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 1,059,840 / 1,677,312 ( 63 % )                  ;
@@ -67,7 +67,7 @@ agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/07/2021 10:52:46 ;
+; Start date & time ; 07/08/2021 08:35:13 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; top                 ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ agreement for further details.
 +-------------------------------------+------------------------------------------------------------------------+---------------+--------------------+------------+
 ; Assignment Name                     ; Value                                                                  ; Default Value ; Entity Name        ; Section Id ;
 +-------------------------------------+------------------------------------------------------------------------+---------------+--------------------+------------+
-; COMPILER_SIGNATURE_ID               ; 8796759670293.162564796615883                                          ; --            ; --                 ; --         ;
+; COMPILER_SIGNATURE_ID               ; 8796759670293.162572611324075                                          ; --            ; --                 ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                                     ; --            ; --                 ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                                      ; --            ; --                 ; --         ;
 ; MISC_FILE                           ; ../qsys/nios_128k_extended/synthesis/../nios_128k_extended.cmp         ; --            ; --                 ; --         ;
@@ -91,7 +91,7 @@ agreement for further details.
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                                                           ; --            ; --                 ; --         ;
 ; SLD_FILE                            ; ../qsys/nios_128k_extended/synthesis/nios_128k_extended.regmap         ; --            ; --                 ; --         ;
 ; SLD_FILE                            ; ../qsys/nios_128k_extended/synthesis/nios_128k_extended.debuginfo      ; --            ; --                 ; --         ;
-; SLD_INFO                            ; QSYS_NAME nios_128k_extended HAS_SOPCINFO 1 GENERATION_ID 1625647830   ; --            ; nios_128k_extended ; --         ;
+; SLD_INFO                            ; QSYS_NAME nios_128k_extended HAS_SOPCINFO 1 GENERATION_ID 1625725577   ; --            ; nios_128k_extended ; --         ;
 ; SOPCINFO_FILE                       ; ../qsys/nios_128k_extended/synthesis/../../nios_128k_extended.sopcinfo ; --            ; --                 ; --         ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                                     ; --            ; --                 ; --         ;
 +-------------------------------------+------------------------------------------------------------------------+---------------+--------------------+------------+
@@ -102,10 +102,10 @@ agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:26     ; 1.0                     ; 1366 MB             ; 00:01:16                           ;
-; Fitter               ; 00:01:00     ; 1.0                     ; 1504 MB             ; 00:00:57                           ;
+; Analysis & Synthesis ; 00:01:26     ; 1.0                     ; 1364 MB             ; 00:01:16                           ;
+; Fitter               ; 00:01:16     ; 1.0                     ; 1505 MB             ; 00:01:13                           ;
 ; Assembler            ; 00:00:06     ; 1.0                     ; 1032 MB             ; 00:00:05                           ;
-; Total                ; 00:02:32     ; --                      ; --                  ; 00:02:18                           ;
+; Total                ; 00:02:48     ; --                      ; --                  ; 00:02:34                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

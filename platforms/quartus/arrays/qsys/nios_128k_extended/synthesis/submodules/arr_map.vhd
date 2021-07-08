@@ -2,14 +2,14 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity stab_cc is
+entity amap_cc is
 	port (
         -- SLAVE INTERFACE ( <-> Nios )
 		avs_s0_address   : in  std_logic_vector(2 downto 0); 
         -- 000 : control/status register (writing asserts start, reading gets rdy)
-        -- 001 : arg1 register (start address)
-        -- 010 : arg2 register (size)
-        -- 011 : result register
+        -- 001 : arg1 register (src array start address)
+        -- 010 : arg2 register (dst array start address)
+        -- 011 : arg3 register (array size)
         -- other addresses are reserved for other args / results
 		avs_s0_write     : in  std_logic;
 		avs_s0_writedata : in  std_logic_vector(31 downto 0);
@@ -17,35 +17,39 @@ entity stab_cc is
 		avs_s0_readdata  : out std_logic_vector(31 downto 0);                  
 		clock_clk        : in  std_logic;
 		reset_reset      : in  std_logic;
-        -- -- WRITE MASTER INTERFACE ( <-> Shared memory )
-		-- avm_wm_address   : out std_logic_vector(31 downto 0);                 
-		-- avm_wm_write      : out std_logic;                                       
-		-- avm_wm_writedata  : out  std_logic_vector(31 downto 0);
-		-- avm_wm_waitrequest : in  std_logic;
+        -- WRITE MASTER INTERFACE ( <-> Shared memory )
+		avm_wm_address   : out std_logic_vector(31 downto 0);                 
+		avm_wm_write      : out std_logic;                                       
+		avm_wm_writedata  : out  std_logic_vector(31 downto 0);
+		avm_wm_waitrequest : in  std_logic;
         -- avm_wm_response: in std_logic_vector(1 downto 0)
         -- READ MASTER INTERFACE ( <-> Shared memory )
 		avm_rm_address   : out std_logic_vector(31 downto 0);                 
 		avm_rm_read      : out std_logic;                                       
 		avm_rm_readdata  : in  std_logic_vector(31 downto 0);
-		avm_rm_waitrequest : in  std_logic;
-        avm_rm_response: in std_logic_vector(1 downto 0)
+		avm_rm_waitrequest : in  std_logic
+        -- avm_rm_response: in std_logic_vector(1 downto 0)
 	);
 end entity;
 
-architecture rtl of stab_cc is
+architecture rtl of amap_cc is
 
-  type t_state is (Idle, SeqRd, WaitRd);
+  type t_state is (Idle, Rd, WaitRd, WaitWr);
   signal state: t_state;
-  signal address: unsigned(31 downto 0);
+  signal raddr, waddr: unsigned(31 downto 0);
   signal size: unsigned(31 downto 0);
   signal count: unsigned(31 downto 0);
-  signal sum: unsigned(31 downto 0);
   signal rdy: std_logic;
   
+  function f(x: unsigned(31 downto 0)) return unsigned is  -- the mapped function (to be adjusted)
+  begin
+    return x+1;
+  end;
+    
 begin
 
   WRITE: process (reset_reset, clock_clk)
-    variable data: std_logic_vector(31 downto 0);
+    variable arg, res: unsigned(31 downto 0); 
   begin
     if reset_reset = '1' then
       avm_rm_read <= '0';
@@ -59,19 +63,20 @@ begin
               when "000" =>  -- writing CSR asserts starts operation
                 rdy <= '0';
                 count <= to_unsigned(0, 32);
-                sum <= to_unsigned(0, 32);
-                state <= SeqRd;
+                state <= Rd;
               when "001" =>
-                address <= unsigned(avs_s0_writedata);
+                raddr <= unsigned(avs_s0_writedata);
               when "010" =>
+                waddr <= unsigned(avs_s0_writedata);
+              when "011" =>
                 size <= unsigned(avs_s0_writedata);
               when others =>
                 null; 
             end case;
           end if;
-        when SeqRd =>
-          if ( count < size ) then 
-            avm_rm_address <= std_logic_vector(address);
+        when Rd =>
+          if ( count <= size ) then 
+            avm_rm_address <= std_logic_vector(raddr);
             avm_rm_read <= '1';
             state <= WaitRd;
           else -- Done
@@ -81,13 +86,20 @@ begin
         when WaitRd =>  
           if avm_rm_waitrequest = '0' then -- end of read transfer
             avm_rm_read <= '0';
-            data := '0' & avm_rm_readdata(31 downto 1);
-            -- Note: the read value is an OCaml-encoded representation of an int !
-            -- Note : the previous line does the decoding
-            sum <= sum + unsigned(data);
-            address <= address + 4;
+            arg := unsigned('0' & avm_rm_readdata(31 downto 1)); -- Get rid of OCaml tag
+            res := f(arg);
+            avm_wm_writedata <= std_logic_vector(res(30 downto 0)) & '1'; -- Re-tag value
+            avm_wm_address <= std_logic_vector(waddr);
+            avm_wm_write <= '1';
+            state <= WaitWr;
+          end if;
+        when WaitWr =>  
+          if avm_wm_waitrequest = '0' then -- end of write transfer
+            avm_wm_write <= '0';
+            raddr <= raddr + 4;
+            waddr <= waddr + 4;
             count <= count + 1;
-            state <= SeqRd; -- next value
+            state <= Rd;
           end if;
       end case;
     end if;
@@ -99,9 +111,9 @@ begin
       if avs_s0_read = '1' then
         case avs_s0_address is
           when "000" => avs_s0_readdata <= "0000000000000000000000000000000" & rdy; -- when reading CSR, bit 0 is rdy
-          when "001" => avs_s0_readdata <= std_logic_vector(address);
-          when "010" => avs_s0_readdata <= std_logic_vector(size);
-          when "011" => avs_s0_readdata <= std_logic_vector(sum);
+          when "001" => avs_s0_readdata <= std_logic_vector(raddr);
+          when "010" => avs_s0_readdata <= std_logic_vector(waddr);
+          when "011" => avs_s0_readdata <= std_logic_vector(size);
           when others => null; 
         end case;
       end if;

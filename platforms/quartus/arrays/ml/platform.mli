@@ -58,12 +58,16 @@ end
 
 module C : (* Primitives implemented in C *)
 sig
-  external arr_sum : int array -> int = "caml_nios_arr_sum" [@@noalloc]
+  external arr_reduce : int array -> int = "caml_nios_arr_reduce" [@@noalloc]
   external arr_map : int array -> int array -> unit = "caml_nios_arr_map" [@@noalloc]
+  (* The [reduce] and [map] functions are not explicitely given as argument.
+     They will be hardcoded in the implementation. *)
 end
 
-module Rtl : (* Primitives implemented as RT-level custom instruction and component *)
+module Rtl : (* Primitives implemented as RT-level custom instruction or component *)
 sig
-  external arr_sum : int array -> int = "caml_nios_arr_sum_cc" [@@noalloc]
+  external arr_reduce : int array -> int = "caml_nios_arr_reduce_cc" [@@noalloc]
   external arr_map : int array -> int array -> unit = "caml_nios_arr_map_cc" [@@noalloc]
+  (* The [reduce] and [map] functions are not explicitely given as argument.
+     They will be hardcoded in the implementation. *)
 end

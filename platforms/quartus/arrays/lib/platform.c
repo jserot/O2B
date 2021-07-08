@@ -195,38 +195,41 @@ int nios_get_sys_id()
 
 // Extended functions
 
-int nios_arr_sum(int32_t* addr, unsigned size)
+#define REDUCE_INIT 0
+#define REDUCE_FUN(x,y) ((x)+(y))
+
+int nios_arr_reduce(int32_t* src, unsigned size)
 {
-  int sum;
-  for ( sum=0; size>0; size--, addr++ )
-    sum += Int_val(*addr);
-  return sum;
+  int32_t acc;
+  for ( acc=REDUCE_INIT; size>0; size--, src++ )
+    acc = REDUCE_FUN(acc,Int_val(*src));
+  return acc;
 }
 
-int nios_arr_sum_cc(int32_t* addr, unsigned size)
+int nios_arr_reduce_cc(int32_t* src, unsigned size)
 {
   int result;
-  alt_32 *src_addr, *shmem_addr;
-  int cnt;
 
   // INVOKE CUSTOM COMPONENT
-  IOWR(STAB_CC_0_BASE, 1, addr); // Start address
-  IOWR(STAB_CC_0_BASE, 2, size); // Size
+  IOWR(ARED_CC_0_BASE, 1, src); // Start address
+  IOWR(ARED_CC_0_BASE, 2, size); // Size
   
-  IOWR(STAB_CC_0_BASE, 0, 1);  // Writing control/status register starts operation
+  IOWR(ARED_CC_0_BASE, 0, 1);  // Writing control/status register starts operation
 
-  while ( IORD(STAB_CC_0_BASE, 0) == 0 ); // Wait for rdy
+  while ( IORD(ARED_CC_0_BASE, 0) == 0 ); // Wait for rdy
 
-  result = IORD(STAB_CC_0_BASE, 3); // Get Result
+  result = IORD(ARED_CC_0_BASE, 3); // Get Result
 
   return result;
 }
+
+#define MAP_FUN(x) ((x)+1)
 
 int nios_arr_map(int32_t* src, int32_t *dst, unsigned size)
 {
   int i;
   for ( i=0; i<size; i++, src++, dst++ )
-    *dst = Val_int(Int_val(*src)+1); // TO BE GENERALIZED !
+    *dst = Val_int(MAP_FUN(Int_val(*src))); 
   return 0;
 }
 

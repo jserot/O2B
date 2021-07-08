@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'nios_128k_extended'
  * SOPC Builder design path: ../qsys/nios_128k_extended.sopcinfo
  *
- * Generated: Wed Jul 07 10:56:22 CEST 2021
+ * Generated: Thu Jul 08 08:41:51 CEST 2021
  */
 
 /*
@@ -140,21 +140,7 @@
 #define __ALTERA_AVALON_TIMER
 #define __ALTERA_NIOS2_GEN2
 #define __AMAP_CC
-#define __STAB_CC
-
-
-/*
- * STAB_CC_0 configuration
- *
- */
-
-#define ALT_MODULE_CLASS_STAB_CC_0 STAB_CC
-#define STAB_CC_0_BASE 0x21040
-#define STAB_CC_0_IRQ -1
-#define STAB_CC_0_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define STAB_CC_0_NAME "/dev/STAB_CC_0"
-#define STAB_CC_0_SPAN 32
-#define STAB_CC_0_TYPE "STAB_CC"
+#define __ARED_CC
 
 
 /*
@@ -199,12 +185,26 @@
  */
 
 #define ALT_MODULE_CLASS_amap_cc_0 amap_cc
-#define AMAP_CC_0_BASE 0x21000
+#define AMAP_CC_0_BASE 0x21020
 #define AMAP_CC_0_IRQ -1
 #define AMAP_CC_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define AMAP_CC_0_NAME "/dev/amap_cc_0"
 #define AMAP_CC_0_SPAN 32
 #define AMAP_CC_0_TYPE "amap_cc"
+
+
+/*
+ * ared_cc_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_ared_cc_0 ared_cc
+#define ARED_CC_0_BASE 0x21040
+#define ARED_CC_0_IRQ -1
+#define ARED_CC_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define ARED_CC_0_NAME "/dev/ared_cc_0"
+#define ARED_CC_0_SPAN 32
+#define ARED_CC_0_TYPE "ared_cc"
 
 
 /*
@@ -520,7 +520,7 @@
 #define SYS_ID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYS_ID_NAME "/dev/sys_id"
 #define SYS_ID_SPAN 8
-#define SYS_ID_TIMESTAMP 1625647830
+#define SYS_ID_TIMESTAMP 1625725577
 #define SYS_ID_TYPE "altera_avalon_sysid_qsys"
 
 
@@ -531,7 +531,7 @@
 
 #define ALT_MODULE_CLASS_timer altera_avalon_timer
 #define TIMER_ALWAYS_RUN 0
-#define TIMER_BASE 0x21020
+#define TIMER_BASE 0x21000
 #define TIMER_COUNTER_SIZE 32
 #define TIMER_FIXED_PERIOD 0
 #define TIMER_FREQ 50000000

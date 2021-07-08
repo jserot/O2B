@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>7 juil. 2021 11:33:35</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1625650415199</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>8 juil. 2021 08:41:49</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1625726509703</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>./</BspGeneratedLocation>
         <BspSettingsFile>bsp/settings.bsp</BspSettingsFile>
         <SopcDesignFile>../qsys/nios_128k_extended.sopcinfo</SopcDesignFile>
@@ -893,19 +893,19 @@
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>amap_cc_0</slaveDescriptor>
-                <addressRange>0x00021000 - 0x0002101F</addressRange>
-                <addressSpan>32</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
                 <slaveDescriptor>timer</slaveDescriptor>
-                <addressRange>0x00021020 - 0x0002103F</addressRange>
+                <addressRange>0x00021000 - 0x0002101F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>STAB_CC_0</slaveDescriptor>
+                <slaveDescriptor>amap_cc_0</slaveDescriptor>
+                <addressRange>0x00021020 - 0x0002103F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>ared_cc_0</slaveDescriptor>
                 <addressRange>0x00021040 - 0x0002105F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes/>

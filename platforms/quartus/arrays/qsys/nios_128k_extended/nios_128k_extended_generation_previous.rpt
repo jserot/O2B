@@ -1,9 +1,11 @@
 Info: Starting: Create block symbol file (.bsf)
-Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended.qsys --block-symbol-file --output-directory=/media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended --family="MAX 10" --part=10M50DAF484C6GES
+Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended.qsys --block-symbol-file --output-directory=/media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended --family="MAX 10" --part=10M50DAF484C6GES
 Progress: Loading qsys/nios_128k_extended.qsys
 Progress: Reading input file
-Progress: Adding STAB_CC_0 [STAB_CC 1.0]
-Progress: Parameterizing module STAB_CC_0
+Progress: Adding amap_cc_0 [amap_cc 1.0]
+Progress: Parameterizing module amap_cc_0
+Progress: Adding ared_cc_0 [ared_cc 1.0]
+Progress: Parameterizing module ared_cc_0
 Progress: Adding button [altera_avalon_pio 15.1]
 Progress: Parameterizing module button
 Progress: Adding clk [clock_source 15.1]
@@ -46,11 +48,13 @@ Info: qsys-generate succeeded.
 Info: Finished: Create block symbol file (.bsf)
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended.qsys --synthesis=VHDL --output-directory=/media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended/synthesis --family="MAX 10" --part=10M50DAF484C6GES
+Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended.qsys --synthesis=VHDL --output-directory=/media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended/synthesis --family="MAX 10" --part=10M50DAF484C6GES
 Progress: Loading qsys/nios_128k_extended.qsys
 Progress: Reading input file
-Progress: Adding STAB_CC_0 [STAB_CC 1.0]
-Progress: Parameterizing module STAB_CC_0
+Progress: Adding amap_cc_0 [amap_cc 1.0]
+Progress: Parameterizing module amap_cc_0
+Progress: Adding ared_cc_0 [ared_cc 1.0]
+Progress: Parameterizing module ared_cc_0
 Progress: Adding button [altera_avalon_pio 15.1]
 Progress: Parameterizing module button
 Progress: Adding clk [clock_source 15.1]
@@ -90,35 +94,36 @@ Info: nios_128k_extended.switch: PIO inputs are not hardwired in test bench. Und
 Info: nios_128k_extended.sys_id: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
 Info: nios_128k_extended.sys_id: Time stamp will be automatically updated when this component is generated.
 Info: nios_128k_extended: Generating nios_128k_extended "nios_128k_extended" for QUARTUS_SYNTH
-Info: STAB_CC_0: "nios_128k_extended" instantiated STAB_CC "STAB_CC_0"
+Info: amap_cc_0: "nios_128k_extended" instantiated amap_cc "amap_cc_0"
+Info: ared_cc_0: "nios_128k_extended" instantiated ared_cc "ared_cc_0"
 Info: button: Starting RTL generation for module 'nios_128k_extended_button'
-Info: button:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_button --dir=/tmp/alt8815_2448789467405386934.dir/0002_button_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0002_button_gen//nios_128k_extended_button_component_configuration.pl  --do_build_sim=0  ]
+Info: button:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_button --dir=/tmp/alt8816_6862491584560848014.dir/0003_button_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0003_button_gen//nios_128k_extended_button_component_configuration.pl  --do_build_sim=0  ]
 Info: button: Done RTL generation for module 'nios_128k_extended_button'
 Info: button: "nios_128k_extended" instantiated altera_avalon_pio "button"
 Info: cpu: "nios_128k_extended" instantiated altera_nios2_gen2 "cpu"
 Info: hex0: Starting RTL generation for module 'nios_128k_extended_hex0'
-Info: hex0:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_hex0 --dir=/tmp/alt8815_2448789467405386934.dir/0003_hex0_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0003_hex0_gen//nios_128k_extended_hex0_component_configuration.pl  --do_build_sim=0  ]
+Info: hex0:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_hex0 --dir=/tmp/alt8816_6862491584560848014.dir/0004_hex0_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0004_hex0_gen//nios_128k_extended_hex0_component_configuration.pl  --do_build_sim=0  ]
 Info: hex0: Done RTL generation for module 'nios_128k_extended_hex0'
 Info: hex0: "nios_128k_extended" instantiated altera_avalon_pio "hex0"
 Info: jtag_uart: Starting RTL generation for module 'nios_128k_extended_jtag_uart'
-Info: jtag_uart:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=nios_128k_extended_jtag_uart --dir=/tmp/alt8815_2448789467405386934.dir/0004_jtag_uart_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0004_jtag_uart_gen//nios_128k_extended_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=nios_128k_extended_jtag_uart --dir=/tmp/alt8816_6862491584560848014.dir/0005_jtag_uart_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0005_jtag_uart_gen//nios_128k_extended_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart: Done RTL generation for module 'nios_128k_extended_jtag_uart'
 Info: jtag_uart: "nios_128k_extended" instantiated altera_avalon_jtag_uart "jtag_uart"
 Info: led: Starting RTL generation for module 'nios_128k_extended_led'
-Info: led:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_led --dir=/tmp/alt8815_2448789467405386934.dir/0005_led_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0005_led_gen//nios_128k_extended_led_component_configuration.pl  --do_build_sim=0  ]
+Info: led:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_led --dir=/tmp/alt8816_6862491584560848014.dir/0006_led_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0006_led_gen//nios_128k_extended_led_component_configuration.pl  --do_build_sim=0  ]
 Info: led: Done RTL generation for module 'nios_128k_extended_led'
 Info: led: "nios_128k_extended" instantiated altera_avalon_pio "led"
 Info: onchip_memory: Starting RTL generation for module 'nios_128k_extended_onchip_memory'
-Info: onchip_memory:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=nios_128k_extended_onchip_memory --dir=/tmp/alt8815_2448789467405386934.dir/0006_onchip_memory_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0006_onchip_memory_gen//nios_128k_extended_onchip_memory_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=nios_128k_extended_onchip_memory --dir=/tmp/alt8816_6862491584560848014.dir/0007_onchip_memory_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0007_onchip_memory_gen//nios_128k_extended_onchip_memory_component_configuration.pl  --do_build_sim=0  ]
 Info: onchip_memory: Done RTL generation for module 'nios_128k_extended_onchip_memory'
 Info: onchip_memory: "nios_128k_extended" instantiated altera_avalon_onchip_memory2 "onchip_memory"
 Info: switch: Starting RTL generation for module 'nios_128k_extended_switch'
-Info: switch:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_switch --dir=/tmp/alt8815_2448789467405386934.dir/0007_switch_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0007_switch_gen//nios_128k_extended_switch_component_configuration.pl  --do_build_sim=0  ]
+Info: switch:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64/perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64/perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_128k_extended_switch --dir=/tmp/alt8816_6862491584560848014.dir/0008_switch_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0008_switch_gen//nios_128k_extended_switch_component_configuration.pl  --do_build_sim=0  ]
 Info: switch: Done RTL generation for module 'nios_128k_extended_switch'
 Info: switch: "nios_128k_extended" instantiated altera_avalon_pio "switch"
 Info: sys_id: "nios_128k_extended" instantiated altera_avalon_sysid_qsys "sys_id"
 Info: timer: Starting RTL generation for module 'nios_128k_extended_timer'
-Info: timer:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64//perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64//perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=nios_128k_extended_timer --dir=/tmp/alt8815_2448789467405386934.dir/0009_timer_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8815_2448789467405386934.dir/0009_timer_gen//nios_128k_extended_timer_component_configuration.pl  --do_build_sim=0  ]
+Info: timer:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64//perl/bin/perl -I /home/js/altera/15.1.0/quartus/linux64//perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/js/altera/15.1.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=nios_128k_extended_timer --dir=/tmp/alt8816_6862491584560848014.dir/0010_timer_gen/ --quartus_dir=/home/js/altera/15.1.0/quartus --verilog --config=/tmp/alt8816_6862491584560848014.dir/0010_timer_gen//nios_128k_extended_timer_component_configuration.pl  --do_build_sim=0  ]
 Info: timer: Done RTL generation for module 'nios_128k_extended_timer'
 Info: timer: "nios_128k_extended" instantiated altera_avalon_timer "timer"
 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
@@ -136,20 +141,21 @@ Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_012: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_013: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_014: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_015: Inserting error_adapter: error_adapter_0
 Info: mm_interconnect_0: "nios_128k_extended" instantiated altera_mm_interconnect "mm_interconnect_0"
 Info: irq_mapper: "nios_128k_extended" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "nios_128k_extended" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'nios_128k_extended_cpu_cpu'
-Info: cpu:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64//eperlcmd -I /home/js/altera/15.1.0/quartus/linux64//perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=nios_128k_extended_cpu_cpu --dir=/tmp/alt8815_2448789467405386934.dir/0012_cpu_gen/ --quartus_bindir=/home/js/altera/15.1.0/quartus/linux64/ --verilog --config=/tmp/alt8815_2448789467405386934.dir/0012_cpu_gen//nios_128k_extended_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2021.07.07 09:26:27 (*) Starting Nios II generation
-Info: cpu: # 2021.07.07 09:26:27 (*)   Checking for plaintext license.
-Info: cpu: # 2021.07.07 09:26:36 (*)   Plaintext license not found.
-Info: cpu: # 2021.07.07 09:26:36 (*)   No license required to generate encrypted Nios II/e.
-Info: cpu: # 2021.07.07 09:26:36 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2021.07.07 09:26:36 (*)   Creating all objects for CPU
-Info: cpu: # 2021.07.07 09:26:37 (*)   Generating RTL from CPU objects
-Info: cpu: # 2021.07.07 09:26:37 (*)   Creating plain-text RTL
-Info: cpu: # 2021.07.07 09:26:39 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec /home/js/altera/15.1.0/quartus/linux64//eperlcmd -I /home/js/altera/15.1.0/quartus/linux64//perl/lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/europa -I /home/js/altera/15.1.0/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/15.1.0/quartus/sopc_builder/bin -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/js/altera/15.1.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=nios_128k_extended_cpu_cpu --dir=/tmp/alt8816_6862491584560848014.dir/0013_cpu_gen/ --quartus_bindir=/home/js/altera/15.1.0/quartus/linux64/ --verilog --config=/tmp/alt8816_6862491584560848014.dir/0013_cpu_gen//nios_128k_extended_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2021.07.08 08:06:50 (*) Starting Nios II generation
+Info: cpu: # 2021.07.08 08:06:50 (*)   Checking for plaintext license.
+Info: cpu: # 2021.07.08 08:06:59 (*)   Plaintext license not found.
+Info: cpu: # 2021.07.08 08:06:59 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2021.07.08 08:06:59 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2021.07.08 08:06:59 (*)   Creating all objects for CPU
+Info: cpu: # 2021.07.08 08:07:00 (*)   Generating RTL from CPU objects
+Info: cpu: # 2021.07.08 08:07:00 (*)   Creating plain-text RTL
+Info: cpu: # 2021.07.08 08:07:02 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'nios_128k_extended_cpu_cpu'
 Info: cpu: "cpu" instantiated altera_nios2_gen2_unit "cpu"
 Info: cpu_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "cpu_data_master_translator"
@@ -160,26 +166,26 @@ Info: jtag_uart_avalon_jtag_slave_agent_rsp_fifo: "mm_interconnect_0" instantiat
 Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
 Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
 Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
-Info: router_003: "mm_interconnect_0" instantiated altera_merlin_router "router_003"
 Info: router_005: "mm_interconnect_0" instantiated altera_merlin_router "router_005"
 Info: router_007: "mm_interconnect_0" instantiated altera_merlin_router "router_007"
+Info: router_010: "mm_interconnect_0" instantiated altera_merlin_router "router_010"
 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
 Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
 Info: cmd_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_002"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
 Info: cmd_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_002"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
-Info: cmd_mux_004: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_004"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
-Info: rsp_demux_004: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_004"
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_mux_005: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_005"
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_demux_005: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_005"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_002"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/extended3/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/quartus/arrays/qsys/nios_128k_extended/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
-Info: nios_128k_extended: Done "nios_128k_extended" with 38 modules, 50 files
+Info: nios_128k_extended: Done "nios_128k_extended" with 39 modules, 51 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

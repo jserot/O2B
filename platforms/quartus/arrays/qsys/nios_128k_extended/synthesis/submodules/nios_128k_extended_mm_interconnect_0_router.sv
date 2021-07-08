@@ -222,20 +222,20 @@ module nios_128k_extended_mm_interconnect_0_router
 
     // ( 0x21000 .. 0x21020 )
     if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h21000   ) begin
-            src_channel = 16'b0000000000010000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
+            src_channel = 16'b1000000000000000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 15;
     end
 
     // ( 0x21020 .. 0x21040 )
     if ( {address[RG:PAD3],{PAD3{1'b0}}} == 18'h21020   ) begin
-            src_channel = 16'b1000000000000000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 15;
+            src_channel = 16'b0000000000010000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
     end
 
     // ( 0x21040 .. 0x21060 )
     if ( {address[RG:PAD4],{PAD4{1'b0}}} == 18'h21040   ) begin
             src_channel = 16'b0000000000001000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
     end
 
     // ( 0x21060 .. 0x21070 )

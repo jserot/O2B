@@ -16,6 +16,6 @@ CORE RAM=128k
 HAL library with Small-C lib and reduced drivers
 
 Two custom components:
-- STAB_CC (compute the sum of an array)
-- AMAP_CC (map a (int->int) function over an array)
+- FOLD_CC (to iterate over an array of ints)
+- AMAP_CC (to map a function over an array of ints)
   
