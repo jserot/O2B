@@ -29,7 +29,7 @@ let chrono f =
   r, t2-t1
   
 let () =
-  let _ = Sys.sys_id () in 
+  let _ = System.sys_id () in 
   if Timer.init () < 0 then error "Timer init failed";
   while true do
     let r1, t1 = chrono gcd in

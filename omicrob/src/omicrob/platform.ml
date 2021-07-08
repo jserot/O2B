@@ -5,7 +5,7 @@ let platform_module_name = "platform"
 let compile_ml_to_byte ~ppx_options ~mlopts ~cxxopts ~local ~trace ~verbose ~platform_dir inputs output =
     let libdir = Tools.libdir local in
     let mldir = Tools.filename_concat [ platform_dir; "ml" ] in
-    let bytedir = Tools.filename_concat [ platform_dir; "byterun" ] in
+    let bytedir = Tools.filename_concat [ platform_dir; "c" ] in
     let vars = [ ("CAMLLIB", libdir) ] in
     let cmd = [ Config.ocamlc ] @ default_ocamlc_options @ ppx_options @ [ "-custom" ] @ mlopts in
     let cmd = if trace > 0 then cmd @ [ "-ccopt"; "-DDEBUG=" ^ string_of_int trace ] else cmd in
