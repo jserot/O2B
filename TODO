@@ -1,5 +1,5 @@
-- add "mini" platform
-- rename "extended" as "extops"
 - reorganize platform specific files in platform subdirs (lib,ml,byterun)
+- get rid of bsp compilation warnings
 - rename Platform.Sys module (conflict with stdlb)
+- add "mini" platform
 - add list_upd.vhd CC

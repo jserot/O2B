@@ -1,4 +1,4 @@
-PLATFORMS=basic extended arrays
+PLATFORMS=basic extops arrays
 
 clean:
 	for i in $(PLATFORMS); do (cd $$i; make clean); done
