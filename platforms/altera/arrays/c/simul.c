@@ -86,19 +86,23 @@ int nios_get_sys_id()
 int nios_arr_reduce(int* src, unsigned size)
 {
   printf("nios_arr_reduce(%x,%d)\n", src, size);
+  return 0;
 }
 
 int nios_arr_reduce_cc(int* src, unsigned size)
 {
   printf("nios_arr_reduce_cc(%x,%d)\n", src, size);
+  return 0;
 }
 
 int nios_arr_map(int* src, int* dst, unsigned size)
 {
   printf("nios_arr_map(%x,%x,%d)\n", src, dst, size);
+  return 0;
 }
 
 int nios_arr_map_cc(int* src, int* dst, unsigned size)
 {
   printf("nios_arr_map(%x,%x,%d)\n", src, dst, size);
+  return 0;
 }

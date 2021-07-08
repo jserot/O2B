@@ -2,7 +2,7 @@ open Platform
    
 let size = 1024
          
-let a = Array.init size (fun i -> 1)
+let a = Array.init size (fun _ -> 1)
 
 let arr_sum a = Array.fold_left ( + ) 0 a
                  
@@ -29,7 +29,7 @@ let error msg =
   raise Exit
 
 let () =
-  let _ = Sys.sys_id () in 
+  let _ = System.sys_id () in 
   if Timer.init () < 0 then error "Timer init failed";
   for i=1 to 4 do
     let r1, t1 = chrono arr_sum a in

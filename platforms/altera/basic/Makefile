@@ -9,7 +9,7 @@ BSP_OPTS=--set hal.sys_clk_timer none --set hal.timestamp_timer sys_timer
 
 omicrob:
 	(cd ml; make)
-	(cd byterun; make)
+	(cd c; make)
 
 check:
 ifeq ($(QUARTUS_ROOTDIR),)
@@ -39,7 +39,7 @@ bsp-edit: check
 
 clean:
 	(cd ml; make clean)
-	(cd byterun; make clean)
+	(cd c; make clean)
 	(cd apps; make clean)
 
 clobber: clean
