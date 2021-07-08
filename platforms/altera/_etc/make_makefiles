@@ -5,7 +5,7 @@ source ../../../../../etc/config.sh
 
 if [ -n "$QUARTUS_ROOTDIR" ]; then
 echo "* Generating platform-specific makefile"
-nios2-app-generate-makefile --app-dir . --bsp-dir $PLATFORM_DIR/bsp --set APP_CFLAGS_OPTIMIZATION -Os --set APP_CFLAGS_USER_FLAGS "-std=c11 -I$INCLUDEDIR -I$PLATFORM_DIR/lib -I$PLATFORM_DIR/byterun" --src-files ./main.c
+nios2-app-generate-makefile --app-dir . --bsp-dir $PLATFORM_DIR/bsp --set APP_CFLAGS_OPTIMIZATION -Os --set APP_CFLAGS_USER_FLAGS "-std=c11 -I$INCLUDEDIR -I$PLATFORM_DIR/c -I$PLATFORM_DIR/c/_build" --src-files ./main.c
 mv Makefile Makefile.platform
 echo "* Platform-specicic makefile written to Makefile.platform"
 

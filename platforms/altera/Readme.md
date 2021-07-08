@@ -7,16 +7,20 @@ A _platform_ is a combination of
 - a board (device type + peripherals)
 - a system configuration (Nios CPU type and configuration, memory, interfaces, custom components/instructions, ...)
 - a _board support package_ (BSP)
+- an OCaml/C support library (interface to the OMicroB framework)
 
 The board description ("hardware") is in subdirectory `hw`. 
 The system configuration ("SoPC") is in subdirectory `qsys`. 
 The BSP description is in subdirectory `bsp`.
 The source code of custom components or instructions, when present, is is subdirectory `rtl`.
 
-The interface to the OMicroB framework is located in subdirectories `ml`, `byterun` and `lib`.
-The files `lib/platform.(c.h)}` contain the C API to the platform specific functions.
-The file `byterun/prims/bindings.c` contains the OCaml wrappers to these functions.
+The OCaml/C library is located in subdirectories `ml` and `c`.
+The files `c/platform.(c.h)}` contain the C API to the platform specific functions.
+The file `c/bindings.c` contains the OCaml wrappers to these functions.
+The files `c/simul.{c,h}` contain the corresponding functions for the simulator (*)
 The files `ml/platform.{ml,mli}` describe the OCaml interface to the platform. 
+
+(*) Warning : these functions are mandatory, even if you don't want to simulate the code !
 
 Applications running on the considered platform are located in subdirecty `apps`.
 
@@ -38,9 +42,35 @@ The platforms provided here
 - target a [DE10-Lite](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021)
   board, equiped with a Max10 M50DAF484 FPGA. 
 
-### Configuring hardware
+### Build/edit the Nios2 configuration
 
-To configure the hardware
+This is done using the `QSys` tool.
+
+1. From the platform top directory, type `make sopc-edit` (alternatively, launch `Quartus`, run
+   `QSys` from the `Tools` menu and open the `.qsys` file located in the `qsys` subdirectory)
+3. Edit the system configuration (add components and connexions, ...)
+4. Click on `Generate HDL` 
+
+This will generate a description of the SoPC in file `qsys/platform.sopcinfo` file and of the corresponding
+hardwire files in the `qsys/platform>` subdirectory.
+
+### Building the hardware configuration
+
+1. Type `make hw-build` 
+
+This will generate the bitstream configuration to be uploaded to the FPGA in file `hw/output_file/top.sof`
+
+If the new platform requires changes to the hardware configuration (wiring a button or a LED for
+example), you will have to edit the Quartus project file. For this
+
+2. Type `make hw-edit` or launch `Quartus` and open project `hw/top.qpf`
+2. Check the file containing the SoPC configuration (it should be `../qsys/platform/synthesis/platform.qip`)
+3. Edit file `top.vhd` ... and wire the peripherals as wanted
+4. Save the project and compile it ("Play" button)
+
+### Programming the hardware
+
+To upload the hardware configuration to the FPGA
 
 1. connect the board and check that the corresponding device (USB-Blaster) is recognized and
    registered
@@ -86,26 +116,6 @@ To diagnose / fix the problem
    - [https://ecen3350.rocks/static/usb-blaster.pdf]
    - [https://ubuntuforums.org/showthread.php?t=1441742]
 
-### Editing the Nios2 configuration
-
-This is done using the `QSys` tool.
-
-1. From the platform top directory, type `make sopc-edit` (alternatively, launch `Quartus`, run
-   `QSys` from the `Tools` menu and open the `.qsys` file located in the `qsys` subdirectory)
-3. Edit the system configuration
-4. Click on `Generate HDL` 
-
-This will generate a description of the SoPC in the `.sopcinfo` file and of the corresponding
-hardwire files in the `qsys/<sopc_name>` subdirectory.
-
-### Editing the hardware configuration
-
-1. Either type `make hw-edit` or launch `Quartus` and open project `hw/top.qpf`
-2. Adjust the file containing the SoPC configuration (it should be `../qsys/<sopc_name>/synthesis/<name>.qip`)
-3. Edit file `top.v` to instanciate the correct NIOS model (line 72 : `nios_128k_base u0 (...)` ...
-   ... and wire the peripherals as wanted
-4. Save the project and compile it ("Play" button)
-
 ### Editing and (re)building the BSP (Board Support Package)
 
 If the Nios2 configuration has been changed, the BSP must be rebuilt :
@@ -115,3 +125,11 @@ If the Nios2 configuration has been changed, the BSP must be rebuilt :
 The BSP can also be edited (by selecting specific drivers to reduce memory footprint for ex.) :
 
 - From the platform top directory, type `make bsp-edit`
+
+### (Re)building the OCaml/C support
+
+- From the platform top directory, type `make omicrob` 
+
+You are now ready to write, compile and download OCaml code to be run on the Nios2 processor running
+on the FPGA !
+

@@ -1,5 +1,5 @@
 clean:
-	(cd quartus; make clean)
+	(cd altera; make clean)
 
 clobber:
-	(cd quartus; make clobber)
+	(cd altera; make clobber)

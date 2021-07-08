@@ -1,4 +1,3 @@
-- reorganize platform specific files in platform subdirs (lib,ml,byterun)
 - get rid of bsp compilation warnings
 - add "mini" platform
 - add list_upd.vhd CC
