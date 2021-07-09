@@ -211,6 +211,8 @@ int nios_arr_reduce_cc(int32_t* src, unsigned size)
   int result;
 
   // INVOKE CUSTOM COMPONENT
+  // The code is given in ../rtl/arr_reduce.vhd
+
   IOWR(ARED_CC_0_BASE, 1, src); // Start address
   IOWR(ARED_CC_0_BASE, 2, size); // Size
   
@@ -236,6 +238,8 @@ int nios_arr_map(int32_t* src, int32_t *dst, unsigned size)
 int nios_arr_map_cc(int32_t* src, int32_t *dst, unsigned size)
 {
   // INVOKE CUSTOM COMPONENT
+  // The code is given in ../rtl/arr_map.vhd
+  
   IOWR(AMAP_CC_0_BASE, 1, src); // Start address
   IOWR(AMAP_CC_0_BASE, 2, dst); // Start address
   IOWR(AMAP_CC_0_BASE, 3, size); // Size

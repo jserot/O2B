@@ -1,3 +1,2 @@
 - get rid of bsp compilation warnings
-- add "mini" platform
-- add list_upd.vhd CC
+- add list_sum.vhd CC
