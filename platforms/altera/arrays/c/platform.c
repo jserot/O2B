@@ -200,7 +200,7 @@ int nios_get_sys_id()
 
 int nios_arr_reduce(int32_t* src, unsigned size)
 {
-  int32_t acc;
+  int32_t acc = 0;
   for ( acc=REDUCE_INIT; size>0; size--, src++ )
     acc = REDUCE_FUN(acc,Int_val(*src));
   return acc;

@@ -64,10 +64,14 @@ value caml_nios_get_sys_id(value unit) {
 #endif
 
 value caml_nios_arr_reduce(value a) {
+  alt_printf("** caml_nios_arr_reduce: v=%x\n", (int32_t*)v);
+  inspect_value(v);
   return Val_int(nios_arr_reduce(BLOCK_ADDR(a),Wosize_val(a)));
 }
 
 value caml_nios_arr_reduce_cc(value a) {
+  alt_printf("** caml_nios_arr_reduce_cc: v=%x\n", (int32_t*)v);
+  inspect_value(v);
   return Val_int(nios_arr_reduce_cc(BLOCK_ADDR(a),Wosize_val(a)));
 }
 
