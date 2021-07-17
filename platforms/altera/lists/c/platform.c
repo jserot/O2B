@@ -85,21 +85,19 @@ int nios_list_reduce(uint32_t v)
 
 int nios_list_reduce_cc(uint32_t v)
 {
-  int arg1, arg2, res1, res2;
-
+  // int arg1, arg2, res1, res2;
+  int res;
   // INVOKE CUSTOM COMPONENT
   // The code is given in ../rtl/list_reduce.vhd
-
   IOWR(LRED_CC_0_BASE, 1, ocaml_ram_heap); 
   IOWR(LRED_CC_0_BASE, 2, v); 
   IOWR(LRED_CC_0_BASE, 0, 1);  // Writing control/status register starts operation
   while ( IORD(LRED_CC_0_BASE, 0) == 0 ); // Wait for rdy
-  arg1 = IORD(LRED_CC_0_BASE, 1);
-  arg2 = IORD(LRED_CC_0_BASE, 2);
-  res1 = IORD(LRED_CC_0_BASE, 3);
-  res2 = IORD(LRED_CC_0_BASE, 4);
+  // arg1 = IORD(LRED_CC_0_BASE, 1);
+  // arg2 = IORD(LRED_CC_0_BASE, 2);
   // alt_printf("** nios_list_reduce_cc: arg1=%x\n", arg1);
   // alt_printf("** nios_list_reduce_cc: arg2=%x\n", arg2);
-  // alt_printf("** nios_list_reduce_cc: res=%x/%x\n", res1, res2);
-  return res1;
+  res = IORD(LRED_CC_0_BASE, 3);
+  // alt_printf("** nios_list_reduce_cc: res=%x\n", res);
+  return res;
 }

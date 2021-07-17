@@ -10,8 +10,7 @@ entity lred_cc is
         -- 000 : control/status register (writing asserts start, reading gets rdy)
         -- 001 : arg1 register (Avalon address of the caml heap)
         -- 010 : arg2 register (caml value representing the list)
-        -- 011 : result1 register (final accumulator)
-        -- 100 : result2 register (list length)
+        -- 011 : result register (final accumulator)
         -- other addresses are reserved for other args / results
 		avs_s0_write     : in  std_logic;
 		avs_s0_writedata : in  std_logic_vector(31 downto 0);
@@ -40,7 +39,6 @@ architecture rtl of lred_cc is
   signal state: t_state;
   signal caml_heap_base: unsigned(31 downto 0);
   signal v: std_logic_vector(31 downto 0);
-  signal count: unsigned(31 downto 0);
   signal acc: signed(30 downto 0);
   signal rdy: std_logic;
   
@@ -66,7 +64,6 @@ begin
             case avs_s0_address is
               when "000" =>  -- writing CSR asserts starts operation
                 rdy <= '0';
-                count <= to_unsigned(0, 32);
                 acc <= caml_int_const(0);
                 state <= DecodeValue;
               when "001" =>
@@ -93,7 +90,6 @@ begin
             avm_rm_read <= '0';
             data := caml_decode_int(avm_rm_readdata); -- head value
             acc <= acc + data;
-            count <= count + 1;
             avm_rm_address <= std_logic_vector(blk_addr+4);
             avm_rm_read <= '1';
             state <= GetTail; 
@@ -117,7 +113,6 @@ begin
           when "001" => avs_s0_readdata <= std_logic_vector(caml_heap_base);
           when "010" => avs_s0_readdata <= std_logic_vector(v);
           when "011" => avs_s0_readdata <= std_logic_vector(resize(acc,32));
-          when "100" => avs_s0_readdata <= std_logic_vector(count);
           when others => null; 
         end case;
       end if;

@@ -37,6 +37,8 @@ value caml_nios_list_reduce_cc(value v) {
   return Val_int(nios_list_reduce_cc(v));
 }
 
+// The following functions are for debug only
+
 #ifdef __OCAML__
 #include <stdio.h>
 
