@@ -46,9 +46,9 @@ void print_block (value v, int m) // Taken from "Developing applications with OC
 {
   int size, i;
   margin(m);
-  printf("decoding caml value %x\n", v);
+  printf("decoding caml value %x\n", (unsigned int)v);
   if (Is_long(v))
-    { printf("immediate value (%d)\n", Long_val(v));  return; };
+    { printf("immediate value (%ld)\n", Long_val(v));  return; };
   printf ("memory block: addr=%p size=%d  -  ", BLOCK_ADDR(v), size=Wosize_val(v));
   switch (Tag_val(v))
    {
@@ -89,13 +89,13 @@ void print_block (value v, int m) // For debug only
   margin(m);
   if ( ! Is_block(v))
     { alt_printf("[%x] is immediate value (%x)\n", v, Int_val(v));  return; };
-  blk_addr = Flash_block_val(v);  // TO BE FIXED : this should be Ram_block_val !!
+  blk_addr = Ram_block_val(v); 
   alt_printf("[%x] is memory block: addr=%x, raw content={%x,%x,%x}, size=%x  -  ", v, blk_addr, blk_addr[-1], blk_addr[0], blk_addr[1], size=Wosize_val(v));
   switch (Tag_val(v))
    {
     case Closure_tag :
         alt_printf("closure with %x free variables\n", size-1);
-        margin(m+4); printf("code pointer: %x\n",Codeptr_val(v)) ;
+        margin(m+4); printf("code pointer: %x\n", (unsigned int)(Codeptr_val(v))) ;
         for (i=1;i<size;i++)  print_block(Field(v,i), m+4);
         break;
     case String_tag :

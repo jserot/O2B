@@ -45,13 +45,13 @@ int nios_timer_get_ms()
 
 int nios_list_reduce(value v)
 {
-  printf("nios_list_reduce(%x)\n", v);
+  printf("nios_list_reduce(%x)\n", (unsigned int)v);
   return 0;
 }
 
-int nios_list_reduce_cc(int* src)
+int nios_list_reduce_cc(value v)
 {
-  printf("nios_list_reduce_cc(%x)\n", src);
+  printf("nios_list_reduce_cc(%x)\n", (unsigned int)v);
   return 0;
 }
 
