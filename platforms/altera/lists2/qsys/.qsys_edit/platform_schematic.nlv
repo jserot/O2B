@@ -1,0 +1,19 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst platform.sys_timer -pg 1 -lvl 3 -y 130
+preplace inst platform.onchip_memory -pg 1 -lvl 3 -y 230
+preplace inst platform.cpu -pg 1 -lvl 2 -y 70
+preplace inst platform.clk -pg 1 -lvl 1 -y 90
+preplace inst platform.cpu.cpu -pg 1
+preplace inst platform -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst platform.jtag_uart -pg 1 -lvl 3 -y 30
+preplace inst platform.cpu.reset_bridge -pg 1
+preplace inst platform.cpu.clock_bridge -pg 1
+preplace netloc FAN_OUT<net_container>platform</net_container>(SLAVE)sys_timer.irq,(MASTER)cpu.irq,(SLAVE)jtag_uart.irq) 1 2 1 680
+preplace netloc EXPORT<net_container>platform</net_container>(SLAVE)platform.clk,(SLAVE)clk.clk_in) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>platform</net_container>(MASTER)clk.clk,(SLAVE)cpu.clk,(SLAVE)sys_timer.clk,(SLAVE)jtag_uart.clk,(SLAVE)onchip_memory.clk1) 1 1 2 280 210 720
+preplace netloc INTERCONNECT<net_container>platform</net_container>(SLAVE)cpu.debug_mem_slave,(MASTER)cpu.data_master,(SLAVE)jtag_uart.avalon_jtag_slave,(SLAVE)sys_timer.s1,(SLAVE)onchip_memory.s1,(MASTER)cpu.instruction_master) 1 1 2 300 250 660
+preplace netloc FAN_OUT<net_container>platform</net_container>(MASTER)clk.clk_reset,(SLAVE)onchip_memory.reset1,(SLAVE)sys_timer.reset,(SLAVE)cpu.reset,(SLAVE)jtag_uart.reset) 1 1 2 260 230 700
+preplace netloc EXPORT<net_container>platform</net_container>(SLAVE)clk.clk_in_reset,(SLAVE)platform.reset) 1 0 1 NJ
+levelinfo -pg 1 0 50 910
+levelinfo -hier platform 60 90 420 760 900

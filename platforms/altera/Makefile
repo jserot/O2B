@@ -1,4 +1,4 @@
-PLATFORMS=basic extops arrays mini lists
+PLATFORMS=basic extops arrays mini lists lists2
 
 clean:
 	for i in $(PLATFORMS); do (cd $$i; make clean); done

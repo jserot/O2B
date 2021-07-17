@@ -1,0 +1,16 @@
+
+State Machine - |top|platform:u0|lred_cc:lred_cc_0|state
+Name state.GetTail state.GetHead state.DecodeValue state.Idle 
+state.Idle 0 0 0 0 
+state.DecodeValue 0 0 1 1 
+state.GetHead 0 1 0 1 
+state.GetTail 1 0 0 1 
+
+State Machine - |top|platform:u0|platform_cpu:cpu|platform_cpu_cpu:cpu|platform_cpu_cpu_nios2_oci:the_platform_cpu_cpu_nios2_oci|platform_cpu_cpu_debug_slave_wrapper:the_platform_cpu_cpu_debug_slave_wrapper|platform_cpu_cpu_debug_slave_tck:the_platform_cpu_cpu_debug_slave_tck|DRsize
+Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
+DRsize.000 0 0 0 0 0 0 
+DRsize.001 0 0 0 0 1 1 
+DRsize.010 0 0 0 1 0 1 
+DRsize.011 0 0 1 0 0 1 
+DRsize.100 0 1 0 0 0 1 
+DRsize.101 1 0 0 0 0 1 
