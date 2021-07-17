@@ -5,8 +5,8 @@ let list_make n = (* warning: tail recursive version required here unless stack_
     if i > n then acc else mk (i::acc) (i+1) in
   mk [] 1 
   
+(* let l = [1; 2; 3] *)
 let l = list_make 1000
-(* let l = [1; 2; 3] *) (* Warning : this does not work since [l] is allocated in the Flash heap in this case. TO BE FIXED *)
       
 let list_sum l = List.fold_left ( + ) 0 l  (* OCaml implementation *)
 

@@ -90,7 +90,7 @@ int nios_list_reduce_cc(uint32_t v)
   // INVOKE CUSTOM COMPONENT
   // The code is given in ../rtl/list_reduce.vhd
 
-  IOWR(LRED_CC_0_BASE, 1, 0x30ed8); // OCaml flash or ram heap address (taken from ../apps/x/main.map)
+  IOWR(LRED_CC_0_BASE, 1, 0x2fef0); // OCaml flash or ram heap address (taken from ../apps/x/main.map)
   IOWR(LRED_CC_0_BASE, 2, v); 
   IOWR(LRED_CC_0_BASE, 0, 1);  // Writing control/status register starts operation
   while ( IORD(LRED_CC_0_BASE, 0) == 0 ); // Wait for rdy

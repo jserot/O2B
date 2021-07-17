@@ -26,8 +26,8 @@ let gc               = ref None
 let arch             = ref None
 let no_clean_interp  = ref false
 let no_shortcut_init = ref false
-let no_flash_heap    = ref false
-let no_flash_globals = ref false
+let no_flash_heap    = ref true (* For O2B *)
+let no_flash_globals = ref true  (* For O2B *)
 
 let mlopts           = ref []
 let bc2copts         = ref []
