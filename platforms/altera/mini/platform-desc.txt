@@ -1,8 +1,0 @@
-Device=Max10 10M50DAF484C7G
-Board=DE10-Lite
-Peripherals=
-  1 hi-res interval timer
-  1 jtag-uart
-RAM=128k
-HAL library with Small-C lib and reduced drivers
-  

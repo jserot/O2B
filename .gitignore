@@ -20,4 +20,5 @@ platforms/*/*/apps/*/main.c
 etc/config.*
 src/byterun/nios/
 platforms/*/docs/
+**/_build/
 extra-docs/

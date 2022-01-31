@@ -1,0 +1,11 @@
+Device=Max10 10M50DAF484C7G
+Board=DE10-Lite
+Peripherals=
+  1 hi-res interval timer
+  1 jtag-uart
+  1 PLL (giving 100 MHz sys and sdram clk)
+  1 SDRAM controler
+On chip RAM=128k
+External SDRAM=64 Mo (32 M x 16 bits, 16M x 32 bits)
+HAL library with Small-C lib and reduced drivers
+  
