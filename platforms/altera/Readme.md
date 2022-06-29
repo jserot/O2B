@@ -38,7 +38,7 @@ To use the provided platforms, edit them or build new ones, the Intel *Quartus* 
 - support for the target FPGA device
 
 The platforms provided here 
-- have been developed with [Quartus Prime v 15.1 Lite Edition](https://fpgasoftware.intel.com/15.1/?edition=lite&platform=linux) under LinuxMint 4.15.0.
+- have been developed with [Quartus Prime v 17.1 Lite Edition](https://fpgasoftware.intel.com/15.1/?edition=lite&platform=linux) under LinuxMint 4.15.0.
 - target a [DE10-Lite](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021)
   board, equiped with a Max10 M50DAF484 FPGA. 
 

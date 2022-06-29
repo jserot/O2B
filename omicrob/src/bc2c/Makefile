@@ -8,7 +8,6 @@ bc2c: $(TARGETS)
 
 $(BIN)/bc2c: $(SRCS) config.ml
 	$(OCAMLBUILD) $(FLAGS) main.native
-	mkdir -p $(BIN)
 	cp .build/main.native $@
 
 config.ml: $(ETC)/config.ml

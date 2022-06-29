@@ -2,7 +2,7 @@ include ../../../../etc/config.make
 
 TARGETLIB=libcamlrun.a
 
-OCAML_COPTS=-ccopt -Wall -ccopt -Wno-unused-result -ccopt -Wno-format-truncation -ccopt -D__OCAML__
+OCAML_COPTS=-ccopt -Wall -ccopt -Wno-unused-result -ccopt -D__OCAML__
 
 HEADERS := $(wildcard */*.h)
 

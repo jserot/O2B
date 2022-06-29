@@ -1,3 +1,7 @@
+# v 0.4 (Jun 29, 2022)
+
+- rebased on latest version of OMicroB (supporting OCaml 4.14.0)
+
 # v 0.3 (Jan 31, 2022)
 
 - added platform altera/dram, giving access to the external 64Mb DRAM on the DE10-Lite board
