@@ -50,3 +50,42 @@ struct
     external get_us : unit -> int = "caml_nios_timer_get_us" [@@noalloc]
     external get_ms : unit -> int = "caml_nios_timer_get_ms" [@@noalloc]
 end
+
+module Ssd =
+struct 
+
+  let size = 6
+
+  external display_char : int -> char -> unit = "caml_nios_ssd_display_char" [@@noalloc]
+
+  let resize n s =
+      let l = String.length s in
+      if l < n then s ^ String.make (n-l) ' '
+      else if l > n then String.sub s 0 n
+      else s
+
+  let display_string s = 
+    s |> resize size |> String.iteri (fun i c -> display_char (size-i-1) c)
+
+  let display_int n = n |> string_of_int |> display_string
+
+end
+
+module Led =
+struct
+  let size = 10
+  external set : int -> bool -> unit = "caml_nios_led_set" [@@noalloc]
+end
+
+module Switch =
+struct
+  let size = 10
+  external get : int -> bool = "caml_nios_switch_get" [@@noalloc]
+end
+
+module Button =
+struct
+  let size = 2
+  external get : int -> bool = "caml_nios_button_get" [@@noalloc]
+end
+

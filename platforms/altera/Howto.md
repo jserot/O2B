@@ -13,7 +13,7 @@
 - from platform root dir : `make hw` 
 
 4. Rebuild the BSP files
-- from platform root dir : `make sopc-files` (this will required because the `.sopcinfo` file has
+- from platform root dir : `make bsp-files` (this will required because the `.sopcinfo` file has
   been updated)
 
 5. Rebuild the `omicrob` support (required after cloning or if the new platform introduces new ext
@@ -21,5 +21,5 @@
 - from platform root dir : `make omicrob` 
 
 6. Rebuild and launch the softare
-- from `./apps/<xxx>` : `make-makefiles; make build`
+- from `./apps/<xxx>` : `make_makefiles; make build`
 - from `./apps/<xxx>` : `make run`

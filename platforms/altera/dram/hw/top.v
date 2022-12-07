@@ -9,18 +9,18 @@ module top(
       input    [ 1: 0]   KEY,
 
       // ///////// SW /////////
-      // input    [ 9: 0]   SW,
+      input    [ 9: 0]   SW,
 
       // ///////// LEDR /////////
       output   [ 9: 0]   LEDR,
 
       // ///////// HEX /////////
-      // output   [ 7: 0]   HEX0,
-      // output   [ 7: 0]   HEX1,
-      // output   [ 7: 0]   HEX2,
-      // output   [ 7: 0]   HEX3,
-      // output   [ 7: 0]   HEX4,
-      // output   [ 7: 0]   HEX5,
+      output   [ 7: 0]   HEX0,
+      output   [ 7: 0]   HEX1,
+      output   [ 7: 0]   HEX2,
+      output   [ 7: 0]   HEX3,
+      output   [ 7: 0]   HEX4,
+      output   [ 7: 0]   HEX5,
 
       // ///////// SDRAM /////////
       output             DRAM_CLK,
@@ -68,6 +68,15 @@ platform u0 (
         .altpll_0_locked_conduit_export    (),    
         .clk_clk                           (MAX10_CLK1_50),                           
         .reset_reset_n                     (1'b1),
+		.led_external_connection_export (LEDR),
+		.button_external_connection_export (KEY[1:0]), 
+		.switch_external_connection_export (SW[9:0]),
+		.hex0_external_connection_export (HEX0),
+		.hex1_external_connection_export (HEX1),
+		.hex2_external_connection_export (HEX2),
+		.hex3_external_connection_export (HEX3),
+		.hex4_external_connection_export (HEX4),
+		.hex5_external_connection_export (HEX5), 
         .sdram_wire_addr(DRAM_ADDR),                
 		.sdram_wire_ba(DRAM_BA),                  
 		.sdram_wire_cas_n(DRAM_CAS_N),               
@@ -80,6 +89,6 @@ platform u0 (
 		.sdram_clk_clk(DRAM_CLK)
 	 );
 
-	assign LEDR[0] = KEY[1];
+	// assign LEDR[0] = KEY[1];
 
 endmodule

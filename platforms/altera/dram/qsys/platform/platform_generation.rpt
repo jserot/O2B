@@ -1,73 +1,100 @@
-Info: Starting: Create block symbol file (.bsf)
-Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform.qsys --block-symbol-file --output-directory=/media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform --family="MAX 10" --part=10M50DAF484C6GES
-Progress: Loading qsys/platform.qsys
-Progress: Reading input file
-Progress: Adding altpll_0 [altpll 17.1]
-Progress: Parameterizing module altpll_0
-Progress: Adding clk [clock_source 17.1]
-Progress: Parameterizing module clk
-Progress: Adding cpu [altera_nios2_gen2 17.1]
-Progress: Parameterizing module cpu
-Progress: Adding jtag_uart [altera_avalon_jtag_uart 17.1]
-Progress: Parameterizing module jtag_uart
-Progress: Adding onchip_memory [altera_avalon_onchip_memory2 17.1]
-Progress: Parameterizing module onchip_memory
-Progress: Adding sdram [altera_avalon_new_sdram_controller 17.1]
-Progress: Parameterizing module sdram
-Progress: Adding sys_timer [altera_avalon_timer 17.1]
-Progress: Parameterizing module sys_timer
-Progress: Building connections
-Progress: Parameterizing connections
-Progress: Validating
-Progress: Done reading input file
-Info: platform.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
-Info: platform.sdram: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
-Info: qsys-generate succeeded.
-Info: Finished: Create block symbol file (.bsf)
-Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform.qsys --synthesis=VERILOG --output-directory=/media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis --family="MAX 10" --part=10M50DAF484C6GES
+Info: qsys-generate /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform.qsys --synthesis=VHDL --output-directory=/media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis --family="MAX 10" --part=10M50DAF484C6GES
 Progress: Loading qsys/platform.qsys
 Progress: Reading input file
 Progress: Adding altpll_0 [altpll 17.1]
 Progress: Parameterizing module altpll_0
+Progress: Adding button [altera_avalon_pio 17.1]
+Progress: Parameterizing module button
 Progress: Adding clk [clock_source 17.1]
 Progress: Parameterizing module clk
 Progress: Adding cpu [altera_nios2_gen2 17.1]
 Progress: Parameterizing module cpu
+Progress: Adding hex0 [altera_avalon_pio 17.1]
+Progress: Parameterizing module hex0
+Progress: Adding hex1 [altera_avalon_pio 17.1]
+Progress: Parameterizing module hex1
+Progress: Adding hex2 [altera_avalon_pio 17.1]
+Progress: Parameterizing module hex2
+Progress: Adding hex3 [altera_avalon_pio 17.1]
+Progress: Parameterizing module hex3
+Progress: Adding hex4 [altera_avalon_pio 17.1]
+Progress: Parameterizing module hex4
+Progress: Adding hex5 [altera_avalon_pio 17.1]
+Progress: Parameterizing module hex5
 Progress: Adding jtag_uart [altera_avalon_jtag_uart 17.1]
 Progress: Parameterizing module jtag_uart
+Progress: Adding led [altera_avalon_pio 17.1]
+Progress: Parameterizing module led
 Progress: Adding onchip_memory [altera_avalon_onchip_memory2 17.1]
 Progress: Parameterizing module onchip_memory
 Progress: Adding sdram [altera_avalon_new_sdram_controller 17.1]
 Progress: Parameterizing module sdram
+Progress: Adding switch [altera_avalon_pio 17.1]
+Progress: Parameterizing module switch
 Progress: Adding sys_timer [altera_avalon_timer 17.1]
 Progress: Parameterizing module sys_timer
 Progress: Building connections
 Progress: Parameterizing connections
 Progress: Validating
 Progress: Done reading input file
+Info: platform.button: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
 Info: platform.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
 Info: platform.sdram: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: platform.switch: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
 Info: platform: Generating platform "platform" for QUARTUS_SYNTH
 Info: Inserting clock-crossing logic between cmd_demux.src2 and cmd_mux_002.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src6 and cmd_mux_006.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src7 and cmd_mux_007.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src8 and cmd_mux_008.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src9 and cmd_mux_009.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src10 and cmd_mux_010.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src11 and cmd_mux_011.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src12 and cmd_mux_012.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src13 and cmd_mux_013.sink0
+Info: Inserting clock-crossing logic between cmd_demux.src14 and cmd_mux_014.sink0
 Info: Inserting clock-crossing logic between rsp_demux_002.src0 and rsp_mux.sink2
+Info: Inserting clock-crossing logic between rsp_demux_006.src0 and rsp_mux.sink6
+Info: Inserting clock-crossing logic between rsp_demux_007.src0 and rsp_mux.sink7
+Info: Inserting clock-crossing logic between rsp_demux_008.src0 and rsp_mux.sink8
+Info: Inserting clock-crossing logic between rsp_demux_009.src0 and rsp_mux.sink9
+Info: Inserting clock-crossing logic between rsp_demux_010.src0 and rsp_mux.sink10
+Info: Inserting clock-crossing logic between rsp_demux_011.src0 and rsp_mux.sink11
+Info: Inserting clock-crossing logic between rsp_demux_012.src0 and rsp_mux.sink12
+Info: Inserting clock-crossing logic between rsp_demux_013.src0 and rsp_mux.sink13
+Info: Inserting clock-crossing logic between rsp_demux_014.src0 and rsp_mux.sink14
 Info: altpll_0: "platform" instantiated altpll "altpll_0"
+Info: button: Starting RTL generation for module 'platform_button'
+Info: button:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=platform_button --dir=/tmp/alt9333_6722637901382392879.dir/0004_button_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0004_button_gen//platform_button_component_configuration.pl  --do_build_sim=0  ]
+Info: button: Done RTL generation for module 'platform_button'
+Info: button: "platform" instantiated altera_avalon_pio "button"
 Info: cpu: "platform" instantiated altera_nios2_gen2 "cpu"
+Info: hex0: Starting RTL generation for module 'platform_hex0'
+Info: hex0:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=platform_hex0 --dir=/tmp/alt9333_6722637901382392879.dir/0005_hex0_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0005_hex0_gen//platform_hex0_component_configuration.pl  --do_build_sim=0  ]
+Info: hex0: Done RTL generation for module 'platform_hex0'
+Info: hex0: "platform" instantiated altera_avalon_pio "hex0"
 Info: jtag_uart: Starting RTL generation for module 'platform_jtag_uart'
-Info: jtag_uart:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=platform_jtag_uart --dir=/tmp/alt9023_1728014822232365893.dir/0004_jtag_uart_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9023_1728014822232365893.dir/0004_jtag_uart_gen//platform_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=platform_jtag_uart --dir=/tmp/alt9333_6722637901382392879.dir/0006_jtag_uart_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0006_jtag_uart_gen//platform_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
 Info: jtag_uart: Done RTL generation for module 'platform_jtag_uart'
 Info: jtag_uart: "platform" instantiated altera_avalon_jtag_uart "jtag_uart"
+Info: led: Starting RTL generation for module 'platform_led'
+Info: led:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=platform_led --dir=/tmp/alt9333_6722637901382392879.dir/0007_led_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0007_led_gen//platform_led_component_configuration.pl  --do_build_sim=0  ]
+Info: led: Done RTL generation for module 'platform_led'
+Info: led: "platform" instantiated altera_avalon_pio "led"
 Info: onchip_memory: Starting RTL generation for module 'platform_onchip_memory'
-Info: onchip_memory:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=platform_onchip_memory --dir=/tmp/alt9023_1728014822232365893.dir/0005_onchip_memory_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9023_1728014822232365893.dir/0005_onchip_memory_gen//platform_onchip_memory_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=platform_onchip_memory --dir=/tmp/alt9333_6722637901382392879.dir/0008_onchip_memory_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0008_onchip_memory_gen//platform_onchip_memory_component_configuration.pl  --do_build_sim=0  ]
 Info: onchip_memory: Done RTL generation for module 'platform_onchip_memory'
 Info: onchip_memory: "platform" instantiated altera_avalon_onchip_memory2 "onchip_memory"
 Info: sdram: Starting RTL generation for module 'platform_sdram'
-Info: sdram:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=platform_sdram --dir=/tmp/alt9023_1728014822232365893.dir/0006_sdram_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9023_1728014822232365893.dir/0006_sdram_gen//platform_sdram_component_configuration.pl  --do_build_sim=0  ]
+Info: sdram:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=platform_sdram --dir=/tmp/alt9333_6722637901382392879.dir/0009_sdram_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0009_sdram_gen//platform_sdram_component_configuration.pl  --do_build_sim=0  ]
 Info: sdram: Done RTL generation for module 'platform_sdram'
 Info: sdram: "platform" instantiated altera_avalon_new_sdram_controller "sdram"
+Info: switch: Starting RTL generation for module 'platform_switch'
+Info: switch:   Generation command is [exec /home/js/altera/17.1/quartus/linux64/perl/bin/perl -I /home/js/altera/17.1/quartus/linux64/perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=platform_switch --dir=/tmp/alt9333_6722637901382392879.dir/0010_switch_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0010_switch_gen//platform_switch_component_configuration.pl  --do_build_sim=0  ]
+Info: switch: Done RTL generation for module 'platform_switch'
+Info: switch: "platform" instantiated altera_avalon_pio "switch"
 Info: sys_timer: Starting RTL generation for module 'platform_sys_timer'
-Info: sys_timer:   Generation command is [exec /home/js/altera/17.1/quartus/linux64//perl/bin/perl -I /home/js/altera/17.1/quartus/linux64//perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=platform_sys_timer --dir=/tmp/alt9023_1728014822232365893.dir/0007_sys_timer_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9023_1728014822232365893.dir/0007_sys_timer_gen//platform_sys_timer_component_configuration.pl  --do_build_sim=0  ]
+Info: sys_timer:   Generation command is [exec /home/js/altera/17.1/quartus/linux64//perl/bin/perl -I /home/js/altera/17.1/quartus/linux64//perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/common -I /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- /home/js/altera/17.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=platform_sys_timer --dir=/tmp/alt9333_6722637901382392879.dir/0011_sys_timer_gen/ --quartus_dir=/home/js/altera/17.1/quartus --verilog --config=/tmp/alt9333_6722637901382392879.dir/0011_sys_timer_gen//platform_sys_timer_component_configuration.pl  --do_build_sim=0  ]
 Info: sys_timer: Done RTL generation for module 'platform_sys_timer'
 Info: sys_timer: "platform" instantiated altera_avalon_timer "sys_timer"
 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
@@ -76,20 +103,29 @@ Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_009: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_010: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_012: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_013: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_014: Inserting error_adapter: error_adapter_0
 Info: mm_interconnect_0: "platform" instantiated altera_mm_interconnect "mm_interconnect_0"
 Info: irq_mapper: "platform" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "platform" instantiated altera_reset_controller "rst_controller"
 Info: cpu: Starting RTL generation for module 'platform_cpu_cpu'
-Info: cpu:   Generation command is [exec /home/js/altera/17.1/quartus/linux64//eperlcmd -I /home/js/altera/17.1/quartus/linux64//perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=platform_cpu_cpu --dir=/tmp/alt9023_1728014822232365893.dir/0010_cpu_gen/ --quartus_bindir=/home/js/altera/17.1/quartus/linux64/ --verilog --config=/tmp/alt9023_1728014822232365893.dir/0010_cpu_gen//platform_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
-Info: cpu: # 2022.01.31 10:56:41 (*) Starting Nios II generation
-Info: cpu: # 2022.01.31 10:56:41 (*)   Checking for plaintext license.
-Info: cpu: # 2022.01.31 10:56:43 (*)   Plaintext license not found.
-Info: cpu: # 2022.01.31 10:56:43 (*)   No license required to generate encrypted Nios II/e.
-Info: cpu: # 2022.01.31 10:56:43 (*)   Elaborating CPU configuration settings
-Info: cpu: # 2022.01.31 10:56:43 (*)   Creating all objects for CPU
-Info: cpu: # 2022.01.31 10:56:45 (*)   Generating RTL from CPU objects
-Info: cpu: # 2022.01.31 10:56:45 (*)   Creating plain-text RTL
-Info: cpu: # 2022.01.31 10:56:46 (*) Done Nios II generation
+Info: cpu:   Generation command is [exec /home/js/altera/17.1/quartus/linux64//eperlcmd -I /home/js/altera/17.1/quartus/linux64//perl/lib -I /home/js/altera/17.1/quartus/sopc_builder/bin/europa -I /home/js/altera/17.1/quartus/sopc_builder/bin/perl_lib -I /home/js/altera/17.1/quartus/sopc_builder/bin -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- /home/js/altera/17.1/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=platform_cpu_cpu --dir=/tmp/alt9333_6722637901382392879.dir/0014_cpu_gen/ --quartus_bindir=/home/js/altera/17.1/quartus/linux64/ --verilog --config=/tmp/alt9333_6722637901382392879.dir/0014_cpu_gen//platform_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2022.12.07 14:58:18 (*) Starting Nios II generation
+Info: cpu: # 2022.12.07 14:58:18 (*)   Checking for plaintext license.
+Info: cpu: # 2022.12.07 14:58:20 (*)   Plaintext license not found.
+Info: cpu: # 2022.12.07 14:58:20 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2022.12.07 14:58:20 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2022.12.07 14:58:20 (*)   Creating all objects for CPU
+Info: cpu: # 2022.12.07 14:58:21 (*)   Generating RTL from CPU objects
+Info: cpu: # 2022.12.07 14:58:21 (*)   Creating plain-text RTL
+Info: cpu: # 2022.12.07 14:58:22 (*) Done Nios II generation
 Info: cpu: Done RTL generation for module 'platform_cpu_cpu'
 Info: cpu: "cpu" instantiated altera_nios2_gen2_unit "cpu"
 Info: cpu_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "cpu_data_master_translator"
@@ -107,22 +143,22 @@ Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "c
 Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
 Info: cmd_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_001"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_002"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: sdram_s1_rsp_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "sdram_s1_rsp_width_adapter"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis/submodules/altera_merlin_address_alignment.sv
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv
 Info: crosser: "mm_interconnect_0" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
-Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/mini6/qsys/platform/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: Reusing file /media/sf_SF2/ml/O2B/platforms/altera/dram/qsys/platform/synthesis/submodules/altera_avalon_st_pipeline_base.v
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: avalon_st_adapter_005: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_005"
 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
 Info: error_adapter_0: "avalon_st_adapter_005" instantiated error_adapter "error_adapter_0"
-Info: platform: Done "platform" with 36 modules, 60 files
+Info: platform: Done "platform" with 40 modules, 66 files
 Info: qsys-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

@@ -1,21 +1,20 @@
 --altsyncram BYTE_SIZE=8 CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" CYCLONEII_M4K_COMPATIBILITY="ON" DEVICE_FAMILY="MAX 10" LOW_POWER_MODE="AUTO" MAXIMUM_DEPTH=32768 NUMWORDS_A=32768 OPERATION_MODE="SINGLE_PORT" OUTDATA_REG_A="UNREGISTERED" RAM_BLOCK_TYPE="AUTO" READ_DURING_WRITE_MODE_MIXED_PORTS="DONT_CARE" WIDTH_A=32 WIDTH_BYTEENA_A=4 WIDTHAD_A=15 address_a byteena_a clock0 clocken0 data_a q_a wren_a CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
---VERSION_BEGIN 15.1 cbx_altera_syncram_nd_impl 2015:10:14:18:59:15:SJ cbx_altsyncram 2015:10:14:18:59:15:SJ cbx_cycloneii 2015:10:14:18:59:15:SJ cbx_lpm_add_sub 2015:10:14:18:59:15:SJ cbx_lpm_compare 2015:10:14:18:59:15:SJ cbx_lpm_decode 2015:10:14:18:59:15:SJ cbx_lpm_mux 2015:10:14:18:59:15:SJ cbx_mgl 2015:10:21:19:02:34:SJ cbx_nadder 2015:10:14:18:59:15:SJ cbx_stratix 2015:10:14:18:59:15:SJ cbx_stratixii 2015:10:14:18:59:15:SJ cbx_stratixiii 2015:10:14:18:59:15:SJ cbx_stratixv 2015:10:14:18:59:15:SJ cbx_util_mgl 2015:10:14:18:59:15:SJ  VERSION_END
+--VERSION_BEGIN 17.1 cbx_altera_syncram_nd_impl 2017:10:19:05:46:40:SJ cbx_altsyncram 2017:10:19:05:46:40:SJ cbx_cycloneii 2017:10:19:05:46:40:SJ cbx_lpm_add_sub 2017:10:19:05:46:40:SJ cbx_lpm_compare 2017:10:19:05:46:40:SJ cbx_lpm_decode 2017:10:19:05:46:40:SJ cbx_lpm_mux 2017:10:19:05:46:40:SJ cbx_mgl 2017:10:19:06:38:12:SJ cbx_nadder 2017:10:19:05:46:40:SJ cbx_stratix 2017:10:19:05:46:40:SJ cbx_stratixii 2017:10:19:05:46:40:SJ cbx_stratixiii 2017:10:19:05:46:40:SJ cbx_stratixv 2017:10:19:05:46:40:SJ cbx_util_mgl 2017:10:19:05:46:40:SJ  VERSION_END
 
 
--- Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
---  Your use of Altera Corporation's design tools, logic functions 
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+--  Your use of Intel Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files from any of the foregoing 
 --  (including device programming or simulation files), and any 
 --  associated documentation or information are expressly subject 
---  to the terms and conditions of the Altera Program License 
---  Subscription Agreement, the Altera Quartus Prime License Agreement,
---  the Altera MegaCore Function License Agreement, or other 
---  applicable license agreement, including, without limitation, 
---  that your use is for the sole purpose of programming logic 
---  devices manufactured by Altera and sold by Altera or its 
---  authorized distributors.  Please refer to the applicable 
---  agreement for further details.
+--  to the terms and conditions of the Intel Program License 
+--  Subscription Agreement, the Intel Quartus Prime License Agreement,
+--  the Intel FPGA IP License Agreement, or other applicable license
+--  agreement, including, without limitation, that your use is for
+--  the sole purpose of programming logic devices manufactured by
+--  Intel and sold by Intel or its authorized distributors.  Please
+--  refer to the applicable agreement for further details.
 
 
 FUNCTION decode_c7a (data[1..0], enable)

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'platform'
  * SOPC Builder design path: ../qsys/platform.sopcinfo
  *
- * Generated: Wed Jan 26 16:31:13 CET 2022
+ * Generated: Wed Dec 07 11:45:37 CET 2022
  */
 
 /*
@@ -211,7 +211,14 @@ SECTIONS
         . = ALIGN(4);
     } > onchip_memory = 0x3a880100 /* NOP instruction (always in big-endian byte ordering) */
 
-    .rodata :
+    /*
+     *
+     * This section's LMA is set to the .text region.
+     * crt0 will copy to this section's specified mapped region virtual memory address (VMA)
+     *
+     */
+
+    .rodata : AT ( LOADADDR (.text) + SIZEOF (.text) )
     {
         PROVIDE (__ram_rodata_start = ABSOLUTE(.));
         . = ALIGN(4);
@@ -230,7 +237,7 @@ SECTIONS
      *
      */
 
-    .rwdata : AT ( LOADADDR (.text) + SIZEOF (.text) )
+    .rwdata : AT ( LOADADDR (.rodata) + SIZEOF (.rodata) )
     {
         PROVIDE (__ram_rwdata_start = ABSOLUTE(.));
         . = ALIGN(4);

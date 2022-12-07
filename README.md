@@ -8,7 +8,7 @@ on Intel/Altera FPGAs)
 
 For compiling the virtual machine :
 
-- OPAM2 + OCaml (>= 4.10) 
+- OPAM2 + OCaml 4.07 
 - obytelib (on OPAM)
 - ocamlclean (on OPAM)
 - ocamlbuild (on OPAM)

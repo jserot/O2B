@@ -13,6 +13,29 @@ char nios_serial_read_char()
   return getchar();
 }
 
+void nios_ssd_display_char(int i, char c)
+{
+  printf("nios_ssd_display_char(%d,%d)\n", i, c);
+}
+
+void nios_led_set(int i, bool b)
+{
+  printf("nios_led_set(%d,%d)\n", i, b);
+}
+
+bool nios_switch_get(int i)
+{
+  printf("nios_switch_get(%d):\n", i);
+  return getchar()=='1';
+}
+
+bool nios_button_get(int i)
+{
+  printf("nios_button_get(%d):\n", i);
+  return getchar()=='1';
+}
+
+
 int nios_timer_init()
 {
   printf("nios_timer_init()\n");

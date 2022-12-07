@@ -1,3 +1,8 @@
+# v 0.5 (Dec 7, 2022)
+
+- require OCaml 4.07.1 (because of changes in OCaml 4.14 stdlib)
+- added IOs (button, switch, leds, ssds) to platform `dram`)
+
 # v 0.4 (Jun 29, 2022)
 
 - rebased on latest version of OMicroB (supporting OCaml 4.14.0)

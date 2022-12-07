@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'platform'
  * SOPC Builder design path: ../qsys/platform.sopcinfo
  *
- * Generated: Wed Jan 26 16:31:13 CET 2022
+ * Generated: Wed Dec 07 11:45:37 CET 2022
  */
 
 /*
@@ -98,6 +98,7 @@
  *
  */
 
+#define ALT_LOAD_COPY_RODATA
 #define ALT_LOAD_COPY_RWDATA
 
 #endif /* __LINKER_H_ */

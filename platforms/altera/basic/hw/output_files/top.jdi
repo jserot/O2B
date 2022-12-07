@@ -1,6 +1,6 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="8a91215b373a6db5aba6"/>
+    <hash md5_digest_80b="b7d06b6adcdb75a8b779"/>
   </project>
   <file_info>
     <file device="10M50DAF484C6GES" path="top.sof" usercode="0xFFFFFFFF"/>
@@ -91,8 +91,8 @@
         <assignment name="send_width" type="dec" value="3"/>
         <assignment name="receive_width" type="dec" value="24"/>
         <assignment name="num_clocks" type="dec" value="0"/>
-        <assignment name="settings" type="string" value="{fabric sld dir agent mfr_code 110 type_code 128 version 1 instance -1 ir_width 1 prefer_host { } psig f63706bb}"/>
-        <assignment name=" constraint(settings)" type="string" value="1 to 112"/>
+        <assignment name="settings" type="string" value="{fabric sld dir agent mfr_code 110 type_code 128 version 1 instance -1 ir_width 1 bridge_agent 0 prefer_host { } psig 9b67919e}"/>
+        <assignment name=" constraint(settings)" type="string" value="1 to 127"/>
         <assignment name=" constraint(send)" type="string" value="2 downto 0"/>
         <assignment name=" constraint(receive)" type="string" value="23 downto 0"/>
       </parameters>

@@ -65,7 +65,7 @@ example), you will have to edit the Quartus project file. For this
 
 2. Type `make hw-edit` or launch `Quartus` and open project `hw/top.qpf`
 2. Check the file containing the SoPC configuration (it should be `../qsys/platform/synthesis/platform.qip`)
-3. Edit file `top.vhd` ... and wire the peripherals as wanted
+3. Edit file `top.vhd` (or `top.v`) ... and wire the peripherals as wanted
 4. Save the project and compile it ("Play" button)
 
 ### Programming the hardware

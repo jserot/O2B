@@ -16,16 +16,16 @@
 <td width="20%" bgcolor="#77BBFF">CPU:</td><td>cpu</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Settings File:</td><td>./bsp/settings.bsp</td>
+<td width="20%" bgcolor="#77BBFF">BSP Settings File:</td><td>bsp/settings.bsp</td>
 </tr>
 <tr mode="wrap">
 <td width="20%" bgcolor="#77BBFF">BSP Version:</td><td>default</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>31 janv. 2022 11:00:49</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated On:</td><td>7 d&eacute;c. 2022 15:02:33</td>
 </tr>
 <tr mode="wrap">
-<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1643623249591</td>
+<td width="20%" bgcolor="#77BBFF">BSP Generated Timestamp:</td><td>1670421753829</td>
 </tr>
 <tr mode="wrap">
 <td width="20%" bgcolor="#77BBFF">BSP Generated Location:</td><td>./</td>
@@ -38,10 +38,37 @@
 <th align="left" width="20%">Slave Descriptor</th><th align="left" width="40%">Address Range</th><th align="left" width="20%">Size</th><th align="left" width="20%">Attributes</th>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>jtag_uart</td><td>0x04041030 - 0x04041037</td><td>8</td><td class="listing">printable</td>
+<td>jtag_uart</td><td>0x040410C0 - 0x040410C7</td><td>8</td><td class="listing">printable</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
-<td>altpll_0</td><td>0x04041020 - 0x0404102F</td><td>16</td><td class="listing">&nbsp;</td>
+<td>altpll_0</td><td>0x040410B0 - 0x040410BF</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>led</td><td>0x040410A0 - 0x040410AF</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>button</td><td>0x04041090 - 0x0404109F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>switch</td><td>0x04041080 - 0x0404108F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>hex0</td><td>0x04041070 - 0x0404107F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>hex1</td><td>0x04041060 - 0x0404106F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>hex2</td><td>0x04041050 - 0x0404105F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>hex3</td><td>0x04041040 - 0x0404104F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>hex4</td><td>0x04041030 - 0x0404103F</td><td>16</td><td class="listing">&nbsp;</td>
+</tr>
+<tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
+<td>hex5</td><td>0x04041020 - 0x0404102F</td><td>16</td><td class="listing">&nbsp;</td>
 </tr>
 <tr mode="wrap" STYLE="display: 'block'; font-family: 'courier'; color: '#000000'; font-weight: '500'; font-size: '14'; margin-top: '10pt'; text-align: 'left'">
 <td>sys_timer</td><td>0x04041000 - 0x0404101F</td><td>32</td><td class="listing">timer</td>
@@ -585,7 +612,7 @@
 <td width="20%">Default Value:</td><td>0</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>0</td>
+<td width="20%">Value:</td><td>1</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>Boolean</td>
@@ -693,7 +720,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>onchip_memory</td>
+<td width="20%">Value:</td><td>sdram</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>
@@ -747,7 +774,7 @@
 <td width="20%">Default Value:</td><td>none</td>
 </tr>
 <tr>
-<td width="20%">Value:</td><td>onchip_memory</td>
+<td width="20%">Value:</td><td>sdram</td>
 </tr>
 <tr>
 <td width="20%">Type:</td><td>UnquotedString</td>

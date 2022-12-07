@@ -5,6 +5,10 @@ Peripherals=
   1 jtag-uart
   1 PLL (giving 100 MHz sys and sdram clk)
   1 SDRAM controler
+  2 push-buttons
+  10 switches
+  10 leds
+  6 seven-segments displays
 On chip RAM=128k
 External SDRAM=64 Mo (32 M x 16 bits, 16M x 32 bits)
 HAL library with Small-C lib and reduced drivers
